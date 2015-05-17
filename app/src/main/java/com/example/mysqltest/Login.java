@@ -14,8 +14,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -104,7 +102,7 @@ public class Login extends Activity  {
 
 
                     //open second activity
-                    Intent i = new Intent(Login.this, ReadComments.class);
+                    Intent i = new Intent(Login.this, ReportViewer.class);
                     finish();
                     startActivity(i);
                     return json.getString(TAG_MESSAGE);
@@ -112,8 +110,9 @@ public class Login extends Activity  {
                     Log.d("Login Failure!", json.getString(TAG_MESSAGE));
                     return json.getString(TAG_MESSAGE);
                 }
-            } catch (JSONException e) {
+            } catch (JSONException  e) {
                 e.printStackTrace();
+
             }
 
             return null;

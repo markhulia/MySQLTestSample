@@ -3,7 +3,7 @@ package com.example.mysqltest;
 /**
  * Created by markhulia on 17/05/15.
  */
-public class GenerateNumbers {
+public class NumberGenerator {
     public static String[] getNumbers() {
         int[] listOfIntegers = new int[1001];
         String[] listOfStrings = new String[1001];

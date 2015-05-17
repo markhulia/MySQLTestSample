@@ -19,9 +19,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ReadComments extends ListActivity {
+public class ReportViewer extends ListActivity {
 
-    String READ_COMMENTS_URL = URL.URL + "comments.php";
+    String READ_COMMENTS_URL = URL.URL + "report.php";
 
     // JSON IDS:
     private static final String TAG_ITEMS = "items";
@@ -39,8 +39,8 @@ public class ReadComments extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // note that use read_comments.xml instead of our single_post.xml
-        setContentView(R.layout.read_comments);
+        // note that use view_reportml instead of our single_item_view_view.xml
+        setContentView(R.layout.view_report);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class ReadComments extends ListActivity {
     }
 
     public void addComment(View v) {
-        Intent i = new Intent(ReadComments.this, AddComment.class);
+        Intent i = new Intent(ReportViewer.this, ReportUpdater.class);
         startActivity(i);
     }
 
@@ -115,11 +115,11 @@ public class ReadComments extends ListActivity {
         // For a ListActivity we need to set the List Adapter, and in order to do
         //that, we need to create a ListAdapter.  This SimpleAdapter,
         //will utilize our updated Hashmapped ArrayList,
-        //use our single_post xml template for each item in our list,
+        //use our single_item_view xml template for each item in our list,
         //and place the appropriate info from the list to the
         //correct GUI id.  Order is important here.
         ListAdapter adapter = new SimpleAdapter(this, mItemList,
-                R.layout.single_post, new String[]{TAG_ITEM_NAME, TAG_ITEM_INFO,
+                R.layout.single_item_view, new String[]{TAG_ITEM_NAME, TAG_ITEM_INFO,
                 TAG_ITEM_QUANTITY}, new int[]{R.id.title, R.id.message,
                 R.id.username});
 
@@ -143,7 +143,7 @@ public class ReadComments extends ListActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(ReadComments.this);
+            pDialog = new ProgressDialog(ReportViewer.this);
             pDialog.setMessage("Loading...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);

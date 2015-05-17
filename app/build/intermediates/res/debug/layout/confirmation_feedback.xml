@@ -23,4 +23,4 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dip" />
-</LinearLayout><!-- From: file:/Users/markhulia/Documents/gitProjects/MySQLTestSample/app/src/main/res/layout/activity_chat_detail_activity.xml -->
+</LinearLayout><!-- From: file:/Users/markhulia/Documents/gitProjects/MySQLTestSample/app/src/main/res/layout/confirmation_feedback.xml -->

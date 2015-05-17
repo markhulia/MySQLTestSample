@@ -26,10 +26,10 @@
             android:name="com.example.mysqltest.Register"
             android:label="@string/app_name"></activity>
         <activity
-            android:name="com.example.mysqltest.AddComment"
+            android:name=".ReportUpdater"
             android:label="@string/app_name"></activity>
         <activity
-            android:name="com.example.mysqltest.ReadComments"
+            android:name=".ReportViewer"
             android:label="@string/app_name"></activity>
         <activity
             android:name=".ChatDetailActivity"

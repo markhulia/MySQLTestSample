@@ -19,8 +19,8 @@
         android:layout_above="@+id/register"
         android:layout_alignLeft="@+id/password"
         android:layout_alignRight="@+id/password"
-        android:text="Login"
-        android:onClick="mSubmit"/>
+        android:onClick="mSubmit"
+        android:text="Login" />
 
     <EditText
         android:id="@+id/password"
@@ -75,8 +75,8 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/TextView01"
         android:layout_above="@+id/username"
+        android:layout_alignRight="@+id/TextView01"
         android:layout_centerVertical="true"
         android:text="Username" />
 

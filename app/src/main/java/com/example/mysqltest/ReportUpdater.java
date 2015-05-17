@@ -21,7 +21,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddComment extends Activity implements OnClickListener {
+public class ReportUpdater extends Activity implements OnClickListener {
 
     //ids
     private static final String TAG_SUCCESS = "success";
@@ -30,7 +30,7 @@ public class AddComment extends Activity implements OnClickListener {
     JSONParser jsonParser = new JSONParser();
     //testing on Emulator:
     //private static final String POST_COMMENT_URL = "http://10.0.2.2:1234/webservice/addcomment.php";
-    String POST_COMMENT_URL = URL.URL + "addcomment.php";
+    String POST_COMMENT_URL = URL.URL + "updateRport.php";
 
     //php add a comment script
 
@@ -51,7 +51,7 @@ public class AddComment extends Activity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_comment);
+        setContentView(R.layout.update_report);
 
         title = (EditText) findViewById(R.id.title);
         message = (EditText) findViewById(R.id.message);
@@ -72,8 +72,8 @@ public class AddComment extends Activity implements OnClickListener {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(AddComment.this);
-            pDialog.setMessage("Posting Comment...");
+            pDialog = new ProgressDialog(ReportUpdater.this);
+            pDialog.setMessage("Updating...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
@@ -88,7 +88,7 @@ public class AddComment extends Activity implements OnClickListener {
             String post_message = message.getText().toString();
 
             //We need to change this:
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(AddComment.this);
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ReportUpdater.this);
             String post_username = sp.getString("username", "anon");
 
             try {
@@ -130,7 +130,7 @@ public class AddComment extends Activity implements OnClickListener {
             // dismiss the dialog once product deleted
             pDialog.dismiss();
             if (file_url != null) {
-                Toast.makeText(AddComment.this, file_url, Toast.LENGTH_LONG).show();
+                Toast.makeText(ReportUpdater.this, file_url, Toast.LENGTH_LONG).show();
             }
 
         }
