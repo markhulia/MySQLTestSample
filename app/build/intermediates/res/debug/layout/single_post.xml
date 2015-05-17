@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/box"
+            android:id="@+id/box1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
@@ -24,10 +24,10 @@
                 android:id="@+id/imageView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/arrowstars" />
+                android:src="@drawable/info" />
 
             <LinearLayout
-                android:id="@+id/box"
+                android:id="@+id/box2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
@@ -80,4 +80,4 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-</LinearLayout><!-- From: file:/Users/markhulia/AndroidStudioProjects/MySQLTestSample/app/src/main/res/layout/single_post.xml -->
+</LinearLayout><!-- From: file:/Users/markhulia/Documents/gitProjects/MySQLTestSample/app/src/main/res/layout/single_post.xml -->

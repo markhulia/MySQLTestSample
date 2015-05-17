@@ -19,7 +19,8 @@
         android:layout_above="@+id/register"
         android:layout_alignLeft="@+id/password"
         android:layout_alignRight="@+id/password"
-        android:text="Login" />
+        android:text="Login"
+        android:onClick="mSubmit"/>
 
     <EditText
         android:id="@+id/password"
@@ -41,7 +42,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="17dp"
         android:gravity="center"
-        android:text="Android Remote Server Tutorial"
+        android:text="Welcome to Awesomeness"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textStyle="bold" />
 
@@ -51,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/arrowstars" />
+        android:src="@drawable/info" />
 
     <TextView
         android:id="@+id/TextView01"
@@ -75,6 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/TextView01"
+        android:layout_above="@+id/username"
         android:layout_centerVertical="true"
         android:text="Username" />
 

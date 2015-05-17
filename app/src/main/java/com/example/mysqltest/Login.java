@@ -27,17 +27,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Login extends Activity implements OnClickListener {
+public class Login extends Activity  {
 
+    //URL string with +php method
+    String LOGIN_URL = URL.URL + "login.php";
     // JSON element ids from response of php script:
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
     // JSON parser class
     JSONParser jsonParser = new JSONParser();
-    //URL string with +php method
-    String LOGIN_URL = URL.URL + "login.php";
     private EditText user, pass;
-    private Button mSubmit, mRegister;
     // Progress Dialog
     private ProgressDialog pDialog;
 
@@ -50,41 +49,21 @@ public class Login extends Activity implements OnClickListener {
         // setup input fields
         user = (EditText) findViewById(R.id.username);
         pass = (EditText) findViewById(R.id.password);
-
-        // setup buttons
-        mSubmit = (Button) findViewById(R.id.login);
-        mRegister = (Button) findViewById(R.id.register);
-
-        // register listeners
-        mSubmit.setOnClickListener(this);
-        mRegister.setOnClickListener(this);
-
     }
 
-    @Override
-    public void onClick(View v) {
+    public void mSubmit(View v) {
         // TODO Auto-generated method stub
-        switch (v.getId()) {
-            case R.id.login:
-                new AttemptLogin().execute();
-                break;
-            case R.id.register:
-                Intent i = new Intent(this, Register.class);
-                startActivity(i);
-                break;
-
-            default:
-                break;
-        }
+        new AttemptLogin().execute();
     }
 
+    //login Assync logic
     class AttemptLogin extends AsyncTask<String, String, String> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(Login.this);
-            pDialog.setMessage("Attempting login...");
+            pDialog.setMessage("Please wait...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
@@ -115,6 +94,7 @@ public class Login extends Activity implements OnClickListener {
                 success = json.getInt(TAG_SUCCESS);
                 if (success == 1) {
                     Log.d("Login Successful", json.toString());
+
                     // save user data
                     SharedPreferences sp = PreferenceManager
                             .getDefaultSharedPreferences(Login.this);
@@ -122,6 +102,8 @@ public class Login extends Activity implements OnClickListener {
                     edit.putString("username", username);
                     edit.commit();
 
+
+                    //open second activity
                     Intent i = new Intent(Login.this, ReadComments.class);
                     finish();
                     startActivity(i);

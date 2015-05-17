@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="/Users/markhulia/AndroidStudioProjects/MySQLTestSample/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jar="/Users/markhulia/Documents/gitProjects/MySQLTestSample/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
         jumboMode="false"
         revision="22.0.0"
         sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="/Users/markhulia/AndroidStudioProjects/MySQLTestSample/app/build/intermediates/pre-dexed/debug/classes-33760ff8367e3c8ad1a288464a290df9666f838c.jar" />
+        <dex dex="/Users/markhulia/Documents/gitProjects/MySQLTestSample/app/build/intermediates/pre-dexed/debug/classes-93dc0342a549032f64c8d0ef51abd6980c297b9c.jar" />
     </item>
     <item
-        jar="/Users/markhulia/AndroidStudioProjects/MySQLTestSample/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jar="/Users/markhulia/Documents/gitProjects/MySQLTestSample/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/Users/markhulia/Documents/gitProjects/MySQLTestSample/app/build/intermediates/pre-dexed/debug/classes-c5601cea1077f0726f295365fe13c62578f15e87.jar" />
+    </item>
+    <item
+        jar="/Users/markhulia/Documents/gitProjects/MySQLTestSample/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
         jumboMode="false"
         revision="22.0.0"
         sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="/Users/markhulia/AndroidStudioProjects/MySQLTestSample/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-73f47f7352a30ccc9d46612127163a7097c0dc47.jar" />
+        <dex dex="/Users/markhulia/Documents/gitProjects/MySQLTestSample/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-920b078cfcfd4e4011b166270df48358f5c4c10d.jar" />
     </item>
     <item
         jar="/Users/markhulia/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
         jumboMode="false"
         revision="22.0.0"
         sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="/Users/markhulia/AndroidStudioProjects/MySQLTestSample/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-0b1f5c66b60afc85b75441bd808e4f5e49064745.jar" />
-    </item>
-    <item
-        jar="/Users/markhulia/AndroidStudioProjects/MySQLTestSample/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="/Users/markhulia/AndroidStudioProjects/MySQLTestSample/app/build/intermediates/pre-dexed/debug/classes-634e89cb65b87ce498133658901eca9d3e601f56.jar" />
+        <dex dex="/Users/markhulia/Documents/gitProjects/MySQLTestSample/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-0b1f5c66b60afc85b75441bd808e4f5e49064745.jar" />
     </item>
 
 </items>

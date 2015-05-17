@@ -21,35 +21,20 @@ import java.util.HashMap;
 
 public class ReadComments extends ListActivity {
 
-    // JSON IDS:
-    private static final String TAG_SUCCESS = "success";
-
-    //URL url = new URL();
-    // php read comments script
-
-    // localhost :
-    // testing on your device
-    // put your local ip instead, on windows, run CMD > ipconfig
-    // or in mac's terminal type ifconfig and look for the ip under en0 or en1
-    // private static final String READ_COMMENTS_URL =
-    // "http://xxx.xxx.x.x:1234/webservice/comments.php";
-    private static final String TAG_TITLE = "title";
-    // testing from a real server:
-    // private static final String READ_COMMENTS_URL =
-    // "http://www.mybringback.com/webservice/comments.php";
-    private static final String TAG_POSTS = "posts";
-    private static final String TAG_POST_ID = "post_id";
-    private static final String TAG_USERNAME = "username";
-    private static final String TAG_MESSAGE = "message";
-    // testing on Emulator:
-    //private static final String READ_COMMENTS_URL = "http://10.0.2.2:2604/webservice/comments.php";
     String READ_COMMENTS_URL = URL.URL + "comments.php";
-    // Progress Dialog
+
+    // JSON IDS:
+    private static final String TAG_ITEMS = "items";
+    private static final String TAG_ITEM_NAME = "item_name";
+    private static final String TAG_ITEM_LOCATION = "location";
+    private static final String TAG_ITEM_QUANTITY = "quantity";
+    private static final String TAG_ITEM_INFO = "item_info";
+    private static final int TAG_QUANTITY = 0;
     private ProgressDialog pDialog;
-    // An array of all of our comments
-    private JSONArray mComments = null;
+    // An array of all of items
+    private JSONArray mList = null;
     // manages all of our comments in a list.
-    private ArrayList<HashMap<String, String>> mCommentList;
+    private ArrayList<HashMap<String, String>> mItemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +57,7 @@ public class ReadComments extends ListActivity {
     }
 
     /**
-     * Retrieves recent post data from the server.
+     * Retrieves recent items data from the server.
      */
     public void updateJSONdata() {
 
@@ -81,7 +66,7 @@ public class ReadComments extends ListActivity {
         // to the json element name, and the content, for example,
         // message it the tag, and "I'm awesome" as the content..
 
-        mCommentList = new ArrayList<HashMap<String, String>>();
+        mItemList = new ArrayList<HashMap<String, String>>();
 
         // Bro, it's time to power up the J parser
         JSONParser jParser = new JSONParser();
@@ -92,34 +77,30 @@ public class ReadComments extends ListActivity {
         // when parsing JSON stuff, we should probably
         // try to catch any exceptions:
         try {
-
-            // I know I said we would check if "Posts were Avail." (success==1)
-            // before we tried to read the individual posts, but I lied...
-            // mComments will tell us how many "posts" or comments are
+            // mList will tell us how many "items" in the list are
             // available
-            mComments = json.getJSONArray(TAG_POSTS);
+            mList = json.getJSONArray(TAG_ITEMS);
 
-            // looping through all posts according to the json object returned
-            for (int i = 0; i < mComments.length(); i++) {
-                JSONObject c = mComments.getJSONObject(i);
+            // looping through all items according to the json object returned
+            for (int i = 0; i < mList.length(); i++) {
+                JSONObject c = mList.getJSONObject(i);
 
                 // gets the content of each tag
-                String title = c.getString(TAG_TITLE);
-                String content = c.getString(TAG_MESSAGE);
-                String username = c.getString(TAG_USERNAME);
+                String iName = c.getString(TAG_ITEM_NAME);
+                String iInfo = c.getString(TAG_ITEM_INFO);
+                String iQuantity = c.getString(TAG_ITEM_QUANTITY);
 
                 // creating new HashMap
                 HashMap<String, String> map = new HashMap<String, String>();
 
-                map.put(TAG_TITLE, title);
-                map.put(TAG_MESSAGE, content);
-                map.put(TAG_USERNAME, username);
+                map.put(TAG_ITEM_NAME, iName);
+                map.put(TAG_ITEM_INFO, iInfo);
+                map.put(TAG_ITEM_QUANTITY, iQuantity);
 
                 // adding HashList to ArrayList
-                mCommentList.add(map);
+                mItemList.add(map);
 
-                // annndddd, our JSON data is up to date same with our array
-                // list
+             //JSON data is updated with new arraylist
             }
 
         } catch (JSONException e) {
@@ -137,17 +118,12 @@ public class ReadComments extends ListActivity {
         //use our single_post xml template for each item in our list,
         //and place the appropriate info from the list to the
         //correct GUI id.  Order is important here.
-        ListAdapter adapter = new SimpleAdapter(this, mCommentList,
-                R.layout.single_post, new String[]{TAG_TITLE, TAG_MESSAGE,
-                TAG_USERNAME}, new int[]{R.id.title, R.id.message,
+        ListAdapter adapter = new SimpleAdapter(this, mItemList,
+                R.layout.single_post, new String[]{TAG_ITEM_NAME, TAG_ITEM_INFO,
+                TAG_ITEM_QUANTITY}, new int[]{R.id.title, R.id.message,
                 R.id.username});
 
-        // I shouldn't have to comment on this one:
         setListAdapter(adapter);
-
-        // Optional: when the user clicks a list item we
-        //could do something.  However, we will choose
-        //to do nothing...
         ListView lv = getListView();
         lv.setOnItemClickListener(new OnItemClickListener() {
 

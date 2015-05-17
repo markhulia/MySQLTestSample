@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/arrowstars" />
+        android:src="@drawable/info" />
 
     <TextView
         android:id="@+id/textView1"
@@ -63,4 +63,4 @@
         android:layout_below="@+id/password"
         android:text="Register" />
 
-</RelativeLayout><!-- From: file:/Users/markhulia/AndroidStudioProjects/MySQLTestSample/app/src/main/res/layout/register.xml -->
+</RelativeLayout><!-- From: file:/Users/markhulia/Documents/gitProjects/MySQLTestSample/app/src/main/res/layout/register.xml -->

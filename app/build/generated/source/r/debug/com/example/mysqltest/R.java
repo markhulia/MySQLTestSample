@@ -1309,12 +1309,12 @@ containing a value of this type.
         public static final int abc_textfield_search_default_mtrl_alpha=0x7f020035;
         public static final int abc_textfield_search_material=0x7f020036;
         public static final int apple55=0x7f020037;
-        public static final int arrowstars=0x7f020038;
-        public static final int black_button=0x7f020039;
-        public static final int blue_gradient=0x7f02003a;
-        public static final int ic_action_favorite=0x7f02003b;
-        public static final int ic_action_good=0x7f02003c;
-        public static final int ic_launcher=0x7f02003d;
+        public static final int black_button=0x7f020038;
+        public static final int blue_gradient=0x7f020039;
+        public static final int ic_action_favorite=0x7f02003a;
+        public static final int ic_action_good=0x7f02003b;
+        public static final int ic_launcher=0x7f02003c;
+        public static final int info=0x7f02003d;
         public static final int post_background_style=0x7f02003e;
         public static final int post_border_style=0x7f02003f;
     }
@@ -1338,7 +1338,8 @@ containing a value of this type.
         public static final int always=0x7f080016;
         public static final int beginning=0x7f080013;
         public static final int bottom_layover=0x7f08004d;
-        public static final int box=0x7f08004f;
+        public static final int box1=0x7f08004f;
+        public static final int box2=0x7f080050;
         public static final int checkbox=0x7f080029;
         public static final int collapseActionView=0x7f080017;
         public static final int decor_content_parent=0x7f08002f;
