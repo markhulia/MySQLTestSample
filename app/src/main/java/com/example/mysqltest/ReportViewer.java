@@ -21,8 +21,6 @@ import java.util.HashMap;
 
 public class ReportViewer extends ListActivity {
 
-    String READ_COMMENTS_URL = URL.URL + "report.php";
-
     // JSON IDS:
     private static final String TAG_ITEMS = "items";
     private static final String TAG_ITEM_NAME = "item_name";
@@ -30,6 +28,7 @@ public class ReportViewer extends ListActivity {
     private static final String TAG_ITEM_QUANTITY = "quantity";
     private static final String TAG_ITEM_INFO = "item_info";
     private static final int TAG_QUANTITY = 0;
+    String READ_COMMENTS_URL = URL.URL + "report.php";
     private ProgressDialog pDialog;
     // An array of all of items
     private JSONArray mList = null;
@@ -100,7 +99,7 @@ public class ReportViewer extends ListActivity {
                 // adding HashList to ArrayList
                 mItemList.add(map);
 
-             //JSON data is updated with new arraylist
+                //JSON data is updated with new arraylist
             }
 
         } catch (JSONException e) {
@@ -120,7 +119,7 @@ public class ReportViewer extends ListActivity {
         //correct GUI id.  Order is important here.
         ListAdapter adapter = new SimpleAdapter(this, mItemList,
                 R.layout.single_item_view, new String[]{TAG_ITEM_NAME, TAG_ITEM_INFO,
-                TAG_ITEM_QUANTITY}, new int[]{R.id.title, R.id.message,
+                TAG_ITEM_QUANTITY}, new int[]{R.id.updateSingleItemQty, R.id.description,
                 R.id.username});
 
         setListAdapter(adapter);

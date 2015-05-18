@@ -11,7 +11,7 @@
         android:src="@drawable/info" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/updateReportItemTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/password"
@@ -22,8 +22,8 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/updateReportItemTitle"
+        android:layout_below="@+id/updateReportItemTitle"
         android:ems="10" />
 
     <TextView

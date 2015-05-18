@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.RemoteInput;
-import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
 
 public class OptionFeedbackActivity extends Activity {
@@ -19,7 +18,7 @@ public class OptionFeedbackActivity extends Activity {
         CharSequence replyText = getMessageText(getIntent());
         if (replyText != null) {
             int foo = Integer.parseInt(replyText.toString());
-            Toast.makeText(this, "OptionFeedbackActivity "+foo, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "OptionFeedbackActivity " + foo, Toast.LENGTH_LONG).show();
         }
 
         //Go back to main activity without crashing the app

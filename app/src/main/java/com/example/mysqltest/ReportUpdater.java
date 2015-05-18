@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
@@ -26,23 +27,11 @@ public class ReportUpdater extends Activity implements OnClickListener {
     //ids
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
-    // JSON parser class
     JSONParser jsonParser = new JSONParser();
-    //testing on Emulator:
-    //private static final String POST_COMMENT_URL = "http://10.0.2.2:1234/webservice/addcomment.php";
-    String POST_COMMENT_URL = URL.URL + "updateRport.php";
-
-    //php add a comment script
-
-    //localhost :  
-    //testing on your device
-    //put your local ip instead,  on windows, run CMD > ipconfig
-    //or in mac's terminal type ifconfig and look for the ip under en0 or en1
-    // private static final String POST_COMMENT_URL = "http://xxx.xxx.x.x:1234/webservice/addcomment.php";
-    private EditText title, message;
-
-    //testing from a real server:
-    //private static final String POST_COMMENT_URL = "http://www.mybringback.com/webservice/addcomment.php";
+    String POST_COMMENT_URL = URL.URL + "updateReport.php";
+    ProgressBar loadingBar;
+    private int itemQty = 0;
+    private EditText updateReportQuantity, description;
     private Button mSubmit;
     // Progress Dialog
     private ProgressDialog pDialog;
@@ -53,11 +42,13 @@ public class ReportUpdater extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.update_report);
 
-        title = (EditText) findViewById(R.id.title);
-        message = (EditText) findViewById(R.id.message);
+        updateReportQuantity = (EditText) findViewById(R.id.updateSingleItemQty);
+        description = (EditText) findViewById(R.id.description);
 
         mSubmit = (Button) findViewById(R.id.submit);
         mSubmit.setOnClickListener(this);
+
+        updateReportQuantity.setHint("Was " + itemQty);
 
     }
 
@@ -77,6 +68,8 @@ public class ReportUpdater extends Activity implements OnClickListener {
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
+            loadingBar = (ProgressBar) findViewById(R.id.progressBar);
+            loadingBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -84,8 +77,8 @@ public class ReportUpdater extends Activity implements OnClickListener {
             // TODO Auto-generated method stub
             // Check for success tag
             int success;
-            String post_title = title.getText().toString();
-            String post_message = message.getText().toString();
+            String post_title = updateReportQuantity.getText().toString();
+            String post_message = description.getText().toString();
 
             //We need to change this:
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ReportUpdater.this);
@@ -105,16 +98,16 @@ public class ReportUpdater extends Activity implements OnClickListener {
                         POST_COMMENT_URL, "POST", params);
 
                 // full json response
-                Log.d("Post Comment attempt", json.toString());
+                Log.d("Update entry attempt", json.toString());
 
                 // json success element
                 success = json.getInt(TAG_SUCCESS);
                 if (success == 1) {
-                    Log.d("Comment Added!", json.toString());
+                    Log.d("Entry updated", json.toString());
                     finish();
                     return json.getString(TAG_MESSAGE);
                 } else {
-                    Log.d("Comment Failure!", json.getString(TAG_MESSAGE));
+                    Log.d("Error updating entry", json.getString(TAG_MESSAGE));
                     return json.getString(TAG_MESSAGE);
 
                 }
@@ -127,6 +120,8 @@ public class ReportUpdater extends Activity implements OnClickListener {
         }
 
         protected void onPostExecute(String file_url) {
+            //hide progress bar
+            loadingBar.setVisibility(View.INVISIBLE);
             // dismiss the dialog once product deleted
             pDialog.dismiss();
             if (file_url != null) {

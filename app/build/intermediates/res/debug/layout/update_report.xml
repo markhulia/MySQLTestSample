@@ -6,51 +6,56 @@
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/info"
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/info" />
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="Android Remote Server Tutorial"
+        android:text="Update entry"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
-        android:id="@+id/message"
+        android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/submit"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_below="@+id/TextView01"
-        android:ems="10" />
+        android:ems="10"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/updateSingleItemQty"
+        android:hint="Description" />
 
     <EditText
-        android:id="@+id/title"
+        android:id="@+id/updateSingleItemQty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView1"
-        android:ems="10">
+        android:layout_below="@+id/updateReportItemTitle"
+        android:ems="10"
+        android:inputType="number"
+        >
 
         <requestFocus />
     </EditText>
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/updateReportItemTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Item Name"
+        android:layout_marginLeft="5dp"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/imageView1"
-        android:text="Title" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/submit"
@@ -61,13 +66,15 @@
         android:layout_alignParentRight="true"
         android:text="Submit" />
 
-    <TextView
-        android:id="@+id/TextView01"
+    <ProgressBar
+        style="?android:attr/progressBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/title"
-        android:layout_marginTop="14dp"
-        android:text="Message" />
+        android:id="@+id/progressBar"
+        android:layout_above="@+id/updateReportItemTitle"
+        android:layout_alignEnd="@+id/imageView1"
+        android:layout_below="@+id/imageView1"
+        android:layout_alignStart="@+id/imageView1"
+        android:visibility="invisible"/>
 
 </RelativeLayout><!-- From: file:/Users/markhulia/Documents/gitProjects/MySQLTestSample/app/src/main/res/layout/update_report.xml -->

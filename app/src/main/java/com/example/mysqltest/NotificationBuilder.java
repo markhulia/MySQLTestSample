@@ -22,11 +22,12 @@ import android.widget.Toast;
  * Created by markhulia on 17/05/15.
  */
 public class NotificationBuilder extends Activity {
+
     public static final int NOTIFICATION_ID = 1;
-    public static final String ItemQty = "Quantity";
-    public static final String ItemName = "Item Name";
-    public static final String Location = "Item Location";
-    public static final String numberOfPackages = "Number of packages";
+    private String ItemQty = "Quantity";
+    private String ItemName = "Item Name";
+    private String Location = "Item Location";
+    private int numberOfPackages;
     TextView itemTitle, itemLocation, itemQuantity;
     EditText updateQty;
 
@@ -37,8 +38,7 @@ public class NotificationBuilder extends Activity {
         itemTitle = (TextView) findViewById(R.id.showItemName);
         itemLocation = (TextView) findViewById(R.id.showItemLoc);
         itemQuantity = (TextView) findViewById(R.id.showItemQty);
-        updateQty = (EditText) findViewById(R.id.number_of_packages);
-
+        Toast.makeText(this, "OnCreate", Toast.LENGTH_LONG).show();
     }
 
     private PendingIntent getConversationPendingIntent(String string, int requestCode) {
@@ -75,12 +75,14 @@ public class NotificationBuilder extends Activity {
         itemTitle.setText(ItemName);
         itemLocation.setText(Location);
         itemQuantity.setText(ItemQty);
-        updateQty.getText().toString();
-//        String amount = updateQty.getText().toString();
-//        if (!amount.isEmpty()) {
-//            numberOfPackages = Integer.parseInt(amount);
-//            updateQty.setText("");
-//        }
+        updateQty = (EditText) findViewById(R.id.number_of_packages);
+        String amount = updateQty.getText().toString();
+
+        //trim().isEmpty() ignores whitespaces
+        if (amount != null && !amount.trim().isEmpty()) {
+            numberOfPackages = Integer.parseInt(amount);
+            //updateQty.setText("");
+        }
         // Intent replyIntent = new Intent(this, showItemLoc.class);
         String[] choices = NumberGenerator.getNumbers();
         RemoteInput remoteInput = new RemoteInput.Builder(OptionFeedbackActivity.EXTRA_VOICE_REPLY)
@@ -124,6 +126,7 @@ public class NotificationBuilder extends Activity {
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(NOTIFICATION_ID, notification);
 
+
     }
 
     public void onUpdateButtonClick(View view) {
@@ -132,6 +135,8 @@ public class NotificationBuilder extends Activity {
         itemTitle.setText(ItemName);
         itemLocation.setText(Location);
         itemQuantity.setText(ItemQty);
+
         updateQty.setText("");
+
     }
 }

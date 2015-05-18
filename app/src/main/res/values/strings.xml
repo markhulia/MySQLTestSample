@@ -9,13 +9,9 @@
     <string name="current_item">Current Item</string>
     <string name="report">Report</string>
     <string name="passwords_not_same">Passwords don\'t match</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">hi</string>
     <string name="title">Title</string>
     <string name="wearTitle">Title on Wearable</string>
     <string name="content">You did it Jora</string>
-    <string name="title_activity_activity_chat_detail">activity_chat_detail</string>
-    <string name="title_activity_chat_detail_activity">chat_detail_activity</string>
     <string name="title_activity_activity_action_feedback">ActionFeedback_Activity</string>
     <string name="title_activity_action_feedback">ActionFeedbackActivity</string>
     <string name="number_of_packages_hint">Enter</string>

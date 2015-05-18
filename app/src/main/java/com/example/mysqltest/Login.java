@@ -16,26 +16,23 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class Login extends Activity  {
+public class Login extends Activity {
 
-    //URL string with +php method
+    // JSON parser class and  URL class
+    JSONParser jsonParser = new JSONParser();
     String LOGIN_URL = URL.URL + "login.php";
+
     // JSON element ids from response of php script:
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
-    // JSON parser class
-    JSONParser jsonParser = new JSONParser();
     private EditText user, pass;
-    // Progress Dialog
     private ProgressDialog pDialog;
 
     @Override
@@ -110,7 +107,7 @@ public class Login extends Activity  {
                     Log.d("Login Failure!", json.getString(TAG_MESSAGE));
                     return json.getString(TAG_MESSAGE);
                 }
-            } catch (JSONException  e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
 
             }
