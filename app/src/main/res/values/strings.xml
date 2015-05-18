@@ -19,6 +19,5 @@
     <string name="title_activity_activity_action_feedback">ActionFeedback_Activity</string>
     <string name="title_activity_action_feedback">ActionFeedbackActivity</string>
     <string name="number_of_packages_hint">Enter</string>
-    <string name="send_button">Send</string>
-    <string name="update">Update</string>
+    <string name="update_button">Update</string>
 </resources>

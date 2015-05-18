@@ -48,7 +48,7 @@ public class ReportViewer extends ListActivity {
         // TODO Auto-generated method stub
         super.onResume();
         // loading the comments via AsyncTask
-        new LoadComments().execute();
+        new LoadReportItems().execute();
     }
 
     public void addComment(View v) {
@@ -138,7 +138,7 @@ public class ReportViewer extends ListActivity {
         });
     }
 
-    public class LoadComments extends AsyncTask<Void, Void, Boolean> {
+    public class LoadReportItems extends AsyncTask<Void, Void, Boolean> {
 
         @Override
         protected void onPreExecute() {

@@ -59,43 +59,43 @@ category#android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:22:17
 	android:name
 		ADDED from AndroidManifest.xml:22:27
-activity#com.example.mysqltest.Register
-ADDED from AndroidManifest.xml:25:9
-	android:label
-		ADDED from AndroidManifest.xml:27:13
-	android:name
-		ADDED from AndroidManifest.xml:26:13
-activity#com.example.mysqltest.ReportUpdater
+activity#com.example.mysqltest.NotificationBuilder
 ADDED from AndroidManifest.xml:28:9
 	android:label
 		ADDED from AndroidManifest.xml:30:13
 	android:name
 		ADDED from AndroidManifest.xml:29:13
-activity#com.example.mysqltest.ReportViewer
+activity#com.example.mysqltest.ReportUpdater
 ADDED from AndroidManifest.xml:31:9
 	android:label
 		ADDED from AndroidManifest.xml:33:13
 	android:name
 		ADDED from AndroidManifest.xml:32:13
-activity#com.example.mysqltest.ChatDetailActivity
+activity#com.example.mysqltest.ReportViewer
 ADDED from AndroidManifest.xml:34:9
 	android:label
 		ADDED from AndroidManifest.xml:36:13
-	android:parentActivityName
-		ADDED from AndroidManifest.xml:37:13
 	android:name
 		ADDED from AndroidManifest.xml:35:13
-meta-data#android.support.PARENT_ACTIVITY
-ADDED from AndroidManifest.xml:38:13
-	android:name
-		ADDED from AndroidManifest.xml:39:17
-	android:value
-		ADDED from AndroidManifest.xml:40:17
-activity#com.example.mysqltest.ActionFeedbackActivity
-ADDED from AndroidManifest.xml:42:9
+activity#com.example.mysqltest.OptionFeedbackActivity
+ADDED from AndroidManifest.xml:37:9
 	android:label
-		ADDED from AndroidManifest.xml:44:13
+		ADDED from AndroidManifest.xml:39:13
 	android:parentActivityName
-		ADDED from AndroidManifest.xml:45:13
+		ADDED from AndroidManifest.xml:40:13
 	android:name
-		ADDED from AndroidManifest.xml:43:13
+		ADDED from AndroidManifest.xml:38:13
+meta-data#android.support.PARENT_ACTIVITY
+ADDED from AndroidManifest.xml:41:13
+	android:name
+		ADDED from AndroidManifest.xml:42:17
+	android:value
+		ADDED from AndroidManifest.xml:43:17
+activity#com.example.mysqltest.ActionFeedbackActivity
+ADDED from AndroidManifest.xml:45:9
+	android:label
+		ADDED from AndroidManifest.xml:47:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:48:13
+	android:name
+		ADDED from AndroidManifest.xml:46:13

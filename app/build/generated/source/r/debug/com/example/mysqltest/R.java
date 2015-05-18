@@ -1338,7 +1338,8 @@ containing a value of this type.
         public static final int activity_chooser_view_content=0x7f080021;
         public static final int always=0x7f080016;
         public static final int beginning=0x7f080013;
-        public static final int bottom_layover=0x7f08004e;
+        public static final int bottom_layer=0x7f08004e;
+        public static final int bottom_layover=0x7f080055;
         public static final int box1=0x7f080050;
         public static final int box2=0x7f080051;
         public static final int button=0x7f08004f;
@@ -1369,7 +1370,7 @@ containing a value of this type.
         public static final int normal=0x7f08000a;
         public static final int number_of_packages=0x7f08004a;
         public static final int password=0x7f080043;
-        public static final int post_comment=0x7f080055;
+        public static final int post_comment=0x7f080056;
         public static final int progress_circular=0x7f080005;
         public static final int progress_horizontal=0x7f080006;
         public static final int radio=0x7f08002b;
@@ -1472,16 +1473,15 @@ containing a value of this type.
         public static final int passwords_not_same=0x7f0a0017;
         public static final int post_comment=0x7f0a0018;
         public static final int report=0x7f0a0019;
-        public static final int send_button=0x7f0a001a;
-        public static final int submit=0x7f0a001b;
-        public static final int title=0x7f0a001c;
-        public static final int title_activity_action_feedback=0x7f0a001d;
-        public static final int title_activity_activity_action_feedback=0x7f0a001e;
-        public static final int title_activity_activity_chat_detail=0x7f0a001f;
-        public static final int title_activity_chat_detail_activity=0x7f0a0020;
-        public static final int update=0x7f0a0021;
-        public static final int username_textview=0x7f0a0022;
-        public static final int wearTitle=0x7f0a0023;
+        public static final int submit=0x7f0a001a;
+        public static final int title=0x7f0a001b;
+        public static final int title_activity_action_feedback=0x7f0a001c;
+        public static final int title_activity_activity_action_feedback=0x7f0a001d;
+        public static final int title_activity_activity_chat_detail=0x7f0a001e;
+        public static final int title_activity_chat_detail_activity=0x7f0a001f;
+        public static final int update_button=0x7f0a0020;
+        public static final int username_textview=0x7f0a0021;
+        public static final int wearTitle=0x7f0a0022;
     }
     public static final class style {
         public static final int Animation_AppCompat_DropDownUp=0x7f0b0000;

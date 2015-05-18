@@ -1,13 +1,14 @@
 package com.example.mysqltest;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.RemoteInput;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
 
-public class ChatDetailActivity extends ActionBarActivity {
+public class OptionFeedbackActivity extends Activity {
     public static final String EXTRA_VOICE_REPLY = "extra_voice_reply";
 
     @Override
@@ -18,11 +19,11 @@ public class ChatDetailActivity extends ActionBarActivity {
         CharSequence replyText = getMessageText(getIntent());
         if (replyText != null) {
             int foo = Integer.parseInt(replyText.toString());
-            Toast.makeText(this, "ChatDetailActivity", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "OptionFeedbackActivity "+foo, Toast.LENGTH_LONG).show();
         }
 
         //Go back to main activity without crashing the app
-        Intent i = new Intent(ChatDetailActivity.this, NotificationBuilder.class);
+        Intent i = new Intent(OptionFeedbackActivity.this, NotificationBuilder.class);
         finish();
         startActivity(i);
     }

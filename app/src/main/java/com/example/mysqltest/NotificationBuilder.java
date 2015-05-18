@@ -1,39 +1,50 @@
 package com.example.mysqltest;
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.app.RemoteInput;
 import android.support.v4.app.TaskStackBuilder;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by markhulia on 17/05/15.
  */
-public class NotificationBuilder extends Activity{
+public class NotificationBuilder extends Activity {
     public static final int NOTIFICATION_ID = 1;
     public static final String ItemQty = "Quantity";
     public static final String ItemName = "Item Name";
-//    public static final String numberOfPackages = null;
+    public static final String Location = "Item Location";
+    public static final String numberOfPackages = "Number of packages";
+    TextView itemTitle, itemLocation, itemQuantity;
+    EditText updateQty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.next_item_caller);
+        itemTitle = (TextView) findViewById(R.id.showItemName);
+        itemLocation = (TextView) findViewById(R.id.showItemLoc);
+        itemQuantity = (TextView) findViewById(R.id.showItemQty);
+        updateQty = (EditText) findViewById(R.id.number_of_packages);
+
     }
 
     private PendingIntent getConversationPendingIntent(String string, int requestCode) {
-        Intent conversationIntent = new Intent(this, ChatDetailActivity.class);
+        Intent conversationIntent = new Intent(this, OptionFeedbackActivity.class);
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
-        taskStackBuilder.addParentStack(ChatDetailActivity.class);
+        taskStackBuilder.addParentStack(OptionFeedbackActivity.class);
         taskStackBuilder.addNextIntent(conversationIntent);
         return taskStackBuilder.getPendingIntent(requestCode, PendingIntent.FLAG_CANCEL_CURRENT);
     }
@@ -60,9 +71,19 @@ public class NotificationBuilder extends Activity{
     // it adds "open Application" action button
     @TargetApi(20)
     public void onVoiceReplyClick(View view) {
-        // Intent replyIntent = new Intent(this, activity_chat_detail.class);
+
+        itemTitle.setText(ItemName);
+        itemLocation.setText(Location);
+        itemQuantity.setText(ItemQty);
+        updateQty.getText().toString();
+//        String amount = updateQty.getText().toString();
+//        if (!amount.isEmpty()) {
+//            numberOfPackages = Integer.parseInt(amount);
+//            updateQty.setText("");
+//        }
+        // Intent replyIntent = new Intent(this, showItemLoc.class);
         String[] choices = NumberGenerator.getNumbers();
-        RemoteInput remoteInput = new RemoteInput.Builder(ChatDetailActivity.EXTRA_VOICE_REPLY)
+        RemoteInput remoteInput = new RemoteInput.Builder(OptionFeedbackActivity.EXTRA_VOICE_REPLY)
                 .setLabel("Reply")
                 .setChoices(choices)
                         //Set false if voice input option should be excluded
@@ -103,5 +124,14 @@ public class NotificationBuilder extends Activity{
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(NOTIFICATION_ID, notification);
 
+    }
+
+    public void onUpdateButtonClick(View view) {
+        Toast.makeText(this, "Items " + numberOfPackages, Toast.LENGTH_LONG).show();
+
+        itemTitle.setText(ItemName);
+        itemLocation.setText(Location);
+        itemQuantity.setText(ItemQty);
+        updateQty.setText("");
     }
 }
