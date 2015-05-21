@@ -30,6 +30,7 @@ public class ReportUpdater extends Activity implements OnClickListener {
     JSONParser jsonParser = new JSONParser();
     String POST_COMMENT_URL = URL.URL + "updateReport.php";
     ProgressBar loadingBar;
+
     private int itemQty = 0;
     private EditText updateReportQuantity, description;
     private Button mSubmit;
@@ -48,12 +49,13 @@ public class ReportUpdater extends Activity implements OnClickListener {
         mSubmit = (Button) findViewById(R.id.submit);
         mSubmit.setOnClickListener(this);
 
-        updateReportQuantity.setHint("Was " + itemQty);
+        updateReportQuantity.setHint("was " + itemQty);
 
     }
 
     @Override
     public void onClick(View v) {
+
         new PostComment().execute();
     }
 

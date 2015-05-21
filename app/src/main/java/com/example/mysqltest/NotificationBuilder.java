@@ -24,12 +24,13 @@ import android.widget.Toast;
 public class NotificationBuilder extends Activity {
 
     public static final int NOTIFICATION_ID = 1;
+    public static int ITEM_ID;
+    TextView itemTitle, itemLocation, itemQuantity;
+    EditText updateQty;
     private String ItemQty = "Quantity";
     private String ItemName = "Item Name";
     private String Location = "Item Location";
     private int numberOfPackages;
-    TextView itemTitle, itemLocation, itemQuantity;
-    EditText updateQty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,8 @@ public class NotificationBuilder extends Activity {
     @TargetApi(20)
     public void onVoiceReplyClick(View view) {
 
+        //TODO add PHP checker, to check if DB has next line. If false, show report
+
         itemTitle.setText(ItemName);
         itemLocation.setText(Location);
         itemQuantity.setText(ItemQty);
@@ -93,7 +96,7 @@ public class NotificationBuilder extends Activity {
                 .build();
 
         PendingIntent confirmActionPendingIntent =
-                getActionFeedbackPendingIntent("Im pretty sure I don`t need this view", 0);
+                getActionFeedbackPendingIntent("Send PHP queries from here", 0);
 
         PendingIntent replyPendingIntent = getConversationPendingIntent("", 1);
 
@@ -136,7 +139,8 @@ public class NotificationBuilder extends Activity {
         itemLocation.setText(Location);
         itemQuantity.setText(ItemQty);
 
-        updateQty.setText("");
-
+        if (updateQty != null) {
+            updateQty.getText().clear();
+        }
     }
 }

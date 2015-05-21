@@ -19,6 +19,14 @@ public class OptionFeedbackActivity extends Activity {
         if (replyText != null) {
             int foo = Integer.parseInt(replyText.toString());
             Toast.makeText(this, "OptionFeedbackActivity " + foo, Toast.LENGTH_LONG).show();
+
+//            try{
+//
+//            }
+//            catch (Exception e){
+//                e.printStackTrace();
+//            }
+
         }
 
         //Go back to main activity without crashing the app
