@@ -43,7 +43,7 @@ public class ReportUpdater extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.update_report);
 
-        updateReportQuantity = (EditText) findViewById(R.id.updateSingleItemQty);
+        updateReportQuantity = (EditText) findViewById(R.id.itemName);
         description = (EditText) findViewById(R.id.description);
 
         mSubmit = (Button) findViewById(R.id.submit);

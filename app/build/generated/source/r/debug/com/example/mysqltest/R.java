@@ -1362,6 +1362,7 @@ containing a value of this type.
         public static final int ifRoom=0x7f080018;
         public static final int image=0x7f080023;
         public static final int imageView1=0x7f080045;
+        public static final int itemName=0x7f080053;
         public static final int listMode=0x7f080009;
         public static final int list_item=0x7f080025;
         public static final int login=0x7f080042;
@@ -1405,9 +1406,8 @@ containing a value of this type.
         public static final int top_layover=0x7f080057;
         public static final int up=0x7f080008;
         public static final int updateReportItemTitle=0x7f080048;
-        public static final int updateSingleItemQty=0x7f080053;
         public static final int useLogo=0x7f080012;
-        public static final int username=0x7f080047;
+        public static final int singleItemViewItemQty =0x7f080047;
         public static final int withText=0x7f08001a;
         public static final int wrap_content=0x7f08001d;
     }

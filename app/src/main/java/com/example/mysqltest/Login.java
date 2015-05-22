@@ -42,7 +42,7 @@ public class Login extends Activity {
         setContentView(R.layout.login);
 
         // setup input fields
-        user = (EditText) findViewById(R.id.username);
+        user = (EditText) findViewById(R.id.singleItemViewItemQty);
         pass = (EditText) findViewById(R.id.password);
     }
 
@@ -69,8 +69,12 @@ public class Login extends Activity {
             // TODO Auto-generated method stub
             // Check for success tag
             int success;
-            String username = user.getText().toString();
-            String password = pass.getText().toString();
+          //  String username = user.getText().toString();
+            String username = "gio";
+          //  String password = pass.getText().toString();
+            String password = "333";
+
+
             try {
                 // Building Parameters
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -99,7 +103,7 @@ public class Login extends Activity {
 
 
                     //open second activity
-                    Intent i = new Intent(Login.this, NotificationBuilder.class);
+                    Intent i = new Intent(Login.this, ReportViewer.class);
                     finish();
                     startActivity(i);
                     return json.getString(TAG_MESSAGE);

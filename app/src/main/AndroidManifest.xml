@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".NotificationBuilder"
+            android:name=".Login"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +26,7 @@
             <!--android:name="com.example.mysqltest.Register"-->
             <!--android:label="@string/app_name"></activity>-->
         <activity
-            android:name=".Login"
+            android:name=".NotificationBuilder"
             android:label="Builder"></activity>
         <activity
             android:name=".ReportUpdater"
@@ -37,18 +37,18 @@
         <activity
             android:name=".OptionFeedbackActivity"
             android:label="Conversation"
-            android:parentActivityName=".NotificationBuilder">
+            android:parentActivityName=".Login">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NotificationBuilder" />
+                android:value=".Login" />
         </activity>
         <activity
             android:name=".ActionFeedbackActivity"
             android:label="@string/title_activity_action_feedback"
-            android:parentActivityName=".NotificationBuilder">
+            android:parentActivityName=".Login">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NotificationBuilder" />
+                android:value=".Login" />
         </activity>
 
     </application>

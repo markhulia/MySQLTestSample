@@ -394,6 +394,7 @@ int id icon 0x7f080026
 int id ifRoom 0x7f080018
 int id image 0x7f080023
 int id imageView1 0x7f080045
+int id itemName 0x7f080053
 int id listMode 0x7f080009
 int id list_item 0x7f080025
 int id login 0x7f080042
@@ -437,9 +438,8 @@ int id top_layer_next_item_caller 0x7f080049
 int id top_layover 0x7f080057
 int id up 0x7f080008
 int id updateReportItemTitle 0x7f080048
-int id updateSingleItemQty 0x7f080053
 int id useLogo 0x7f080012
-int id username 0x7f080047
+int id user 0x7f080047
 int id withText 0x7f08001a
 int id wrap_content 0x7f08001d
 int integer abc_config_activityDefaultDur 0x7f090000

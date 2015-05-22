@@ -124,8 +124,8 @@ public class ReportViewer extends ListActivity {
         //correct GUI id.  Order is important here.
         ListAdapter adapter = new SimpleAdapter(this, mItemList,
                 R.layout.single_item_view, new String[]{TAG_ITEM_NAME, TAG_ITEM_INFO,
-                TAG_ITEM_QUANTITY}, new int[]{R.id.updateSingleItemQty, R.id.description,
-                R.id.username});
+                TAG_ITEM_QUANTITY,TAG_ITEM_COMMENT,TAG_ITEM_LOCATION}, new int[]{R.id.itemName, R.id.description,
+                R.id.singleItemViewItemQty});
 
         setListAdapter(adapter);
         ListView lv = getListView();
