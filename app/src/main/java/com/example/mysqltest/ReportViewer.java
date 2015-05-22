@@ -22,18 +22,19 @@ import java.util.HashMap;
 public class ReportViewer extends ListActivity {
 
     // JSON IDS:
-    private static final String TAG_ITEMS = "items";
+    private static final String TAG_ITEM_ID = "item_id";
     private static final String TAG_ITEM_NAME = "item_name";
-    private static final String TAG_ITEM_LOCATION = "location";
-    private static final String TAG_ITEM_QUANTITY = "quantity";
+    private static final String TAG_ITEM_LOCATION = "item_location";
+    private static final String TAG_ITEM_QUANTITY = "item_quantity";
     private static final String TAG_ITEM_INFO = "item_info";
-    private static final int TAG_QUANTITY = 0;
-    String READ_COMMENTS_URL = URL.URL + "report.php";
+    private static final String TAG_ITEM_COMMENT= "comment";
+    private static final String TAG_ITEMS_REPORT = "items_report";
     private ProgressDialog pDialog;
     // An array of all of items
     private JSONArray mList = null;
     // manages all of our comments in a list.
     private ArrayList<HashMap<String, String>> mItemList;
+    private String READ_COMMENTS_URL = URL.URL + "report.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +79,7 @@ public class ReportViewer extends ListActivity {
         try {
             // mList will tell us how many "items" in the list are
             // available
-            mList = json.getJSONArray(TAG_ITEMS);
+            mList = json.getJSONArray(TAG_ITEMS_REPORT);
 
             // looping through all items according to the json object returned
             for (int i = 0; i < mList.length(); i++) {
@@ -88,13 +89,17 @@ public class ReportViewer extends ListActivity {
                 String iName = c.getString(TAG_ITEM_NAME);
                 String iInfo = c.getString(TAG_ITEM_INFO);
                 String iQuantity = c.getString(TAG_ITEM_QUANTITY);
+                String iLocation = c.getString(TAG_ITEM_LOCATION);
+                String iComment = c.getString(TAG_ITEM_COMMENT);
 
                 // creating new HashMap
                 HashMap<String, String> map = new HashMap<String, String>();
 
+                map.put(TAG_ITEM_QUANTITY, iQuantity);
                 map.put(TAG_ITEM_NAME, iName);
                 map.put(TAG_ITEM_INFO, iInfo);
-                map.put(TAG_ITEM_QUANTITY, iQuantity);
+                map.put(TAG_ITEM_COMMENT, iComment);
+                map.put(TAG_ITEM_LOCATION, iLocation);
 
                 // adding HashList to ArrayList
                 mItemList.add(map);

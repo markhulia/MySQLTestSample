@@ -26,14 +26,17 @@ public class OptionFeedbackActivity extends Activity {
 //            catch (Exception e){
 //                e.printStackTrace();
 //            }
-
         }
+
+
 
         //Go back to main activity without crashing the app
         Intent i = new Intent(OptionFeedbackActivity.this, NotificationBuilder.class);
         finish();
         startActivity(i);
     }
+
+
 
     // The getMessageText method shows hot to extract voice reply from Intent
     @TargetApi(20) //Suppressing compatibility errors between SDK18 adn SDK20

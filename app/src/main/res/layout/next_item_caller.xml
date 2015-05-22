@@ -74,14 +74,15 @@
 
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/bNextItem"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="onVoiceReplyClick"
+            android:onClick="onNextItemClick"
             android:text="Next Item" />
 
         <Button
+            android:id="@+id/bUpdateQTY"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

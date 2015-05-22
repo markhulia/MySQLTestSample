@@ -25,6 +25,7 @@ public class NotificationBuilder extends Activity {
 
     public static final int NOTIFICATION_ID = 1;
     public static int ITEM_ID;
+    private static int FLAG = 0;
     TextView itemTitle, itemLocation, itemQuantity;
     EditText updateQty;
     private String ItemQty = "Quantity";
@@ -39,7 +40,6 @@ public class NotificationBuilder extends Activity {
         itemTitle = (TextView) findViewById(R.id.showItemName);
         itemLocation = (TextView) findViewById(R.id.showItemLoc);
         itemQuantity = (TextView) findViewById(R.id.showItemQty);
-        Toast.makeText(this, "OnCreate", Toast.LENGTH_LONG).show();
     }
 
     private PendingIntent getConversationPendingIntent(String string, int requestCode) {
@@ -71,7 +71,7 @@ public class NotificationBuilder extends Activity {
     //Pending activity passes the context of the app. On wearable,
     // it adds "open Application" action button
     @TargetApi(20)
-    public void onVoiceReplyClick(View view) {
+    public void onNextItemClick(View view) {
 
         //TODO add PHP checker, to check if DB has next line. If false, show report
 
@@ -79,13 +79,7 @@ public class NotificationBuilder extends Activity {
         itemLocation.setText(Location);
         itemQuantity.setText(ItemQty);
         updateQty = (EditText) findViewById(R.id.number_of_packages);
-        String amount = updateQty.getText().toString();
 
-        //trim().isEmpty() ignores whitespaces
-        if (amount != null && !amount.trim().isEmpty()) {
-            numberOfPackages = Integer.parseInt(amount);
-            //updateQty.setText("");
-        }
         // Intent replyIntent = new Intent(this, showItemLoc.class);
         String[] choices = NumberGenerator.getNumbers();
         RemoteInput remoteInput = new RemoteInput.Builder(OptionFeedbackActivity.EXTRA_VOICE_REPLY)
@@ -119,7 +113,7 @@ public class NotificationBuilder extends Activity {
                 .setContentTitle(ItemName)
                 .setContentText(ItemQty)
                 .setSmallIcon(R.drawable.ic_task)
-                .setContentIntent(getConversationPendingIntent("Pretty Rabbit", 20))
+                .setContentIntent(getConversationPendingIntent("qty", 20))
                 .setPriority(Notification.PRIORITY_HIGH)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setLargeIcon(prettyAvatar)
@@ -133,14 +127,24 @@ public class NotificationBuilder extends Activity {
     }
 
     public void onUpdateButtonClick(View view) {
-        Toast.makeText(this, "Items " + numberOfPackages, Toast.LENGTH_LONG).show();
+        String amount = updateQty.getText().toString();
+        //trim().isEmpty() ignores whitespaces
 
-        itemTitle.setText(ItemName);
-        itemLocation.setText(Location);
-        itemQuantity.setText(ItemQty);
+        //add flag. if user updated amount, it will change flag from 0 to 1. If user
+        //wants to update amount agian before pressing "next item" POP-up window should display info
+        //that this item_id has already been updated and if user wants to proceed
 
-        if (updateQty != null) {
-            updateQty.getText().clear();
+        if (FLAG == 0) {
+            if (amount != null && !amount.trim().isEmpty()) {
+                numberOfPackages = Integer.parseInt(amount);
+                Toast.makeText(this, "Items " + numberOfPackages, Toast.LENGTH_LONG).show();
+                updateQty.getText().clear();
+                FLAG = 1;
+            }
+        } else {
+            //call confirmation dialog
+            //OPTION_YES -> update itemQTY, set FLAG = 1;
+            //OPTION NO -> return to parent activity
         }
     }
 }
