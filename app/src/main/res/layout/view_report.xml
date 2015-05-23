@@ -55,14 +55,15 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/post_comment"
+                android:id="@+id/viewReport_resetBtn"
                 style="@style/WhiteText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:background="@drawable/black_button"
-                android:onClick="addComment"
-                android:text="@string/post_comment" />
+                android:onClick="resetReport"
+                android:text="@string/viewReport_resetDatabase"
+                />
         </LinearLayout>
     </LinearLayout>
 

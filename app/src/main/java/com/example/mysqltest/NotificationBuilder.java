@@ -13,6 +13,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.app.RemoteInput;
 import android.support.v4.app.TaskStackBuilder;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,7 +26,7 @@ public class NotificationBuilder extends Activity {
 
     public static final int NOTIFICATION_ID = 1;
     public static int ITEM_ID;
-    private static int FLAG = 0;
+    private static boolean FLAG = false;
     TextView itemTitle, itemLocation, itemQuantity;
     EditText updateQty;
     private String ItemQty = "Quantity";
@@ -126,19 +127,19 @@ public class NotificationBuilder extends Activity {
     }
 
     public void onUpdateButtonClick(View view) {
-        String amount = updateQty.getText().toString();
-        //trim().isEmpty() ignores whitespaces
+            String amount = updateQty.getText().toString();
+            //trim().isEmpty() ignores whitespaces
 
         //add flag. if user updated amount, it will change flag from 0 to 1. If user
         //wants to update amount agian before pressing "next item" POP-up window should display info
         //that this item_id has already been updated and if user wants to proceed
 
-        if (FLAG == 0) {
+        if (FLAG == false) {
             if (amount != null && !amount.trim().isEmpty()) {
                 numberOfPackages = Integer.parseInt(amount);
                 Toast.makeText(this, "Items " + numberOfPackages, Toast.LENGTH_LONG).show();
                 updateQty.getText().clear();
-                FLAG = 1;
+                FLAG = true;
             }
         } else {
             //TODO: create separate confirmation dialog class

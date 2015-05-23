@@ -169,7 +169,6 @@
     <string name="number_of_packages_hint">Enter</string>
     <string name="password_textview">Password:</string>
     <string name="passwords_not_same">Passwords don\'t match</string>
-    <string name="post_comment">Update</string>
     <string name="report">Report</string>
     <string name="submit">Submit</string>
     <string name="title">Title</string>
@@ -177,6 +176,7 @@
     <string name="title_activity_activity_action_feedback">ActionFeedback_Activity</string>
     <string name="update_button">Update</string>
     <string name="username_textview">Username:</string>
+    <string name="viewReport_resetDatabase">Reset Database</string>
     <string name="wearTitle">Title on Wearable</string>
     <!-- From: file:/Users/markhulia/Documents/gitProjects/MySQLTestSample/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
     <eat-comment/>

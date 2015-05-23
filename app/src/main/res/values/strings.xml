@@ -5,7 +5,7 @@
     <string name="password_textview">Password:</string>
     <string name="submit">Submit</string>
 
-    <string name="post_comment">Update</string>
+    <string name="viewReport_resetDatabase">Reset Database</string>
     <string name="current_item">Current Item</string>
     <string name="report">Report</string>
     <string name="passwords_not_same">Passwords don\'t match</string>

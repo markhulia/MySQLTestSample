@@ -1374,7 +1374,6 @@ containing a value of this type.
         public static final int none=0x7f08000e;
         public static final int normal=0x7f08000a;
         public static final int number_of_packages=0x7f08004a;
-        public static final int post_comment=0x7f08005d;
         public static final int progressBar=0x7f08005a;
         public static final int progress_circular=0x7f080005;
         public static final int progress_horizontal=0x7f080006;
@@ -1412,6 +1411,7 @@ containing a value of this type.
         public static final int top_layover=0x7f08005b;
         public static final int up=0x7f080008;
         public static final int useLogo=0x7f080012;
+        public static final int viewReport_resetBtn=0x7f08005d;
         public static final int withText=0x7f08001a;
         public static final int wrap_content=0x7f08001d;
     }
@@ -1477,14 +1477,14 @@ containing a value of this type.
         public static final int number_of_packages_hint=0x7f0a0013;
         public static final int password_textview=0x7f0a0014;
         public static final int passwords_not_same=0x7f0a0015;
-        public static final int post_comment=0x7f0a0016;
-        public static final int report=0x7f0a0017;
-        public static final int submit=0x7f0a0018;
-        public static final int title=0x7f0a0019;
-        public static final int title_activity_action_feedback=0x7f0a001a;
-        public static final int title_activity_activity_action_feedback=0x7f0a001b;
-        public static final int update_button=0x7f0a001c;
-        public static final int username_textview=0x7f0a001d;
+        public static final int report=0x7f0a0016;
+        public static final int submit=0x7f0a0017;
+        public static final int title=0x7f0a0018;
+        public static final int title_activity_action_feedback=0x7f0a0019;
+        public static final int title_activity_activity_action_feedback=0x7f0a001a;
+        public static final int update_button=0x7f0a001b;
+        public static final int username_textview=0x7f0a001c;
+        public static final int viewReport_resetDatabase=0x7f0a001d;
         public static final int wearTitle=0x7f0a001e;
     }
     public static final class style {
