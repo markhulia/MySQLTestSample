@@ -19,7 +19,7 @@
         android:text="Username" />
 
     <EditText
-        android:id="@+id/user"
+        android:id="@+id/singleItemViewItemQty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/updateReportItemTitle"
@@ -30,8 +30,8 @@
         android:id="@+id/TextView01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/user"
-        android:layout_below="@+id/user"
+        android:layout_alignLeft="@+id/singleItemViewItemQty"
+        android:layout_below="@+id/singleItemViewItemQty"
         android:text="Password" />
 
     <TextView

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <TextureView
+        android:id="@+id/singleItemUpdate_ItemQty"
+        android:layout_width="match_parent"
+        android:layout_height="44dp" />
+
+
+</LinearLayout>
+<!-- From: file:/Users/markhulia/Documents/gitProjects/MySQLTestSample/app/src/main/res/layout/single_item_update.xml -->

@@ -1341,14 +1341,13 @@ containing a value of this type.
         public static final int bUpdateQTY=0x7f080050;
         public static final int beginning=0x7f080013;
         public static final int bottom_layer=0x7f08004e;
-        public static final int bottom_layover=0x7f080058;
-        public static final int box1=0x7f080051;
-        public static final int box2=0x7f080052;
+        public static final int bottom_layover=0x7f080059;
+        public static final int box1=0x7f080052;
+        public static final int box2=0x7f080053;
         public static final int checkbox=0x7f080029;
         public static final int collapseActionView=0x7f080017;
         public static final int decor_content_parent=0x7f08002f;
         public static final int default_activity_button=0x7f080024;
-        public static final int description=0x7f080054;
         public static final int dialog=0x7f08001b;
         public static final int disableHome=0x7f08000c;
         public static final int dropdown=0x7f08001c;
@@ -1362,7 +1361,7 @@ containing a value of this type.
         public static final int ifRoom=0x7f080018;
         public static final int image=0x7f080023;
         public static final int imageView1=0x7f080045;
-        public static final int itemName=0x7f080053;
+        public static final int itemName=0x7f080054;
         public static final int listMode=0x7f080009;
         public static final int list_item=0x7f080025;
         public static final int login=0x7f080042;
@@ -1372,8 +1371,8 @@ containing a value of this type.
         public static final int normal=0x7f08000a;
         public static final int number_of_packages=0x7f08004a;
         public static final int password=0x7f080043;
-        public static final int post_comment=0x7f080059;
-        public static final int progressBar=0x7f080056;
+        public static final int post_comment=0x7f08005a;
+        public static final int progressBar=0x7f080057;
         public static final int progress_circular=0x7f080005;
         public static final int progress_horizontal=0x7f080006;
         public static final int radio=0x7f08002b;
@@ -1396,18 +1395,20 @@ containing a value of this type.
         public static final int showItemName=0x7f08004c;
         public static final int showItemQty=0x7f08004b;
         public static final int showTitle=0x7f080011;
+        public static final int singleItemUpdate_ItemQty=0x7f080051;
+        public static final int singleItemViewItemQty=0x7f080047;
+        public static final int singleItemView_ItemInfo=0x7f080055;
         public static final int split_action_bar=0x7f080007;
-        public static final int submit=0x7f080055;
+        public static final int submit=0x7f080056;
         public static final int submit_area=0x7f08003c;
         public static final int tabMode=0x7f08000b;
         public static final int textView2=0x7f080044;
         public static final int title=0x7f080027;
         public static final int top_layer_next_item_caller=0x7f080049;
-        public static final int top_layover=0x7f080057;
+        public static final int top_layover=0x7f080058;
         public static final int up=0x7f080008;
         public static final int updateReportItemTitle=0x7f080048;
         public static final int useLogo=0x7f080012;
-        public static final int singleItemViewItemQty =0x7f080047;
         public static final int withText=0x7f08001a;
         public static final int wrap_content=0x7f08001d;
     }
@@ -1444,10 +1445,11 @@ containing a value of this type.
         public static final int login=0x7f030018;
         public static final int next_item_caller=0x7f030019;
         public static final int register=0x7f03001a;
-        public static final int single_item_view=0x7f03001b;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001c;
-        public static final int update_report=0x7f03001d;
-        public static final int view_report=0x7f03001e;
+        public static final int single_item_update=0x7f03001b;
+        public static final int single_item_view=0x7f03001c;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
+        public static final int update_report=0x7f03001e;
+        public static final int view_report=0x7f03001f;
     }
     public static final class string {
         public static final int abc_action_bar_home_description=0x7f0a0000;

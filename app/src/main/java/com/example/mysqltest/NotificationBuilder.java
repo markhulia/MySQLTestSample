@@ -74,7 +74,6 @@ public class NotificationBuilder extends Activity {
     public void onNextItemClick(View view) {
 
         //TODO add PHP checker, to check if DB has next line. If false, show report
-
         itemTitle.setText(ItemName);
         itemLocation.setText(Location);
         itemQuantity.setText(ItemQty);
@@ -142,6 +141,7 @@ public class NotificationBuilder extends Activity {
                 FLAG = 1;
             }
         } else {
+            //TODO: create separate confirmation dialog class
             //call confirmation dialog
             //OPTION_YES -> update itemQTY, set FLAG = 1;
             //OPTION NO -> return to parent activity

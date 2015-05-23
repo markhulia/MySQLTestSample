@@ -64,7 +64,7 @@
         android:text="Password" />
 
     <EditText
-        android:id="@+id/user"
+        android:id="@+id/singleItemViewItemQty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/TextView01"
@@ -75,7 +75,7 @@
         android:id="@+id/updateReportItemTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/user"
+        android:layout_above="@+id/singleItemViewItemQty"
         android:layout_alignRight="@+id/TextView01"
         android:layout_centerVertical="true"
         android:text="Username" />

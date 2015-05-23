@@ -5,12 +5,14 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +29,7 @@ public class ReportViewer extends ListActivity {
     private static final String TAG_ITEM_LOCATION = "item_location";
     private static final String TAG_ITEM_QUANTITY = "item_quantity";
     private static final String TAG_ITEM_INFO = "item_info";
-    private static final String TAG_ITEM_COMMENT= "comment";
+    private static final String TAG_ITEM_COMMENT = "comment";
     private static final String TAG_ITEMS_REPORT = "items_report";
     private ProgressDialog pDialog;
     // An array of all of items
@@ -122,22 +124,25 @@ public class ReportViewer extends ListActivity {
         //use our single_item_view xml template for each item in our list,
         //and place the appropriate info from the list to the
         //correct GUI id.  Order is important here.
-        ListAdapter adapter = new SimpleAdapter(this, mItemList,
-                R.layout.single_item_view, new String[]{TAG_ITEM_NAME, TAG_ITEM_INFO,
-                TAG_ITEM_QUANTITY,TAG_ITEM_COMMENT,TAG_ITEM_LOCATION}, new int[]{R.id.itemName, R.id.description,
+        final ListAdapter adapter = new SimpleAdapter(this, mItemList,
+                R.layout.single_item_view,
+                new String[]{TAG_ITEM_NAME, TAG_ITEM_INFO,
+                TAG_ITEM_QUANTITY, TAG_ITEM_COMMENT, TAG_ITEM_LOCATION},
+                new int[]{R.id.itemName, R.id.singleItemView_ItemInfo,
                 R.id.singleItemViewItemQty});
 
         setListAdapter(adapter);
-        ListView lv = getListView();
+        final ListView lv = getListView();
         lv.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
+            public void onItemClick(AdapterView<?> parent, View viewClicked,
                                     int position, long id) {
-
                 // This method is triggered if an item is click within our
                 // list. Should implement this to edit database elements
-
+                String lst = mItemList.get(position).toString();
+                Toast.makeText(ReportViewer.this, "Position " + position, Toast.LENGTH_LONG).show();
+                Log.d(" ReportView onItemClick", lst);
             }
         });
     }
