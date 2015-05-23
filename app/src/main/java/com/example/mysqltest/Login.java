@@ -42,8 +42,8 @@ public class Login extends Activity {
         setContentView(R.layout.login);
 
         // setup input fields
-        user = (EditText) findViewById(R.id.singleItemViewItemQty);
-        pass = (EditText) findViewById(R.id.password);
+        user = (EditText) findViewById(R.id.login_username);
+        pass = (EditText) findViewById(R.id.login_passwordET);
     }
 
     public void mSubmit(View v) {

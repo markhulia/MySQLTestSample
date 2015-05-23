@@ -127,9 +127,9 @@ public class ReportViewer extends ListActivity {
         final ListAdapter adapter = new SimpleAdapter(this, mItemList,
                 R.layout.single_item_view,
                 new String[]{TAG_ITEM_NAME, TAG_ITEM_INFO,
-                TAG_ITEM_QUANTITY, TAG_ITEM_COMMENT, TAG_ITEM_LOCATION},
-                new int[]{R.id.itemName, R.id.singleItemView_ItemInfo,
-                R.id.singleItemViewItemQty});
+                        TAG_ITEM_QUANTITY, TAG_ITEM_COMMENT, TAG_ITEM_LOCATION},
+                new int[]{R.id.singleItemView_itemName, R.id.singleItemView_ItemInfo,
+                        R.id.login_username});
 
         setListAdapter(adapter);
         final ListView lv = getListView();
@@ -138,11 +138,9 @@ public class ReportViewer extends ListActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked,
                                     int position, long id) {
-                // This method is triggered if an item is click within our
-                // list. Should implement this to edit database elements
-                String lst = mItemList.get(position).toString();
-                Toast.makeText(ReportViewer.this, "Position " + position, Toast.LENGTH_LONG).show();
-                Log.d(" ReportView onItemClick", lst);
+
+                Toast.makeText(ReportViewer.this, "Position " + mItemList.get(position).get(TAG_ITEM_COMMENT), Toast.LENGTH_LONG).show();
+                Log.d(" ReportView onItemClick", mItemList.get(position).get(TAG_ITEM_COMMENT));
             }
         });
     }

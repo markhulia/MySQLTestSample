@@ -3,39 +3,39 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/login_imageLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/login_textView2"
         android:layout_centerHorizontal="true"
         android:src="@drawable/info" />
 
     <TextView
-        android:id="@+id/updateReportItemTitle"
+        android:id="@+id/login_ReportTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/password"
+        android:layout_alignLeft="@+id/login_passwordET"
         android:layout_centerVertical="true"
         android:text="Username" />
 
     <EditText
-        android:id="@+id/singleItemViewItemQty"
+        android:id="@+id/login_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/updateReportItemTitle"
-        android:layout_below="@+id/updateReportItemTitle"
+        android:layout_alignLeft="@+id/login_ReportTitle"
+        android:layout_below="@+id/login_ReportTitle"
         android:ems="10" />
 
     <TextView
-        android:id="@+id/TextView01"
+        android:id="@+id/login_TextView01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/singleItemViewItemQty"
-        android:layout_below="@+id/singleItemViewItemQty"
+        android:layout_alignLeft="@+id/login_username"
+        android:layout_below="@+id/login_username"
         android:text="Password" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/login_textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -47,20 +47,20 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/login_passwordET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/TextView01"
+        android:layout_below="@+id/login_TextView01"
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/register"
+        android:id="@+id/login_registerBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/password"
-        android:layout_below="@+id/password"
+        android:layout_alignRight="@+id/login_passwordET"
+        android:layout_below="@+id/login_passwordET"
         android:text="Register" />
 
 </RelativeLayout>

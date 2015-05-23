@@ -2,12 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical"
+    android:weightSum="1">
 
-    <TextureView
-        android:id="@+id/singleItemUpdate_ItemQty"
+
+    <TextView
+        android:id="@+id/singleItemUpdate_itemName"
         android:layout_width="match_parent"
-        android:layout_height="44dp" />
+        android:layout_height="wrap_content"
+        android:text="Large Text"
+        android:layout_marginBottom="5dp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <TextView
+        android:id="@+id/singleItemUpdate_itemInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Large Text"
+        android:layout_marginBottom="5dp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/singleItemUpdate_itemQty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:hint="quantity" />
+
+
+    <Button
+        android:id="@+id/singleItemUpdate_UpdateBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="update"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

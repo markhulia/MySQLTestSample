@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mysqltest"
     android:versionCode="1"
-    android:versionName="1.0">
+    android:versionName="1.0"
+    >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -13,7 +14,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
         <activity
             android:name=".Login"
             android:label="@string/app_name"
@@ -28,17 +30,21 @@
             <!--android:label="@string/app_name"></activity>-->
         <activity
             android:name=".NotificationBuilder"
-            android:label="Builder"></activity>
+            android:label="Builder"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ReportUpdater"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ReportViewer"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".OptionFeedbackActivity"
             android:label="Conversation"
-            android:parentActivityName=".Login">
+            android:parentActivityName=".Login"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Login" />
@@ -46,7 +52,8 @@
         <activity
             android:name=".ActionFeedbackActivity"
             android:label="@string/title_activity_action_feedback"
-            android:parentActivityName=".Login">
+            android:parentActivityName=".Login"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Login" />
