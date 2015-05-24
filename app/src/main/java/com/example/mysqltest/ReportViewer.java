@@ -40,8 +40,8 @@ public class ReportViewer extends ListActivity {
     private ProgressDialog pDialog;
     private JSONArray mList = null;
     private ArrayList<HashMap<String, String>> mItemList;
-    private String READ_COMMENTS_URL = URL.URL + "report.php";
-    private String RESET_DATABASE = URL.URL + "resetReport.php";
+    private String SHOW_REPORT_URL = URL.URL + "report.php";
+    private String RESET_DATABASE_URL = URL.URL + "resetReport.php";
     JSONParser jsonParser = new JSONParser();
     private boolean doubleBackToExitPressedOnce = false;
     @Override
@@ -84,7 +84,7 @@ public class ReportViewer extends ListActivity {
     public void updateJSONdata() {
         mItemList = new ArrayList<HashMap<String, String>>();
         JSONParser jParser = new JSONParser();
-        JSONObject json = jParser.getJSONFromUrl(READ_COMMENTS_URL);
+        JSONObject json = jParser.getJSONFromUrl(SHOW_REPORT_URL);
 
         try {
             mList = json.getJSONArray(TAG_ITEMS_REPORT);
@@ -167,6 +167,7 @@ public class ReportViewer extends ListActivity {
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
             pDialog.dismiss();
+            //wtf???><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< this should not be here
             updateList();
         }
     }
@@ -189,7 +190,7 @@ public class ReportViewer extends ListActivity {
                 params.add(new BasicNameValuePair("username", post_username));
 
                 JSONObject json = jsonParser.makeHttpRequest(
-                        RESET_DATABASE, "POST", params);
+                        RESET_DATABASE_URL, "POST", params);
                 return "success";
             } catch (Exception e) {
                 Log.e(TAG, " crashed here");

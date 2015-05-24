@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.app.RemoteInput;
@@ -19,28 +21,43 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by markhulia on 17/05/15.
  */
 public class NotificationBuilder extends Activity {
 
     public static final int NOTIFICATION_ID = 1;
-    public static int ITEM_ID;
+    public static final String TAG_ITEM_ID = "item_id";
+    private static final String TAG_ITEM_NAME = "item_name";
+    private static final String TAG_ITEM_LOCATION = "item_location";
+    private static final String TAG_ITEM_QUANTITY = "item_quantity";
+    private static final String TAG_ITEM_INFO = "item_info";
+    private static final String TAG_ITEM_COMMENT = "comment";
+    private static final String TAG_ITEMS_REPORT = "items_report";
     private static boolean FLAG = false;
-    TextView itemTitle, itemLocation, itemQuantity;
+//    int itemID = 3;
+    TextView itemTitle, itemLocationTV, itemQuantityTV;
     EditText updateQty;
-    private String ItemQty = "Quantity";
-    private String ItemName = "Item Name";
-    private String Location = "Item Location";
+    private String ITEM_NUMBER_URL = URL.URL + "nextItem.php";
     private int numberOfPackages;
+    private boolean doubleBackToExitPressedOnce = false;
+    private JSONArray mList = null;
+//    String itemIdString;
+//    String itemName;
+//    String itemQuantityString;
+    String itemLocation;
+    String itemInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.next_item_caller);
-        itemTitle = (TextView) findViewById(R.id.showItemName);
-        itemLocation = (TextView) findViewById(R.id.showItemLoc);
-        itemQuantity = (TextView) findViewById(R.id.showItemQty);
+        new getItemNumber().execute();
+
     }
 
     private PendingIntent getConversationPendingIntent(String string, int requestCode) {
@@ -69,70 +86,23 @@ public class NotificationBuilder extends Activity {
         return Bitmap.createScaledBitmap(largeIcon, width, height, false);
     }
 
+
     //Pending activity passes the context of the app. On wearable,
     // it adds "open Application" action button
     @TargetApi(20)
     public void onNextItemClick(View view) {
 
-        //TODO add PHP checker, to check if DB has next line. If false, show report
-        itemTitle.setText(ItemName);
-        itemLocation.setText(Location);
-        itemQuantity.setText(ItemQty);
-        updateQty = (EditText) findViewById(R.id.number_of_packages);
-
-        // Intent replyIntent = new Intent(this, showItemLoc.class);
-        String[] choices = NumberGenerator.getNumbers();
-        RemoteInput remoteInput = new RemoteInput.Builder(OptionFeedbackActivity.EXTRA_VOICE_REPLY)
-                .setLabel("Reply")
-                .setChoices(choices)
-                        //Set false if voice input option should be excluded
-                .setAllowFreeFormInput(true)
-                .build();
-
-        PendingIntent confirmActionPendingIntent =
-                getActionFeedbackPendingIntent("Send PHP queries from here", 0);
-
-        PendingIntent replyPendingIntent = getConversationPendingIntent("", 1);
-
-        NotificationCompat.Action confirmAction = new NotificationCompat.Action(
-                R.drawable.ic_ok, "Confirm",
-                confirmActionPendingIntent);
-
-        NotificationCompat.Action replyAction =
-                new NotificationCompat.Action.Builder(R.drawable.ic_add, ItemQty, replyPendingIntent)
-                        .addRemoteInput(remoteInput)
-                        .build();
-
-        NotificationCompat.WearableExtender wearableExtender = new NotificationCompat.WearableExtender()
-                .addAction(confirmAction)
-                .addAction(replyAction);
-
-        Bitmap prettyAvatar = getScaledLargeIconFromResource(R.drawable.ic_light);
-
-        Notification notification = new NotificationCompat.Builder(this)
-                .setContentTitle(ItemName)
-                .setContentText(ItemQty)
-                .setSmallIcon(R.drawable.ic_task)
-                .setContentIntent(getConversationPendingIntent("qty", 20))
-                .setPriority(Notification.PRIORITY_HIGH)
-                .setDefaults(Notification.DEFAULT_ALL)
-                .setLargeIcon(prettyAvatar)
-                .extend(wearableExtender)
-                .build();
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(NOTIFICATION_ID, notification);
-
-
+        Toast.makeText(this, "onNextItemClick", Toast.LENGTH_LONG).show();
     }
 
     public void onUpdateButtonClick(View view) {
-            String amount = updateQty.getText().toString();
-            //trim().isEmpty() ignores whitespaces
+        String amount = updateQty.getText().toString();
+        //trim().isEmpty() ignores whitespaces
 
         //add flag. if user updated amount, it will change flag from 0 to 1. If user
         //wants to update amount agian before pressing "next item" POP-up window should display info
         //that this item_id has already been updated and if user wants to proceed
+        Toast.makeText(this, "onUpdateButtonClick", Toast.LENGTH_LONG).show();
 
         if (FLAG == false) {
             if (amount != null && !amount.trim().isEmpty()) {
@@ -147,5 +117,129 @@ public class NotificationBuilder extends Activity {
             //OPTION_YES -> update itemQTY, set FLAG = 1;
             //OPTION NO -> return to parent activity
         }
+    }
+
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+            //reset bool variable after 2 seconds
+        }, 2000);
+    }
+
+    class getItemNumber extends AsyncTask<String, String, String> {
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.d("getItemNumber", "On pre-execute");
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            Log.d("getItemNumber", " on In-Background");
+
+            JSONParser jParser = new JSONParser();
+            JSONObject json = jParser.getJSONFromUrl(ITEM_NUMBER_URL);
+
+            try {
+                mList = json.getJSONArray(TAG_ITEMS_REPORT);
+                // PAY ATTENTION TO i < 2 ==========================================================
+                for (int i = 0; i < 1; i++) {
+                    JSONObject c = mList.getJSONObject(i);
+
+
+                    // gets the content of each tag
+                   String itemIdString = c.getString(TAG_ITEM_ID);
+                   String itemName = c.getString(TAG_ITEM_NAME);
+                   String itemQuantityString = c.getString(TAG_ITEM_QUANTITY);
+                    itemLocation = c.getString(TAG_ITEM_LOCATION);
+                    itemInfo = c.getString(TAG_ITEM_INFO);
+                    Log.d(" Item_ID ", itemIdString);
+                    Log.d(" name ",itemName);
+                    Log.d(" quantity ", itemQuantityString);
+                    // creating new HashMapHashMap<String, String> map = new HashMap<>();
+                    // adding HashList to ArrayList
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            itemTitle = (TextView) findViewById(R.id.showItemName);
+            itemLocationTV = (TextView) findViewById(R.id.showItemLoc);
+            itemQuantityTV = (TextView) findViewById(R.id.showItemQty);
+            Log.d("Before invoke ","---------------------------- "+itemName);
+            //retreive row from DB
+            Log.d("After invoke ", "---------------------------- " + itemName);
+            //TODO add PHP checker, to check if DB has next line. If false, show report
+            itemTitle.setText(itemIdString);
+            itemLocationTV.setText(itemLocation);
+            itemQuantityTV.setText(itemQuantityString);
+            updateQty = (EditText) findViewById(R.id.number_of_packages);
+
+
+            // Intent replyIntent = new Intent(this, showItemLoc.class);
+            String[] choices = NumberGenerator.getNumbers();
+            RemoteInput remoteInput = new RemoteInput.Builder(OptionFeedbackActivity.EXTRA_VOICE_REPLY)
+                    .setLabel("Reply")
+                    .setChoices(choices)
+                            //Set false if voice input option should be excluded
+                    .setAllowFreeFormInput(true)
+                    .build();
+
+            PendingIntent confirmActionPendingIntent =
+                    getActionFeedbackPendingIntent("confirmation dawg", 0);
+
+            PendingIntent replyPendingIntent = getConversationPendingIntent("reply dawg", 1);
+
+            NotificationCompat.Action confirmAction = new NotificationCompat.Action(
+                    R.drawable.ic_ok, "Confirm",
+                    confirmActionPendingIntent);
+
+            NotificationCompat.Action replyAction =
+                    new NotificationCompat.Action.Builder(R.drawable.ic_add, TAG_ITEM_QUANTITY, replyPendingIntent)
+                            .addRemoteInput(remoteInput)
+                            .build();
+
+            NotificationCompat.WearableExtender wearableExtender = new NotificationCompat.WearableExtender()
+                    .addAction(confirmAction)
+                    .addAction(replyAction);
+
+            Bitmap prettyAvatar = getScaledLargeIconFromResource(R.drawable.ic_light);
+
+            Notification notification = new NotificationCompat.Builder(NotificationBuilder.this)
+                    .setContentTitle(itemName)
+                    .setContentText(itemQuantityString)
+                    .setSmallIcon(R.drawable.ic_task)
+                    .setContentIntent(getConversationPendingIntent("qty", 20))
+                    .setPriority(Notification.PRIORITY_HIGH)
+                    .setDefaults(Notification.DEFAULT_ALL)
+                    .setLargeIcon(prettyAvatar)
+                    .extend(wearableExtender)
+                    .build();
+
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(NotificationBuilder.this);
+            notificationManager.notify(NOTIFICATION_ID, notification);
+
+
+            return itemName;
+        }
+
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            myMethod(result);
+            Log.d("getItemNumber", "on Post-Execute");
+        }
+    }
+    private String myMethod(String result){
+
+        return result;
     }
 }

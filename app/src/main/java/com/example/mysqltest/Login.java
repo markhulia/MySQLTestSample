@@ -5,7 +5,6 @@ package com.example.mysqltest;
  */
 
 import android.app.Activity;
-import android.app.Notification;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,22 +16,23 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Login extends Activity {
 
-    // JSON parser class and  URL class
-    JSONParser jsonParser = new JSONParser();
-    String LOGIN_URL = URL.URL + "login.php";
-
     // JSON element ids from response of php script:
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
+    // JSON parser class and  URL class
+    JSONParser jsonParser = new JSONParser();
+    String LOGIN_URL = URL.URL + "login.php";
     private EditText user, pass;
     private ProgressDialog pDialog;
 
@@ -70,9 +70,9 @@ public class Login extends Activity {
             // TODO Auto-generated method stub
             // Check for success tag
             int success;
-          //  String username = user.getText().toString();
+            //  String username = user.getText().toString();
             String username = "gio";
-          //  String password = pass.getText().toString();
+            //  String password = pass.getText().toString();
             String password = "333";
 
 
@@ -87,7 +87,7 @@ public class Login extends Activity {
                 JSONObject json = jsonParser.makeHttpRequest(LOGIN_URL, "POST",
                         params);
 
-                // check your log for json response
+                // check  log for json response
                 Log.d("Login attempt", json.toString());
 
                 // json success tag
@@ -104,7 +104,7 @@ public class Login extends Activity {
 
 
                     //open second activity
-                    Intent i = new Intent(Login.this, ReportViewer.class);
+                    Intent i = new Intent(Login.this, GetFirstRow.class);
                     finish();
                     startActivity(i);
                     return json.getString(TAG_MESSAGE);

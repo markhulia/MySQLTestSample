@@ -1340,7 +1340,7 @@ containing a value of this type.
         public static final int bUpdateQTY=0x7f080050;
         public static final int beginning=0x7f080013;
         public static final int bottom_layer=0x7f08004e;
-        public static final int bottom_layover=0x7f08005c;
+        public static final int bottom_layover=0x7f08005b;
         public static final int box1=0x7f080055;
         public static final int box2=0x7f080056;
         public static final int checkbox=0x7f080029;
@@ -1374,7 +1374,6 @@ containing a value of this type.
         public static final int none=0x7f08000e;
         public static final int normal=0x7f08000a;
         public static final int number_of_packages=0x7f08004a;
-        public static final int progressBar=0x7f08005a;
         public static final int progress_circular=0x7f080005;
         public static final int progress_horizontal=0x7f080006;
         public static final int radio=0x7f08002b;
@@ -1403,15 +1402,15 @@ containing a value of this type.
         public static final int singleItemView_ItemInfo=0x7f080058;
         public static final int singleItemView_itemName=0x7f080057;
         public static final int split_action_bar=0x7f080007;
-        public static final int submit=0x7f080059;
+        public static final int startActivity_getFirstRowBtn=0x7f080059;
         public static final int submit_area=0x7f08003c;
         public static final int tabMode=0x7f08000b;
         public static final int title=0x7f080027;
         public static final int top_layer_next_item_caller=0x7f080049;
-        public static final int top_layover=0x7f08005b;
+        public static final int top_layover=0x7f08005a;
         public static final int up=0x7f080008;
         public static final int useLogo=0x7f080012;
-        public static final int viewReport_resetBtn=0x7f08005d;
+        public static final int viewReport_resetBtn=0x7f08005c;
         public static final int withText=0x7f08001a;
         public static final int wrap_content=0x7f08001d;
     }
@@ -1450,8 +1449,8 @@ containing a value of this type.
         public static final int register=0x7f03001a;
         public static final int single_item_update=0x7f03001b;
         public static final int single_item_view=0x7f03001c;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
-        public static final int update_report=0x7f03001e;
+        public static final int start_activity=0x7f03001d;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001e;
         public static final int view_report=0x7f03001f;
     }
     public static final class string {
