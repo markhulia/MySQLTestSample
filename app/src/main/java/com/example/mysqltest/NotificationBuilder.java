@@ -21,9 +21,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * Created by markhulia on 17/05/15.
@@ -45,6 +52,7 @@ public class NotificationBuilder extends Activity {
     private int numberOfPackages;
     private boolean doubleBackToExitPressedOnce = false;
     private JSONArray mList = null;
+    private ArrayList<HashMap<String, String>> mItemList;
 
 
     @Override
@@ -149,15 +157,19 @@ public class NotificationBuilder extends Activity {
         @Override
         protected String doInBackground(String... args) {
             Log.d("getItemNumber", " on In-Background");
-
+            mItemList = new ArrayList<HashMap<String, String>>();
             JSONParser jParser = new JSONParser();
             JSONObject json = jParser.getJSONFromUrl(ITEM_NUMBER_URL);
-
+            int rowNrInt = 1;
+            String rowNr = String.valueOf(rowNrInt);
             try {
                 mList = json.getJSONArray(TAG_ITEMS_REPORT);
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put(TAG_ITEM_QUANTITY, rowNr);
+                mItemList.add(map);
                 // PAY ATTENTION TO i < 2 ==========================================================
-                for (int i = 1; i < 2; i++) {
-                    JSONObject c = mList.getJSONObject(i);
+              //  for (int i = 0; i < json.length(); i++) {
+                    JSONObject c = mList.getJSONObject(0);
 
 
                     // gets the content of each tag
@@ -171,6 +183,7 @@ public class NotificationBuilder extends Activity {
                     Log.d(" quantity ", itemQuantityString);
                     // creating new HashMapHashMap<String, String> map = new HashMap<>();
                     // adding HashList to ArrayList
+
 
 
                     Log.d("Before invoke ", "---------------------------- " + itemName);
@@ -232,7 +245,7 @@ public class NotificationBuilder extends Activity {
 
                     NotificationManagerCompat notificationManager = NotificationManagerCompat.from(NotificationBuilder.this);
                     notificationManager.notify(NOTIFICATION_ID, notification);
-                }
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
