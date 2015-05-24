@@ -11,9 +11,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a69f3904-d48d-4765-8385-8f970bbf3758" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/NotificationBuilder$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/NotificationBuilder$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/NotificationBuilder$getItemNumber.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/NotificationBuilder$getItemNumber.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/NotificationBuilder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/NotificationBuilder.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
@@ -39,28 +43,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="NotificationBuilder.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NotificationBuilder.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/NotificationBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="250" column="36" selection-start-line="250" selection-start-column="36" selection-end-line="250" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.6713147">
+              <caret line="178" column="42" selection-start-line="178" selection-start-column="42" selection-end-line="178" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5535#5732#0" expanded="true" />
-                <element signature="e#5731#5732#0" expanded="true" />
-                <element signature="e#6715#6731#0" expanded="true" />
-                <element signature="e#8067#8462#0" expanded="true" />
-                <element signature="e#8461#8462#0" expanded="true" />
+                <element signature="e#5501#5698#0" expanded="true" />
+                <element signature="e#5697#5698#0" expanded="true" />
+                <element signature="e#6621#6636#0" expanded="true" />
+                <element signature="e#6830#6846#0" expanded="true" />
+                <element signature="e#8181#8576#0" expanded="true" />
+                <element signature="e#8575#8576#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GetFirstRow.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GetFirstRow.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/GetFirstRow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5378486">
-              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="54" column="58" selection-start-line="54" selection-start-column="58" selection-end-line="54" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -70,22 +75,17 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/ReportViewer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="110" column="35" selection-start-line="110" selection-start-column="16" selection-end-line="110" selection-end-column="35" />
+              <caret line="44" column="45" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="45" />
               <folding>
-                <element signature="imports" expanded="false" />
                 <element signature="method#onBackPressed#0;class#ReportViewer#0" expanded="false" />
-                <element signature="e#2337#2535#0" expanded="false" />
-                <element signature="e#2534#2535#0" expanded="false" />
                 <element signature="method#onResume#0;class#ReportViewer#0" expanded="false" />
+                <element signature="e#3685#3701#0" expanded="true" />
                 <element signature="method#updateList#0;class#ReportViewer#0" expanded="false" />
-                <element signature="e#4745#5193#0" expanded="false" />
-                <element signature="e#5192#5193#0" expanded="false" />
-                <element signature="e#5240#5241#0" expanded="false" />
-                <element signature="e#5284#5285#0" expanded="false" />
                 <element signature="method#onPreExecute#0;class#LoadReportItems#0;class#ReportViewer#0" expanded="false" />
                 <element signature="method#doInBackground#0;class#LoadReportItems#0;class#ReportViewer#0" expanded="false" />
                 <element signature="method#onPostExecute#0;class#LoadReportItems#0;class#ReportViewer#0" expanded="false" />
                 <element signature="class#updateReport#0;class#ReportViewer#0" expanded="false" />
+                <element signature="e#6696#6711#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1392,8 +1392,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/GetFirstRow.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/ReportViewer.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/JSONParser.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/NotificationBuilder.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/Login.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/NotificationBuilder.java" />
       </list>
     </option>
   </component>
@@ -1411,9 +1411,9 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="350" />
+    <option name="x" value="651" />
     <option name="y" value="23" />
-    <option name="width" value="1325" />
+    <option name="width" value="1045" />
     <option name="height" value="992" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -1718,8 +1718,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="350" y="23" width="1325" height="992" extended-state="0" />
-    <editor active="true" />
+    <frame x="651" y="23" width="1045" height="992" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1732,13 +1732,13 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29351535" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39497718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39497718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32906976" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298479" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15198752" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19441675" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32660332" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1811,11 +1811,12 @@
           <caret line="171" column="56" selection-start-line="171" selection-start-column="56" selection-end-line="171" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5535#5732#0" expanded="true" />
-            <element signature="e#5731#5732#0" expanded="true" />
-            <element signature="e#6715#6731#0" expanded="true" />
-            <element signature="e#8067#8462#0" expanded="true" />
-            <element signature="e#8461#8462#0" expanded="true" />
+            <element signature="e#5501#5698#0" expanded="true" />
+            <element signature="e#5697#5698#0" expanded="true" />
+            <element signature="e#6621#6636#0" expanded="true" />
+            <element signature="e#6830#6846#0" expanded="true" />
+            <element signature="e#8181#8576#0" expanded="true" />
+            <element signature="e#8575#8576#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1833,20 +1834,15 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="110" column="35" selection-start-line="110" selection-start-column="16" selection-end-line="110" selection-end-column="35" />
           <folding>
-            <element signature="imports" expanded="false" />
             <element signature="method#onBackPressed#0;class#ReportViewer#0" expanded="false" />
-            <element signature="e#2337#2535#0" expanded="false" />
-            <element signature="e#2534#2535#0" expanded="false" />
             <element signature="method#onResume#0;class#ReportViewer#0" expanded="false" />
+            <element signature="e#3685#3701#0" expanded="true" />
             <element signature="method#updateList#0;class#ReportViewer#0" expanded="false" />
-            <element signature="e#4745#5193#0" expanded="false" />
-            <element signature="e#5192#5193#0" expanded="false" />
-            <element signature="e#5240#5241#0" expanded="false" />
-            <element signature="e#5284#5285#0" expanded="false" />
             <element signature="method#onPreExecute#0;class#LoadReportItems#0;class#ReportViewer#0" expanded="false" />
             <element signature="method#doInBackground#0;class#LoadReportItems#0;class#ReportViewer#0" expanded="false" />
             <element signature="method#onPostExecute#0;class#LoadReportItems#0;class#ReportViewer#0" expanded="false" />
             <element signature="class#updateReport#0;class#ReportViewer#0" expanded="false" />
+            <element signature="e#6696#6711#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1875,11 +1871,12 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5535#5732#0" expanded="true" />
-            <element signature="e#5731#5732#0" expanded="true" />
-            <element signature="e#6715#6731#0" expanded="true" />
-            <element signature="e#8067#8462#0" expanded="true" />
-            <element signature="e#8461#8462#0" expanded="true" />
+            <element signature="e#5501#5698#0" expanded="true" />
+            <element signature="e#5697#5698#0" expanded="true" />
+            <element signature="e#6621#6636#0" expanded="true" />
+            <element signature="e#6830#6846#0" expanded="true" />
+            <element signature="e#8181#8576#0" expanded="true" />
+            <element signature="e#8575#8576#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1889,20 +1886,15 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="103" column="54" selection-start-line="103" selection-start-column="15" selection-end-line="103" selection-end-column="54" />
           <folding>
-            <element signature="imports" expanded="false" />
             <element signature="method#onBackPressed#0;class#ReportViewer#0" expanded="false" />
-            <element signature="e#2337#2535#0" expanded="false" />
-            <element signature="e#2534#2535#0" expanded="false" />
             <element signature="method#onResume#0;class#ReportViewer#0" expanded="false" />
+            <element signature="e#3685#3701#0" expanded="true" />
             <element signature="method#updateList#0;class#ReportViewer#0" expanded="false" />
-            <element signature="e#4745#5193#0" expanded="false" />
-            <element signature="e#5192#5193#0" expanded="false" />
-            <element signature="e#5240#5241#0" expanded="false" />
-            <element signature="e#5284#5285#0" expanded="false" />
             <element signature="method#onPreExecute#0;class#LoadReportItems#0;class#ReportViewer#0" expanded="false" />
             <element signature="method#doInBackground#0;class#LoadReportItems#0;class#ReportViewer#0" expanded="false" />
             <element signature="method#onPostExecute#0;class#LoadReportItems#0;class#ReportViewer#0" expanded="false" />
             <element signature="class#updateReport#0;class#ReportViewer#0" expanded="false" />
+            <element signature="e#6696#6711#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2092,44 +2084,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/ReportViewer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="110" column="35" selection-start-line="110" selection-start-column="16" selection-end-line="110" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="method#onBackPressed#0;class#ReportViewer#0" expanded="false" />
-            <element signature="e#2337#2535#0" expanded="false" />
-            <element signature="e#2534#2535#0" expanded="false" />
-            <element signature="method#onResume#0;class#ReportViewer#0" expanded="false" />
-            <element signature="method#updateList#0;class#ReportViewer#0" expanded="false" />
-            <element signature="e#4745#5193#0" expanded="false" />
-            <element signature="e#5192#5193#0" expanded="false" />
-            <element signature="e#5240#5241#0" expanded="false" />
-            <element signature="e#5284#5285#0" expanded="false" />
-            <element signature="method#onPreExecute#0;class#LoadReportItems#0;class#ReportViewer#0" expanded="false" />
-            <element signature="method#doInBackground#0;class#LoadReportItems#0;class#ReportViewer#0" expanded="false" />
-            <element signature="method#onPostExecute#0;class#LoadReportItems#0;class#ReportViewer#0" expanded="false" />
-            <element signature="class#updateReport#0;class#ReportViewer#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/NotificationBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="250" column="36" selection-start-line="250" selection-start-column="36" selection-end-line="250" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5535#5732#0" expanded="true" />
-            <element signature="e#5731#5732#0" expanded="true" />
-            <element signature="e#6715#6731#0" expanded="true" />
-            <element signature="e#8067#8462#0" expanded="true" />
-            <element signature="e#8461#8462#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/Login.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2142,9 +2096,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/GetFirstRow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5378486">
-          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="54" column="58" selection-start-line="54" selection-start-column="58" selection-end-line="54" selection-end-column="58" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/ReportViewer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="45" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="45" />
+          <folding>
+            <element signature="method#onBackPressed#0;class#ReportViewer#0" expanded="false" />
+            <element signature="method#onResume#0;class#ReportViewer#0" expanded="false" />
+            <element signature="e#3685#3701#0" expanded="true" />
+            <element signature="method#updateList#0;class#ReportViewer#0" expanded="false" />
+            <element signature="method#onPreExecute#0;class#LoadReportItems#0;class#ReportViewer#0" expanded="false" />
+            <element signature="method#doInBackground#0;class#LoadReportItems#0;class#ReportViewer#0" expanded="false" />
+            <element signature="method#onPostExecute#0;class#LoadReportItems#0;class#ReportViewer#0" expanded="false" />
+            <element signature="class#updateReport#0;class#ReportViewer#0" expanded="false" />
+            <element signature="e#6696#6711#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/NotificationBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6713147">
+          <caret line="178" column="42" selection-start-line="178" selection-start-column="42" selection-end-line="178" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5501#5698#0" expanded="true" />
+            <element signature="e#5697#5698#0" expanded="true" />
+            <element signature="e#6621#6636#0" expanded="true" />
+            <element signature="e#6830#6846#0" expanded="true" />
+            <element signature="e#8181#8576#0" expanded="true" />
+            <element signature="e#8575#8576#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

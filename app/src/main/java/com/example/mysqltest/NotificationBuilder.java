@@ -30,7 +30,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.StringTokenizer;
 
 /**
  * Created by markhulia on 17/05/15.
@@ -163,6 +162,10 @@ public class NotificationBuilder extends Activity {
             int rowNrInt = 1;
             String rowNr = String.valueOf(rowNrInt);
             try {
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("item_id", rowNr));
+
+
                 mList = json.getJSONArray(TAG_ITEMS_REPORT);
                 HashMap<String, String> map = new HashMap<String, String>();
                 map.put(TAG_ITEM_QUANTITY, rowNr);
@@ -183,7 +186,6 @@ public class NotificationBuilder extends Activity {
                 Log.d(" quantity ", itemQuantityString);
                 // creating new HashMapHashMap<String, String> map = new HashMap<>();
                 // adding HashList to ArrayList
-
 
 
                 Log.d("Before invoke ", "---------------------------- " + itemName);
