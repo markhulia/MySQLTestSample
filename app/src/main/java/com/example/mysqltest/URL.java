@@ -10,6 +10,12 @@ public class URL {
 
     //home
     public static final String URL = "http://10.0.1.5:2604/webservice/";
+    static int rowNumber = 0;
+
+    public static void setRowNumber(int i) {
+        rowNumber++;
+        return;
+    }
 
     //Office ANDROID network
     //public static final String URL = "http://192.168.1.153:2604/webservice/";

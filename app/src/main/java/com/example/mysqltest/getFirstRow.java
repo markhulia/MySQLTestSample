@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -28,14 +29,15 @@ public class GetFirstRow extends Activity {
     String itemIdString;
     String TAG = "GetFirstRow";
     private JSONArray mList = null;
-
+    int i = URL.rowNumber;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_activity);
+        Log.d("i on create", String.valueOf(i));
     }
 
     public void onGetFirstRowClick(View view) {
-
+        Log.d("i ongetFirstRowClick", String.valueOf(i));
         new firstItem().execute();
     }
 
@@ -43,20 +45,28 @@ public class GetFirstRow extends Activity {
         protected void onPreExecute() {
             super.onPreExecute();
             Log.d("getItemNumber", "On pre-execute");
+
+           // Log.d("i onPreExecute ", String.valueOf(i));
         }
 
         @Override
         protected String doInBackground(String... strings) {
 
+            String rowNumber = String.valueOf(i);
 
             try {
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("rowNr", "5"));
-
+                params.add(new BasicNameValuePair("rowNr", rowNumber));
+                Log.d("i doInBackground", String.valueOf(i));
                 JSONParser jsonParser = new JSONParser();
                 JSONObject jsonObject = jsonParser.makeHttpRequest(
                         GET_FIRST_ROW_URL, "POST", params);
-
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        i++;
+                    }
+                });
                 Log.d(TAG, jsonObject.toString());
             } catch (Exception e) {
                 Log.d(TAG, "some exception");
@@ -78,7 +88,7 @@ public class GetFirstRow extends Activity {
                 Log.d(" Item ID ", itemIdString);
                 //Toast.makeText(GetFirstRow.this, "1st item id " + itemIdString, Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(GetFirstRow.this, NotificationBuilder.class);
+                Intent intent = new Intent(GetFirstRow.this, GetFirstRow.class);
                 finish();
                 startActivity(intent);
 
@@ -91,6 +101,9 @@ public class GetFirstRow extends Activity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             Log.d("getItemNumber", "on Post-Execute");
+            i++;
+            URL.setRowNumber(i);
+            Log.d("i onPostExecute NUMBER", String.valueOf(i));
         }
 
     }
