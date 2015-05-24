@@ -39,26 +39,26 @@ public class NotificationBuilder extends Activity {
     private static final String TAG_ITEM_COMMENT = "comment";
     private static final String TAG_ITEMS_REPORT = "items_report";
     private static boolean FLAG = false;
-//    int itemID = 3;
     TextView itemTitle, itemLocationTV, itemQuantityTV;
     EditText updateQty;
     private String ITEM_NUMBER_URL = URL.URL + "nextItem.php";
     private int numberOfPackages;
     private boolean doubleBackToExitPressedOnce = false;
     private JSONArray mList = null;
-//    String itemIdString;
-//    String itemName;
-//    String itemQuantityString;
-    String itemLocation;
-    String itemInfo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.next_item_caller);
+
+
         new getItemNumber().execute();
+//        getItemNumber getN = new getItemNumber();
+//        if(getN.getStatus()== AsyncTask.Status.FINISHED) {
 
     }
+
 
     private PendingIntent getConversationPendingIntent(String string, int requestCode) {
         Intent conversationIntent = new Intent(this, OptionFeedbackActivity.class);
@@ -136,10 +136,14 @@ public class NotificationBuilder extends Activity {
         }, 2000);
     }
 
-    class getItemNumber extends AsyncTask<String, String, String> {
+    public class getItemNumber extends AsyncTask<String, String, String> {
         protected void onPreExecute() {
             super.onPreExecute();
             Log.d("getItemNumber", "On pre-execute");
+            itemTitle = (TextView) findViewById(R.id.showItemName);
+            itemLocationTV = (TextView) findViewById(R.id.showItemLoc);
+            itemQuantityTV = (TextView) findViewById(R.id.showItemQty);
+
         }
 
         @Override
@@ -152,94 +156,95 @@ public class NotificationBuilder extends Activity {
             try {
                 mList = json.getJSONArray(TAG_ITEMS_REPORT);
                 // PAY ATTENTION TO i < 2 ==========================================================
-                for (int i = 0; i < 1; i++) {
+                for (int i = 1; i < 2; i++) {
                     JSONObject c = mList.getJSONObject(i);
 
 
                     // gets the content of each tag
-                   String itemIdString = c.getString(TAG_ITEM_ID);
-                   String itemName = c.getString(TAG_ITEM_NAME);
-                   String itemQuantityString = c.getString(TAG_ITEM_QUANTITY);
-                    itemLocation = c.getString(TAG_ITEM_LOCATION);
-                    itemInfo = c.getString(TAG_ITEM_INFO);
+                    final String itemIdString = c.getString(TAG_ITEM_ID);
+                    final String itemName = c.getString(TAG_ITEM_NAME);
+                    final String itemQuantityString = c.getString(TAG_ITEM_QUANTITY);
+                    final String itemLocation = c.getString(TAG_ITEM_LOCATION);
+                    String itemInfo = c.getString(TAG_ITEM_INFO);
                     Log.d(" Item_ID ", itemIdString);
-                    Log.d(" name ",itemName);
+                    Log.d(" name ", itemName);
                     Log.d(" quantity ", itemQuantityString);
                     // creating new HashMapHashMap<String, String> map = new HashMap<>();
                     // adding HashList to ArrayList
+
+
+                    Log.d("Before invoke ", "---------------------------- " + itemName);
+                    //retreive row from DB
+                    Log.d("After invoke ", "---------------------------- " + itemName);
+                    //TODO add PHP checker, to check if DB has next line. If false, show report
+
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            itemTitle.setText(itemName);
+                            itemLocationTV.setText(itemLocation);
+                            itemQuantityTV.setText(itemQuantityString);
+                            updateQty = (EditText) findViewById(R.id.number_of_packages);
+                        }
+                    });
+
+
+                    // Intent replyIntent = new Intent(this, showItemLoc.class);
+                    String[] choices = NumberGenerator.getNumbers();
+                    RemoteInput remoteInput = new RemoteInput.Builder(OptionFeedbackActivity.EXTRA_VOICE_REPLY)
+                            .setLabel("Reply")
+                            .setChoices(choices)
+                                    //Set false if voice input option should be excluded
+                            .setAllowFreeFormInput(true)
+                            .build();
+
+                    PendingIntent confirmActionPendingIntent =
+                            getActionFeedbackPendingIntent("confirmation dawg", 0);
+
+                    PendingIntent replyPendingIntent = getConversationPendingIntent("reply dawg", 1);
+
+                    NotificationCompat.Action confirmAction = new NotificationCompat.Action(
+                            R.drawable.ic_ok, "Confirm",
+                            confirmActionPendingIntent);
+
+                    NotificationCompat.Action replyAction =
+                            new NotificationCompat.Action.Builder(R.drawable.ic_add, TAG_ITEM_QUANTITY, replyPendingIntent)
+                                    .addRemoteInput(remoteInput)
+                                    .build();
+
+                    NotificationCompat.WearableExtender wearableExtender = new NotificationCompat.WearableExtender()
+                            .addAction(confirmAction)
+                            .addAction(replyAction);
+
+                    Bitmap prettyAvatar = getScaledLargeIconFromResource(R.drawable.ic_light);
+
+                    Notification notification = new NotificationCompat.Builder(NotificationBuilder.this)
+                            .setContentTitle(itemName)
+                            .setContentText(itemQuantityString)
+                            .setSmallIcon(R.drawable.ic_task)
+                            .setContentIntent(getConversationPendingIntent("qty", 20))
+                            .setPriority(Notification.PRIORITY_HIGH)
+                            .setDefaults(Notification.DEFAULT_ALL)
+                            .setLargeIcon(prettyAvatar)
+                            .extend(wearableExtender)
+                            .build();
+
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(NotificationBuilder.this);
+                    notificationManager.notify(NOTIFICATION_ID, notification);
                 }
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            itemTitle = (TextView) findViewById(R.id.showItemName);
-            itemLocationTV = (TextView) findViewById(R.id.showItemLoc);
-            itemQuantityTV = (TextView) findViewById(R.id.showItemQty);
-            Log.d("Before invoke ","---------------------------- "+itemName);
-            //retreive row from DB
-            Log.d("After invoke ", "---------------------------- " + itemName);
-            //TODO add PHP checker, to check if DB has next line. If false, show report
-            itemTitle.setText(itemIdString);
-            itemLocationTV.setText(itemLocation);
-            itemQuantityTV.setText(itemQuantityString);
-            updateQty = (EditText) findViewById(R.id.number_of_packages);
-
-
-            // Intent replyIntent = new Intent(this, showItemLoc.class);
-            String[] choices = NumberGenerator.getNumbers();
-            RemoteInput remoteInput = new RemoteInput.Builder(OptionFeedbackActivity.EXTRA_VOICE_REPLY)
-                    .setLabel("Reply")
-                    .setChoices(choices)
-                            //Set false if voice input option should be excluded
-                    .setAllowFreeFormInput(true)
-                    .build();
-
-            PendingIntent confirmActionPendingIntent =
-                    getActionFeedbackPendingIntent("confirmation dawg", 0);
-
-            PendingIntent replyPendingIntent = getConversationPendingIntent("reply dawg", 1);
-
-            NotificationCompat.Action confirmAction = new NotificationCompat.Action(
-                    R.drawable.ic_ok, "Confirm",
-                    confirmActionPendingIntent);
-
-            NotificationCompat.Action replyAction =
-                    new NotificationCompat.Action.Builder(R.drawable.ic_add, TAG_ITEM_QUANTITY, replyPendingIntent)
-                            .addRemoteInput(remoteInput)
-                            .build();
-
-            NotificationCompat.WearableExtender wearableExtender = new NotificationCompat.WearableExtender()
-                    .addAction(confirmAction)
-                    .addAction(replyAction);
-
-            Bitmap prettyAvatar = getScaledLargeIconFromResource(R.drawable.ic_light);
-
-            Notification notification = new NotificationCompat.Builder(NotificationBuilder.this)
-                    .setContentTitle(itemName)
-                    .setContentText(itemQuantityString)
-                    .setSmallIcon(R.drawable.ic_task)
-                    .setContentIntent(getConversationPendingIntent("qty", 20))
-                    .setPriority(Notification.PRIORITY_HIGH)
-                    .setDefaults(Notification.DEFAULT_ALL)
-                    .setLargeIcon(prettyAvatar)
-                    .extend(wearableExtender)
-                    .build();
-
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(NotificationBuilder.this);
-            notificationManager.notify(NOTIFICATION_ID, notification);
-
-
-            return itemName;
+            return "success33";
         }
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            myMethod(result);
             Log.d("getItemNumber", "on Post-Execute");
         }
     }
-    private String myMethod(String result){
 
-        return result;
-    }
+
 }
