@@ -50,9 +50,8 @@ public class GetFirstRow extends Activity {
 
                 mList = json.getJSONArray(TAG_ITEMS_REPORT);
                 Log.d(" In mList", " Procees");
-                // PAY ATTENTION TO i < 2 ==========================================================
-                for (int i = 0; i < 2; i++) {
-                    JSONObject c = mList.getJSONObject(i);
+                //0 is first element from the JSON object
+                    JSONObject c = mList.getJSONObject(0);
 
                     // gets the content of each tag
                     itemIdString = c.getString(TAG_ITEM_ID);
@@ -62,7 +61,6 @@ public class GetFirstRow extends Activity {
                     Intent intent = new Intent(GetFirstRow.this, NotificationBuilder.class);
                     finish();
                     startActivity(intent);
-                }
 
             } catch (JSONException e) {
                 e.printStackTrace();
