@@ -39,11 +39,6 @@ public class OptionFeedbackActivity extends Activity {
 
         new updateAmount().execute();
 
-
-        //Go back to main activity without crashing the app
-        Intent i = new Intent(OptionFeedbackActivity.this, NotificationBuilder.class);
-        finish();
-        startActivity(i);
     }
 
 
@@ -87,6 +82,10 @@ public class OptionFeedbackActivity extends Activity {
             int i = Globals.getItemRowNumber();
             i++;
             Globals.setItemRowNumber(i);
+            //Go back to main activity without crashing the app
+            Intent intent = new Intent(OptionFeedbackActivity.this, NotificationBuilder.class);
+            finish();
+            startActivity(intent);
         }
 
     }

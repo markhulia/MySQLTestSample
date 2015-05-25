@@ -8,7 +8,7 @@ public class Globals {
     public static final String URL = "http://10.0.1.5:2604/webservice/";
     public static String itemName;
     public static String itemLocation;
-    public static String itemIfno;
+    public static String itemInfo;
     public static String itemComment;
     public static String itemId;
     public static String user;
@@ -55,12 +55,12 @@ public class Globals {
         Globals.itemId = itemId;
     }
 
-    public static String getItemIfno() {
-        return itemIfno;
+    public static String getItemInfo() {
+        return itemInfo;
     }
 
-    public static void setItemIfno(String itemIfno) {
-        Globals.itemIfno = itemIfno;
+    public static void setItemInfo(String itemInfo) {
+        Globals.itemInfo = itemInfo;
     }
 
     public static String getItemLocation() {

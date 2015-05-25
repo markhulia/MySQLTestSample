@@ -11,22 +11,26 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.PriorityQueue;
-
 /**
  * Created by markhulia on 24/05/15.
  */
 public class GetFirstRow extends Activity {
 
 
+    public static final String TAG_ITEM_ID = "item_id";
     private static final String GET_FIRST_ROW_URL = Globals.URL + "getFirstRow.php";
-    private static final String RANDOM_CRAP  = Globals.URL + "randomCrap.php";
+    private static final String RANDOM_CRAP = Globals.URL + "randomCrap.php";
+    private static final String TAG_ROW_NUMBER = "rowNr";
+    private static final String TAG_ITEM_NAME = "item_name";
+    private static final String TAG_ITEM_LOCATION = "item_location";
+    private static final String TAG_ITEM_QUANTITY = "item_quantity";
+    private static final String TAG_ITEM_INFO = "item_info";
+    private static final String TAG_ITEM_COMMENT = "comment";
     private static final String TAG_ITEMS_REPORT = "items_report";
-    private static final String ROW_NUMBER = "rowNr";
-    private JSONArray mList = null;
     String rowNumber;
     String Loc = " GetFirstRow";
     JSONParser jParser = new JSONParser();
+    private JSONArray mList = null;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,15 +57,38 @@ public class GetFirstRow extends Activity {
             try {
                 mList = json.getJSONArray(TAG_ITEMS_REPORT);
                 JSONObject c = mList.getJSONObject(0);
+                Globals.setItemName(c.getString(TAG_ITEM_NAME));
+                Globals.setItemQuantity(Integer.parseInt(c.getString(TAG_ITEM_QUANTITY)));
+                Globals.setItemRowNumber(Integer.parseInt(c.getString(TAG_ROW_NUMBER)));
+                Globals.setItemLocation(c.getString(TAG_ITEM_LOCATION));
+                Globals.setItemInfo(c.getString(TAG_ITEM_INFO));
+                Globals.setItemComment(c.getString(TAG_ITEM_COMMENT));
+                rowNumber = c.getString(TAG_ROW_NUMBER);
 
-                Log.e(Loc, "JSON OBJECT: "+c);
-                rowNumber = c.getString(ROW_NUMBER);
-                Log.d(Loc, "ItemIdString "+ rowNumber);
 
-                Intent intent = new Intent(GetFirstRow.this, NotificationBuilder.class);
-                finish();
-                startActivity(intent);
-
+//                Log.e("Before ", String.valueOf(Globals.getItemRowNumber()));
+////                Globals.setItemId(c.getString(TAG_ITEM_ID));
+////                Log.d("After ", Globals.getItemId());
+//
+//                Log.e("Before ", Globals.getItemName());
+////                Globals.setItemName(c.getString(TAG_ITEM_NAME));
+////                Log.d("After ", Globals.getItemName());
+//
+//                Log.e("Before ", String.valueOf(Globals.getItemQuantity()));
+////                Globals.setItemQuantity(Integer.parseInt(c.getString(TAG_ITEM_QUANTITY)));
+////                Log.d("After ", String.valueOf(Globals.getItemQuantity()));
+//
+//                Log.e("Before ", Globals.getItemLocation());
+////                Globals.setItemLocation(c.getString(TAG_ITEM_LOCATION));
+////                Log.d("After ", Globals.getItemLocation());
+//
+//                Log.e("Before ", Globals.getItemInfo());
+////                Globals.setItemInfo(c.getString(TAG_ITEM_INFO));
+////                Log.d("After ", Globals.getItemInfo());
+//
+//                Log.e("Before ", Globals.getItemComment());
+////                Globals.setItemComment(c.getString(TAG_ITEM_COMMENT));
+////                Log.d("After ", Globals.getItemComment());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -70,9 +97,11 @@ public class GetFirstRow extends Activity {
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            int i = Integer.parseInt(rowNumber);
-            Globals.setItemRowNumber(i);
-            Log.d(Loc, "NUMBER"+ String.valueOf(i));
+            Log.d(Loc, "NUMBER: " + String.valueOf(Globals.getItemRowNumber()));
+            Log.e(Loc, "Name: " + Globals.getItemName());
+            Intent intent = new Intent(GetFirstRow.this, NotificationBuilder.class);
+            finish();
+            startActivity(intent);
         }
 
     }

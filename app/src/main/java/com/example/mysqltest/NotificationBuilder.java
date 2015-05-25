@@ -58,12 +58,68 @@ public class NotificationBuilder extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(LOC, " onCreate");
-        Log.d(LOC, " value of global rowNumber: " + Globals.getItemRowNumber());
         setContentView(R.layout.next_item_caller);
+
+        itemTitle = (TextView) findViewById(R.id.showItemName);
+        itemLocationTV = (TextView) findViewById(R.id.showItemLoc);
+        itemQuantityTV = (TextView) findViewById(R.id.showItemQty);
         updateQty = (EditText) findViewById(R.id.number_of_packages);
 
-        new getItemNumber().execute();
+        itemTitle.setText(Globals.getItemName());
+        itemLocationTV.setText(Globals.getItemLocation());
+        itemQuantityTV.setText(String.valueOf(Globals.getItemQuantity()));
+
+        Log.d(LOC, " onCreate");
+        Log.d(LOC, " value of global rowNumber: " + Globals.getItemRowNumber());
+
+
+        String[] choices = NumberGenerator.getNumbers();
+        RemoteInput remoteInput = new RemoteInput.Builder(OptionFeedbackActivity.EXTRA_VOICE_REPLY)
+                .setLabel("Reply")
+                .setChoices(choices)
+                        //Set false if voice input option should be excluded
+                .setAllowFreeFormInput(true)
+                .build();
+
+        PendingIntent confirmActionPendingIntent =
+                getActionFeedbackPendingIntent("confirmation dawg", 0);
+
+        PendingIntent replyPendingIntent = getConversationPendingIntent("reply dawg", 1);
+
+        NotificationCompat.Action confirmAction = new NotificationCompat.Action(
+                R.drawable.ic_ok, "Confirm",
+                confirmActionPendingIntent);
+
+        NotificationCompat.Action replyAction =
+                new NotificationCompat.Action.Builder(R.drawable.ic_add,
+                        TAG_ITEM_QUANTITY, replyPendingIntent)
+                        .addRemoteInput(remoteInput)
+                        .build();
+
+        NotificationCompat.WearableExtender wearableExtender =
+                new NotificationCompat.WearableExtender()
+                        .addAction(confirmAction)
+                        .addAction(replyAction);
+
+        Bitmap prettyAvatar = getScaledLargeIconFromResource(R.drawable.ic_light);
+
+        Notification notification = new NotificationCompat.Builder(NotificationBuilder.this)
+                .setContentTitle(Globals.getItemName())
+                .setContentText(String.valueOf(Globals.getItemQuantity()))
+                .setSmallIcon(R.drawable.ic_task)
+                .setContentIntent(getConversationPendingIntent("qty", 20))
+                .setPriority(Notification.PRIORITY_HIGH)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setLargeIcon(prettyAvatar)
+                .extend(wearableExtender)
+                .build();
+
+        NotificationManagerCompat notificationManager =
+                NotificationManagerCompat.from(NotificationBuilder.this);
+        notificationManager.notify(NOTIFICATION_ID, notification);
+
+
+//        new getItemNumber().execute();
 //        getItemNumber getN = new getItemNumber();
 //        if(getN.getStatus()== AsyncTask.Status.FINISHED) {
 
@@ -158,9 +214,6 @@ public class NotificationBuilder extends Activity {
         protected void onPreExecute() {
             super.onPreExecute();
             Log.d(LOC, " onPreExecute");
-            itemTitle = (TextView) findViewById(R.id.showItemName);
-            itemLocationTV = (TextView) findViewById(R.id.showItemLoc);
-            itemQuantityTV = (TextView) findViewById(R.id.showItemQty);
 
         }
 
@@ -218,8 +271,8 @@ public class NotificationBuilder extends Activity {
                 Log.d("After ", Globals.getItemLocation());
 
                 Log.d("Before ", c.getString(TAG_ITEM_INFO));
-                Globals.setItemIfno(c.getString(TAG_ITEM_INFO));
-                Log.d("After ", Globals.getItemIfno());
+                Globals.setItemInfo(c.getString(TAG_ITEM_INFO));
+                Log.d("After ", Globals.getItemInfo());
 
                 Log.d("Before ", c.getString(TAG_ITEM_COMMENT));
                 Globals.setItemComment(c.getString(TAG_ITEM_COMMENT));
@@ -229,54 +282,7 @@ public class NotificationBuilder extends Activity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
             // Intent replyIntent = new Intent(this, showItemLoc.class);
-            String[] choices = NumberGenerator.getNumbers();
-            RemoteInput remoteInput = new RemoteInput.Builder(OptionFeedbackActivity.EXTRA_VOICE_REPLY)
-                    .setLabel("Reply")
-                    .setChoices(choices)
-                            //Set false if voice input option should be excluded
-                    .setAllowFreeFormInput(true)
-                    .build();
-
-            PendingIntent confirmActionPendingIntent =
-                    getActionFeedbackPendingIntent("confirmation dawg", 0);
-
-            PendingIntent replyPendingIntent = getConversationPendingIntent("reply dawg", 1);
-
-            NotificationCompat.Action confirmAction = new NotificationCompat.Action(
-                    R.drawable.ic_ok, "Confirm",
-                    confirmActionPendingIntent);
-
-            NotificationCompat.Action replyAction =
-                    new NotificationCompat.Action.Builder(R.drawable.ic_add,
-                            TAG_ITEM_QUANTITY, replyPendingIntent)
-                            .addRemoteInput(remoteInput)
-                            .build();
-
-            NotificationCompat.WearableExtender wearableExtender =
-                    new NotificationCompat.WearableExtender()
-                            .addAction(confirmAction)
-                            .addAction(replyAction);
-
-            Bitmap prettyAvatar = getScaledLargeIconFromResource(R.drawable.ic_light);
-
-            Notification notification = new NotificationCompat.Builder(NotificationBuilder.this)
-                    .setContentTitle(Globals.getItemName())
-                    .setContentText(String.valueOf(Globals.getItemQuantity()))
-                    .setSmallIcon(R.drawable.ic_task)
-                    .setContentIntent(getConversationPendingIntent("qty", 20))
-                    .setPriority(Notification.PRIORITY_HIGH)
-                    .setDefaults(Notification.DEFAULT_ALL)
-                    .setLargeIcon(prettyAvatar)
-                    .extend(wearableExtender)
-                    .build();
-
-            NotificationManagerCompat notificationManager =
-                    NotificationManagerCompat.from(NotificationBuilder.this);
-            notificationManager.notify(NOTIFICATION_ID, notification);
-
 
             return "success33";
         }
@@ -287,13 +293,11 @@ public class NotificationBuilder extends Activity {
             Log.d("After ", Globals.getItemName());
             Log.d("After ", String.valueOf(Globals.getItemQuantity()));
             Log.d("After ", Globals.getItemLocation());
-            Log.d("After ", Globals.getItemIfno());
+            Log.d("After ", Globals.getItemInfo());
             Log.d("After ", Globals.getItemComment());
             Log.d(LOC, " onPostExecute :value of row NUMBER " +
                     String.valueOf(Globals.getItemRowNumber()));
-            itemTitle.setText(Globals.getItemName());
-            itemLocationTV.setText(Globals.getItemLocation());
-            itemQuantityTV.setText(String.valueOf(Globals.getItemQuantity()));
+
         }
     }
 
