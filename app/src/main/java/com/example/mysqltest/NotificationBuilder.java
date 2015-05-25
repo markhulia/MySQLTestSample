@@ -21,12 +21,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by markhulia on 17/05/15.
@@ -44,19 +47,19 @@ public class NotificationBuilder extends Activity {
     private static boolean FLAG = false;
     TextView itemTitle, itemLocationTV, itemQuantityTV;
     EditText updateQty;
+    String LOC = " NotificationBuilder";
+    JSONParser jsonParser = new JSONParser();
     private String ITEM_NUMBER_URL = Globals.URL + "nextItem.php";
     private int numberOfPackages;
     private boolean doubleBackToExitPressedOnce = false;
     private JSONArray mList = null;
     private ArrayList<HashMap<String, String>> mItemList;
-    String LOC = " NotificationBuilder";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(LOC, " onCreate");
-        Log.d(LOC, " value of global rowNumber: "+Globals.getItemRowNumber());
+        Log.d(LOC, " value of global rowNumber: " + Globals.getItemRowNumber());
         setContentView(R.layout.next_item_caller);
         updateQty = (EditText) findViewById(R.id.number_of_packages);
 
@@ -164,11 +167,25 @@ public class NotificationBuilder extends Activity {
         @Override
         protected String doInBackground(String... args) {
             Log.d(LOC, " doInBackground");
-            mItemList = new ArrayList<HashMap<String, String>>();
-            JSONParser jParser = new JSONParser();
-            JSONObject json = jParser.getJSONFromUrl(ITEM_NUMBER_URL);
-            int rowNrInt = 1;
-            String rowNr = String.valueOf(rowNrInt);
+
+            try {
+                mItemList = new ArrayList<HashMap<String, String>>();
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
+                jsonParser.makeHttpRequest(
+                        ITEM_NUMBER_URL, "POST", params);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.d(LOC, " doInBackgroun :cant Post");
+            }
+            // JSONParser jParser = new JSONParser();
+            JSONObject json = jsonParser.getJSONFromUrl(ITEM_NUMBER_URL);
+            String rowNr = String.valueOf(Globals.getItemRowNumber());
+
+
+
+            //TODO add PHP checker, to check if DB has next line. If false, show report
 
 
             try {
@@ -181,31 +198,20 @@ public class NotificationBuilder extends Activity {
                     JSONObject c = mList.getJSONObject(i);
 
 
-                    // gets the content of each tag
-                    final String itemIdString = c.getString(TAG_ITEM_ID);
-                    final String itemName = c.getString(TAG_ITEM_NAME);
-                    final String itemQuantityString = c.getString(TAG_ITEM_QUANTITY);
-                    final String itemLocation = c.getString(TAG_ITEM_LOCATION);
-                    String itemInfo = c.getString(TAG_ITEM_INFO);
-                    Log.d(" Item_ID ", itemIdString);
-                    Log.d(" name ", itemName);
-                    Log.d(" quantity ", itemQuantityString);
-                    // creating new HashMapHashMap<String, String> map = new HashMap<>();
-                    // adding HashList to ArrayList
-
-
-                    Log.d("Before invoke ", "---------------------------- " + itemName);
-                    //retreive row from DB
-                    Log.d("After invoke ", "---------------------------- " + itemName);
-                    //TODO add PHP checker, to check if DB has next line. If false, show report
+                    Globals.setItemId(c.getString(TAG_ITEM_ID));
+                    Globals.setItemName(c.getString(TAG_ITEM_NAME));
+                    Globals.setItemQuantity(Integer.parseInt(c.getString(TAG_ITEM_QUANTITY)));
+                    Globals.setItemLocation(c.getString(TAG_ITEM_LOCATION));
+                    Globals.setItemIfno(c.getString(TAG_ITEM_INFO));
+                    Globals.setItemComment(c.getString(TAG_ITEM_COMMENT));
 
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            itemTitle.setText(itemName);
-                            itemLocationTV.setText(itemLocation);
-                            itemQuantityTV.setText(itemQuantityString);
+                            itemTitle.setText(Globals.getItemName());
+                            itemLocationTV.setText(Globals.getItemLocation());
+                            itemQuantityTV.setText(String.valueOf(Globals.getItemQuantity()));
 
                         }
                     });
@@ -230,19 +236,21 @@ public class NotificationBuilder extends Activity {
                             confirmActionPendingIntent);
 
                     NotificationCompat.Action replyAction =
-                            new NotificationCompat.Action.Builder(R.drawable.ic_add, TAG_ITEM_QUANTITY, replyPendingIntent)
+                            new NotificationCompat.Action.Builder(R.drawable.ic_add,
+                                    TAG_ITEM_QUANTITY, replyPendingIntent)
                                     .addRemoteInput(remoteInput)
                                     .build();
 
-                    NotificationCompat.WearableExtender wearableExtender = new NotificationCompat.WearableExtender()
-                            .addAction(confirmAction)
-                            .addAction(replyAction);
+                    NotificationCompat.WearableExtender wearableExtender =
+                            new NotificationCompat.WearableExtender()
+                                    .addAction(confirmAction)
+                                    .addAction(replyAction);
 
                     Bitmap prettyAvatar = getScaledLargeIconFromResource(R.drawable.ic_light);
 
                     Notification notification = new NotificationCompat.Builder(NotificationBuilder.this)
-                            .setContentTitle(itemName)
-                            .setContentText(itemQuantityString)
+                            .setContentTitle(Globals.getItemName())
+                            .setContentText(String.valueOf(Globals.getItemQuantity()))
                             .setSmallIcon(R.drawable.ic_task)
                             .setContentIntent(getConversationPendingIntent("qty", 20))
                             .setPriority(Notification.PRIORITY_HIGH)
@@ -251,7 +259,8 @@ public class NotificationBuilder extends Activity {
                             .extend(wearableExtender)
                             .build();
 
-                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(NotificationBuilder.this);
+                    NotificationManagerCompat notificationManager =
+                            NotificationManagerCompat.from(NotificationBuilder.this);
                     notificationManager.notify(NOTIFICATION_ID, notification);
                 }
 
@@ -263,7 +272,8 @@ public class NotificationBuilder extends Activity {
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Log.d(LOC, " onPostExecute");
+            Log.d(LOC, " onPostExecute :value of row NUMBER " +
+                    String.valueOf(Globals.getItemRowNumber()));
         }
     }
 

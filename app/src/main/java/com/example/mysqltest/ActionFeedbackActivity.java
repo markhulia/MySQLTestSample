@@ -28,16 +28,13 @@ import java.util.List;
 public class ActionFeedbackActivity extends Activity {
     public static final String EXTRA_ACTION_FEEDBACK = "jorik";
     JSONParser jsonParser = new JSONParser();
-    TextView itemTitle, itemLocationTV, itemQuantityTV;
-    EditText updateQty;
     private String TAG = " Action Feedback ";
     private String ITEM_NUMBER_URL = Globals.URL + "notifier.php";
-    private int numberOfPackages;
-    private boolean doubleBackToExitPressedOnce = false;
     private JSONArray mList = null;
+    List<NameValuePair> params = new ArrayList<NameValuePair>();
     private ArrayList<HashMap<String, String>> mItemList;
     Globals globals = new Globals();
-    String  Loc = " ACtionFeedbackActivity";
+    String  Loc = " ActionFeedbackActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +60,11 @@ public class ActionFeedbackActivity extends Activity {
        // SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ActionFeedbackActivity.this);
             try {
                 // Building Parameters
-                List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("rowNr", String.valueOf(globals.getItemRowNumber())));
+                params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
                 params.add(new BasicNameValuePair("picked", "1"));
+                params.add(new BasicNameValuePair("item_quantity",String.valueOf(Globals.getItemQuantity())));
 
+                //Posting parameters to php
                 jsonParser.makeHttpRequest(
                         ITEM_NUMBER_URL, "POST", params);
                 return "success";
@@ -75,8 +73,17 @@ public class ActionFeedbackActivity extends Activity {
                 e.printStackTrace();
             }
 
-
             return null;
+        }
+
+        protected void onPostExecute(String result){
+            super.onPostExecute(result);
+            int i = Globals.getItemRowNumber();
+            i++;
+            Globals.setItemRowNumber(i);
+            Log.d(Loc, " onPostExecute");
+            Log.d(Loc, "i onPostExecute NUMBER "+String.valueOf(Globals.getItemRowNumber()));
+
         }
     }
 
