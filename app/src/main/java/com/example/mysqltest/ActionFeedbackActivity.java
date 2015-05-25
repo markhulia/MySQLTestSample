@@ -33,9 +33,8 @@ public class ActionFeedbackActivity extends Activity {
     private JSONArray mList = null;
     List<NameValuePair> params = new ArrayList<NameValuePair>();
     private ArrayList<HashMap<String, String>> mItemList;
+    Globals globals = new Globals();
     String  Loc = " ActionFeedbackActivity";
-    BackendMagic backendMagic = new BackendMagic();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,9 @@ public class ActionFeedbackActivity extends Activity {
 
         new confirmPick().execute();
 
-
+        Intent i = new Intent(ActionFeedbackActivity.this, NotificationBuilder.class);
+        finish();
+        startActivity(i);
     }
 
     public class confirmPick extends AsyncTask<String, String, String> {
@@ -61,11 +62,11 @@ public class ActionFeedbackActivity extends Activity {
                 // Building Parameters
                 params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
                 params.add(new BasicNameValuePair("picked", "1"));
-                params.add(new BasicNameValuePair("item_quantity", String.valueOf(Globals.getItemQuantity())));
+                params.add(new BasicNameValuePair("item_quantity",String.valueOf(Globals.getItemQuantity())));
+
                 //Posting parameters to php
                 jsonParser.makeHttpRequest(
                         ITEM_NUMBER_URL, "POST", params);
-                //backendMagic.getRow();
                 return "success";
             } catch (Exception e) {
                 Log.e(TAG, " crashed here");
@@ -77,12 +78,9 @@ public class ActionFeedbackActivity extends Activity {
 
         protected void onPostExecute(String result){
             super.onPostExecute(result);
-//            int i = Globals.getItemRowNumber();
-//            i++;
-//            Globals.setItemRowNumber(i);
-            Intent i = new Intent(ActionFeedbackActivity.this, NotificationBuilder.class);
-            finish();
-            startActivity(i);
+            int i = Globals.getItemRowNumber();
+            i++;
+            Globals.setItemRowNumber(i);
             Log.d(Loc, " onPostExecute");
             Log.d(Loc, "i onPostExecute NUMBER "+String.valueOf(Globals.getItemRowNumber()));
 
