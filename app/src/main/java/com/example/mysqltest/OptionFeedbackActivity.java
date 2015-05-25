@@ -31,16 +31,15 @@ public class OptionFeedbackActivity extends Activity {
         setContentView(R.layout.confirmation_feedback);
 
         CharSequence replyText = getMessageText(getIntent());
-        if (replyText != null) {
-            //int foo is number of packages
+        //int foo is number of packages
 
-            // int foo = Integer.parseInt(replyText.toString());
-            numberOfItems = replyText.toString();
-            Toast.makeText(this, "OptionFeedbackActivity " + replyText, Toast.LENGTH_LONG).show();
+        // int foo = Integer.parseInt(replyText.toString());
+        numberOfItems = replyText.toString();
+        Toast.makeText(this, "OptionFeedbackActivity " + replyText, Toast.LENGTH_LONG).show();
 
-            new updateAmount().execute();
+        new updateAmount().execute();
 
-        }
+
         //Go back to main activity without crashing the app
         Intent i = new Intent(OptionFeedbackActivity.this, NotificationBuilder.class);
         finish();
@@ -71,15 +70,15 @@ public class OptionFeedbackActivity extends Activity {
             //add condition if quantity is 0, set picked to 0!!!!
 
 
-            params.add(new BasicNameValuePair("rowNr", String.valueOf(globals.getItemRowNumber())));
             params.add(new BasicNameValuePair("picked", "1"));
+            params.add(new BasicNameValuePair("rowNr", String.valueOf(globals.getItemRowNumber())));
             params.add(new BasicNameValuePair("item_quantity", numberOfItems));
 
             //Posting parameters to php
             jsonParser.makeHttpRequest(
                     ITEM_NUMBER_URL, "POST", params);
 
-            return "success";
+            return null;
         }
 
         protected void onPostExecute(String result) {

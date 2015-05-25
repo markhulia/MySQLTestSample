@@ -6,16 +6,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  * Created by markhulia on 24/05/15.
@@ -23,14 +19,13 @@ import java.util.List;
 public class GetFirstRow extends Activity {
 
 
-    public static final String TAG_ITEM_ID = "item_id";
     private static final String GET_FIRST_ROW_URL = Globals.URL + "getFirstRow.php";
-    String RANDOM_CRAP  = Globals.URL + "randomCrap.php";
+    private static final String RANDOM_CRAP  = Globals.URL + "randomCrap.php";
     private static final String TAG_ITEMS_REPORT = "items_report";
-    String Loc = " GetFirstRow";
-    String itemIdString;
-    public String ROW_NUMBER  = "rowNr";
+    private static final String ROW_NUMBER = "rowNr";
     private JSONArray mList = null;
+    String rowNumber;
+    String Loc = " GetFirstRow";
     JSONParser jParser = new JSONParser();
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +53,10 @@ public class GetFirstRow extends Activity {
             try {
                 mList = json.getJSONArray(TAG_ITEMS_REPORT);
                 JSONObject c = mList.getJSONObject(0);
-                itemIdString = c.getString(ROW_NUMBER);
-                Log.d("ItemIdString ", itemIdString);
+
+                Log.e(Loc, "JSON OBJECT: "+c);
+                rowNumber = c.getString(ROW_NUMBER);
+                Log.d(Loc, "ItemIdString "+ rowNumber);
 
                 Intent intent = new Intent(GetFirstRow.this, NotificationBuilder.class);
                 finish();
@@ -68,15 +65,14 @@ public class GetFirstRow extends Activity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return itemIdString;
+            return "nothing";
         }
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            int i = Integer.parseInt(itemIdString);
+            int i = Integer.parseInt(rowNumber);
             Globals.setItemRowNumber(i);
-            Log.d(Loc, " onPostExecute");
-            Log.d("i onPostExecute NUMBER", String.valueOf(i));
+            Log.d(Loc, "NUMBER"+ String.valueOf(i));
         }
 
     }

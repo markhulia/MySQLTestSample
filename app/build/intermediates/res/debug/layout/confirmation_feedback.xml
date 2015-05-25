@@ -8,15 +8,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Conversation History Here"
+        android:text="Other options here"
         android:textAppearance="@android:style/TextAppearance.Large"
         android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This Activity is a placeholder for a conversation's history. The app
-                      only demonstrates how to implement notifications and not an entire chat app." />
+        android:text="This Activity is a placeholder for any additional options will be required on OptionsFeedbackActivity" />
 
     <TextView
         android:id="@+id/reply"

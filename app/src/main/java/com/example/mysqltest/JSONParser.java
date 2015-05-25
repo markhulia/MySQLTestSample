@@ -87,6 +87,7 @@ public class JSONParser {
             //chek how json looks
             Log.i("wats inside? ", "[" + json + "]");
             jObj = new JSONObject(json);
+
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }

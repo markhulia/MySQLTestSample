@@ -83,6 +83,7 @@ public class Login extends Activity {
                 params.add(new BasicNameValuePair("password", password));
 
                 Log.d("request!", "starting");
+
                 // getting product details by making HTTP request
                 JSONObject json = jsonParser.makeHttpRequest(LOGIN_URL, "POST",
                         params);
