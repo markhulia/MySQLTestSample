@@ -24,71 +24,75 @@ public class GetFirstRow extends Activity {
 
 
     public static final String TAG_ITEM_ID = "item_id";
-    private static final String GET_FIRST_ROW_URL = URL.URL + "randomCrap.php";
+    private static final String GET_FIRST_ROW_URL = Globals.URL + "getFirstRow.php";
+    String RANDOM_CRAP  = Globals.URL + "randomCrap.php";
     private static final String TAG_ITEMS_REPORT = "items_report";
+    String Loc = " GetFirstRow";
     String itemIdString;
-    String TAG = "GetFirstRow";
+    public String ROW_NUMBER  = "rowNr";
     private JSONArray mList = null;
-    int i = URL.rowNumber;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_activity);
-        Log.d("i on create", String.valueOf(i));
+        Log.d(Loc, " onCreate");
     }
 
     public void onGetFirstRowClick(View view) {
-        Log.d("i ongetFirstRowClick", String.valueOf(i));
+        Log.d(Loc, " onGetFirstRowClick");
         new firstItem().execute();
     }
 
     class firstItem extends AsyncTask<String, String, String> {
         protected void onPreExecute() {
             super.onPreExecute();
-            Log.d("getItemNumber", "On pre-execute");
-
+            Log.d(Loc, " onPreExecute");
            // Log.d("i onPreExecute ", String.valueOf(i));
         }
 
         @Override
         protected String doInBackground(String... strings) {
 
-            String rowNumber = String.valueOf(i);
+            Log.d(Loc, " doInBackground");
 
-            try {
-                List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("rowNr", rowNumber));
-                Log.d("i doInBackground", String.valueOf(i));
-                JSONParser jsonParser = new JSONParser();
-                JSONObject jsonObject = jsonParser.makeHttpRequest(
-                        GET_FIRST_ROW_URL, "POST", params);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        i++;
-                    }
-                });
-                Log.d(TAG, jsonObject.toString());
-            } catch (Exception e) {
-                Log.d(TAG, "some exception");
-            }
+//            String rowNumber = String.valueOf(i);
+//
+//            try {
+//                List<NameValuePair> params = new ArrayList<NameValuePair>();
+//                params.add(new BasicNameValuePair("rowNr", rowNumber));
+//                Log.d("i doInBackground", String.valueOf(i));
+//
+//                JSONParser jsonParser = new JSONParser();
+//                JSONObject jsonObject = jsonParser.makeHttpRequest(
+//                        RANDOM_CRAP, "POST", params);
+//
+//                //runs on the main thread
+////                runOnUiThread(new Runnable() {
+////                    @Override
+////                    public void run() {
+////                        i++;
+////                    }
+////                });
+//
+//                Log.d(Loc, jsonObject.toString());
+//            } catch (Exception e) {
+//                Log.d(Loc, "some exception");
+//            }
 
             JSONParser jParser = new JSONParser();
-            JSONObject json = jParser.getJSONFromUrl(GET_FIRST_ROW_URL);
-
+            JSONObject json = jParser.getJSONFromUrl(RANDOM_CRAP);
 
             try {
-
-
                 mList = json.getJSONArray(TAG_ITEMS_REPORT);
                 // PAY ATTENTION TO i < 2 ==========================================================
                 JSONObject c = mList.getJSONObject(0);
 
                 // gets the content of each tag
-                itemIdString = c.getString(TAG_ITEM_ID);
-                Log.d(" Item ID ", itemIdString);
+                itemIdString = c.getString(ROW_NUMBER);
+                Log.d("ItemIdString ", itemIdString);
+
                 //Toast.makeText(GetFirstRow.this, "1st item id " + itemIdString, Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(GetFirstRow.this, GetFirstRow.class);
+                Intent intent = new Intent(GetFirstRow.this, NotificationBuilder.class);
                 finish();
                 startActivity(intent);
 
@@ -100,9 +104,9 @@ public class GetFirstRow extends Activity {
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Log.d("getItemNumber", "on Post-Execute");
-            i++;
-            URL.setRowNumber(i);
+            int i = Integer.parseInt(itemIdString);
+            Globals.setItemRowNumber(i);
+            Log.d(Loc, " onPostExecute");
             Log.d("i onPostExecute NUMBER", String.valueOf(i));
         }
 

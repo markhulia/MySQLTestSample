@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:background="@drawable/black_button"
-                android:onClick="resetReport"
+                android:onClick="onResetReportBtn"
                 android:text="@string/viewReport_resetDatabase"
                 />
         </LinearLayout>

@@ -21,16 +21,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.StringTokenizer;
 
 /**
  * Created by markhulia on 17/05/15.
@@ -48,18 +44,21 @@ public class NotificationBuilder extends Activity {
     private static boolean FLAG = false;
     TextView itemTitle, itemLocationTV, itemQuantityTV;
     EditText updateQty;
-    private String ITEM_NUMBER_URL = URL.URL + "nextItem.php";
+    private String ITEM_NUMBER_URL = Globals.URL + "nextItem.php";
     private int numberOfPackages;
     private boolean doubleBackToExitPressedOnce = false;
     private JSONArray mList = null;
     private ArrayList<HashMap<String, String>> mItemList;
+    String LOC = " NotificationBuilder";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(LOC, " onCreate");
+        Log.d(LOC, " value of global rowNumber: "+Globals.getItemRowNumber());
         setContentView(R.layout.next_item_caller);
-
+        updateQty = (EditText) findViewById(R.id.number_of_packages);
 
         new getItemNumber().execute();
 //        getItemNumber getN = new getItemNumber();
@@ -69,6 +68,7 @@ public class NotificationBuilder extends Activity {
 
 
     private PendingIntent getConversationPendingIntent(String string, int requestCode) {
+        Log.d(LOC, " PendingIntent getConversationPI");
         Intent conversationIntent = new Intent(this, OptionFeedbackActivity.class);
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
         taskStackBuilder.addParentStack(OptionFeedbackActivity.class);
@@ -77,6 +77,7 @@ public class NotificationBuilder extends Activity {
     }
 
     private PendingIntent getActionFeedbackPendingIntent(String actionFeedback, int requestCode) {
+        Log.d(LOC, " PendingIntent getACtionFeedbackPI");
         Intent actionFeedbackIntent = new Intent(this, ActionFeedbackActivity.class);
         actionFeedbackIntent.putExtra(ActionFeedbackActivity.EXTRA_ACTION_FEEDBACK, actionFeedback);
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this)
@@ -100,30 +101,36 @@ public class NotificationBuilder extends Activity {
     @TargetApi(20)
     public void onNextItemClick(View view) {
 
-        Toast.makeText(this, "onNextItemClick", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "onNextItemClick", Toast.LENGTH_SHORT).show();
     }
 
     public void onUpdateButtonClick(View view) {
+        Log.d(LOC, " onUpdateButtonClick");
         String amount = updateQty.getText().toString();
-        //trim().isEmpty() ignores whitespaces
 
-        //add flag. if user updated amount, it will change flag from 0 to 1. If user
-        //wants to update amount agian before pressing "next item" POP-up window should display info
-        //that this item_id has already been updated and if user wants to proceed
-        Toast.makeText(this, "onUpdateButtonClick", Toast.LENGTH_LONG).show();
-
-        if (FLAG == false) {
-            if (amount != null && !amount.trim().isEmpty()) {
-                numberOfPackages = Integer.parseInt(amount);
-                Toast.makeText(this, "Items " + numberOfPackages, Toast.LENGTH_LONG).show();
-                updateQty.getText().clear();
-                FLAG = true;
-            }
+        if (amount.matches("")) {
+            Toast.makeText(this, "please update the amount", Toast.LENGTH_SHORT).show();
         } else {
-            //TODO: create separate confirmation dialog class
-            //call confirmation dialog
-            //OPTION_YES -> update itemQTY, set FLAG = 1;
-            //OPTION NO -> return to parent activity
+            //trim().isEmpty() ignores whitespaces
+
+            //add flag. if user updated amount, it will change flag from 0 to 1. If user
+            //wants to update amount agian before pressing "next item" POP-up window should display info
+            //that this item_id has already been updated and if user wants to proceed
+            Toast.makeText(this, "onUpdateButtonClick", Toast.LENGTH_SHORT).show();
+
+            if (FLAG == false) {
+                if (amount != null && !amount.trim().isEmpty()) {
+                    numberOfPackages = Integer.parseInt(amount);
+                    Toast.makeText(this, "Items " + numberOfPackages, Toast.LENGTH_SHORT).show();
+                    updateQty.getText().clear();
+                    FLAG = true;
+                }
+            } else {
+                //TODO: create separate confirmation dialog class
+                //call confirmation dialog
+                //OPTION_YES -> update itemQTY, set FLAG = 1;
+                //OPTION NO -> return to parent activity
+            }
         }
     }
 
@@ -147,7 +154,7 @@ public class NotificationBuilder extends Activity {
     public class getItemNumber extends AsyncTask<String, String, String> {
         protected void onPreExecute() {
             super.onPreExecute();
-            Log.d("getItemNumber", "On pre-execute");
+            Log.d(LOC, " onPreExecute");
             itemTitle = (TextView) findViewById(R.id.showItemName);
             itemLocationTV = (TextView) findViewById(R.id.showItemLoc);
             itemQuantityTV = (TextView) findViewById(R.id.showItemQty);
@@ -156,7 +163,7 @@ public class NotificationBuilder extends Activity {
 
         @Override
         protected String doInBackground(String... args) {
-            Log.d("getItemNumber", " on In-Background");
+            Log.d(LOC, " doInBackground");
             mItemList = new ArrayList<HashMap<String, String>>();
             JSONParser jParser = new JSONParser();
             JSONObject json = jParser.getJSONFromUrl(ITEM_NUMBER_URL);
@@ -199,7 +206,7 @@ public class NotificationBuilder extends Activity {
                             itemTitle.setText(itemName);
                             itemLocationTV.setText(itemLocation);
                             itemQuantityTV.setText(itemQuantityString);
-                            updateQty = (EditText) findViewById(R.id.number_of_packages);
+
                         }
                     });
 
@@ -256,7 +263,7 @@ public class NotificationBuilder extends Activity {
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Log.d("getItemNumber", "on Post-Execute");
+            Log.d(LOC, " onPostExecute");
         }
     }
 

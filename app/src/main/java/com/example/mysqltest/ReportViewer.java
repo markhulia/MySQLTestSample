@@ -36,18 +36,19 @@ public class ReportViewer extends ListActivity {
     private static final String TAG_ITEM_INFO = "item_info";
     private static final String TAG_ITEM_COMMENT = "comment";
     private static final String TAG_ITEMS_REPORT = "items_report";
-    private String TAG = " ReportView ";
+    private String LOC = " ReportViewer";
     private ProgressDialog pDialog;
     private JSONArray mList = null;
     private ArrayList<HashMap<String, String>> mItemList;
-    private String SHOW_REPORT_URL = URL.URL + "report.php";
-    private String RESET_DATABASE_URL = URL.URL + "resetReport.php";
+    private String SHOW_REPORT_URL = Globals.URL + "report.php";
+    private String RESET_DATABASE_URL = Globals.URL + "onResetReportBtn.php";
     JSONParser jsonParser = new JSONParser();
     private boolean doubleBackToExitPressedOnce = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // note that use view_reportml instead of our single_item_view_view.xml
+        Log.d(LOC, " onCreate");
+        // note that use view_reportml instead of our single_eitem_view_view.xml
         setContentView(R.layout.view_report);
     }
 
@@ -73,6 +74,7 @@ public class ReportViewer extends ListActivity {
     @Override
     protected void onResume() {
         // TODO Auto-generated method stub
+        Log.d(LOC, " onResume");
         super.onResume();
         // loading the comments via AsyncTask
         new LoadReportItems().execute();
@@ -82,6 +84,7 @@ public class ReportViewer extends ListActivity {
      * Retrieves recent items data from the server.
      */
     public void updateJSONdata() {
+        Log.d(LOC, " updateJSONdata");
         mItemList = new ArrayList<HashMap<String, String>>();
         JSONParser jParser = new JSONParser();
         JSONObject json = jParser.getJSONFromUrl(SHOW_REPORT_URL);
@@ -120,6 +123,7 @@ public class ReportViewer extends ListActivity {
      * Inserts the parsed data into the listview.
      */
     private void updateList() {
+        Log.d(LOC, " updateList");
         final ListAdapter adapter = new SimpleAdapter(this, mItemList,
                 R.layout.single_item_view,
                 new String[]{TAG_ITEM_NAME, TAG_ITEM_INFO,
@@ -142,14 +146,17 @@ public class ReportViewer extends ListActivity {
     }
 
 
-    public void resetReport(View v) {
+    public void onResetReportBtn(View v) {
+        Log.d(LOC, " onResetReportBtn");
         new updateReport().execute();
     }
+
     public class LoadReportItems extends AsyncTask<Void, Void, Boolean> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            Log.d(LOC, " onPreExecute :LoadReportItems");
             pDialog = new ProgressDialog(ReportViewer.this);
             pDialog.setMessage("Loading...");
             pDialog.setIndeterminate(false);
@@ -159,6 +166,7 @@ public class ReportViewer extends ListActivity {
 
         @Override
         protected Boolean doInBackground(Void... arg0) {
+            Log.d(LOC, " doInBackground :LoadReportItems");
             updateJSONdata();
             return null;
         }
@@ -166,6 +174,7 @@ public class ReportViewer extends ListActivity {
         @Override
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
+            Log.d(LOC, " onPostExecute :LoadREportItems");
             pDialog.dismiss();
             //wtf???><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< this should not be here
             updateList();
@@ -175,12 +184,13 @@ public class ReportViewer extends ListActivity {
     class updateReport extends AsyncTask<String, String, String> {
         protected void onPreExecute() {
             super.onPreExecute();
-            Log.d(TAG, "On pre-execute");
+            Log.d(LOC, " onPreExecute :updateReport");
+
         }
 
         @Override
         protected String doInBackground(String... args) {
-            Log.d(TAG, " on In-Background");
+            Log.d(LOC, " doInBackground :updateReport");
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ReportViewer.this);
             String post_username = sp.getString("username", "anon");
 
@@ -189,11 +199,11 @@ public class ReportViewer extends ListActivity {
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("username", post_username));
 
-                JSONObject json = jsonParser.makeHttpRequest(
+                jsonParser.makeHttpRequest(
                         RESET_DATABASE_URL, "POST", params);
                 return "success";
             } catch (Exception e) {
-                Log.e(TAG, " crashed here");
+                Log.e(LOC, " crashed here");
                 e.printStackTrace();
             }
 
@@ -202,7 +212,7 @@ public class ReportViewer extends ListActivity {
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Log.d(TAG, "on Post-Execute");
+            Log.d(LOC, " onPostExecute :updateReport");
         }
     }
 }

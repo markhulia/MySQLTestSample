@@ -32,7 +32,7 @@ public class Login extends Activity {
     private static final String TAG_MESSAGE = "message";
     // JSON parser class and  URL class
     JSONParser jsonParser = new JSONParser();
-    String LOGIN_URL = URL.URL + "login.php";
+    String LOGIN_URL = Globals.URL + "login.php";
     private EditText user, pass;
     private ProgressDialog pDialog;
 

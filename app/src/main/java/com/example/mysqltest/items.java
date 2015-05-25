@@ -17,7 +17,7 @@ public class Items {
     JSONParser jsonParser = new JSONParser();
     ReportViewer reportViewer = new ReportViewer();
     NotificationBuilder notificationBuilder = new NotificationBuilder();
-    private String RESET_DATABASE = URL.URL + "resetReport.php";
+    private String RESET_DATABASE = Globals.URL + "onResetReportBtn.php";
     class nexItem extends AsyncTask<String, String, String> {
         protected void onPreExecute() {
             super.onPreExecute();
