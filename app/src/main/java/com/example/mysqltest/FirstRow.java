@@ -14,7 +14,7 @@ import org.json.JSONObject;
 /**
  * Created by markhulia on 24/05/15.
  */
-public class GetFirstRow extends Activity {
+public class FirstRow extends Activity {
 
 
     public static final String TAG_ITEM_ID = "item_id";
@@ -99,7 +99,7 @@ public class GetFirstRow extends Activity {
             super.onPostExecute(result);
             Log.d(Loc, "NUMBER: " + String.valueOf(Globals.getItemRowNumber()));
             Log.e(Loc, "Name: " + Globals.getItemName());
-            Intent intent = new Intent(GetFirstRow.this, NotificationBuilder.class);
+            Intent intent = new Intent(FirstRow.this, NotificationBuilder.class);
             finish();
             startActivity(intent);
         }

@@ -33,7 +33,7 @@
             android:label="Builder"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".GetFirstRow"
+            android:name=".FirstRow"
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <activity

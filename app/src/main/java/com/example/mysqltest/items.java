@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by markhulia on 23/05/15.
  */
-public class Items {
+public class items {
     JSONParser jsonParser = new JSONParser();
     ReportViewer reportViewer = new ReportViewer();
     NotificationBuilder notificationBuilder = new NotificationBuilder();

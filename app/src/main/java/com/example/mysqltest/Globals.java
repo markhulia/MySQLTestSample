@@ -6,6 +6,13 @@ package com.example.mysqltest;
  */
 public class Globals {
     public static final String URL = "http://10.0.1.5:2604/webservice/";
+    public static final String TAG_ROW_NUMBER = "rowNr";
+    public static final String TAG_ITEM_NAME = "item_name";
+    public static final String TAG_ITEM_LOCATION = "item_location";
+    public static final String TAG_ITEM_QUANTITY = "item_quantity";
+    public static final String TAG_ITEM_INFO = "item_info";
+    public static final String TAG_ITEM_COMMENT = "comment";
+    public static final String TAG_ITEMS_REPORT = "items_report";
     public static String itemName;
     public static String itemLocation;
     public static String itemInfo;
