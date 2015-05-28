@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
@@ -21,15 +20,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by markhulia on 17/05/15.
@@ -210,96 +204,96 @@ public class NotificationBuilder extends Activity {
         }, 2000);
     }
 
-    public class getItemNumber extends AsyncTask<String, String, String> {
-        protected void onPreExecute() {
-            super.onPreExecute();
-            Log.d(LOC, " onPreExecute");
-
-        }
-
-        @Override
-        protected String doInBackground(String... args) {
-            Log.d(LOC, " doInBackground");
-
-            try {
-                //post to server current row number to retreive a corresponding row
-                //  mItemList = new ArrayList<HashMap<String, String>>();
-                List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
-                jsonParser.makeHttpRequest(
-                        ITEM_NUMBER_URL, "POST", params);
-                Log.d(LOC, "Succeeded to post");
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                Log.d(LOC, " doInBackgroun :cant Post");
-            }
-            // JSONParser jParser = new JSONParser();
-            JSONObject json = jsonParser.getJSONFromUrl(ITEM_NUMBER_URL);
-            // String rowNr = String.valueOf(Globals.getItemRowNumber());
-
-            //remove this line. it was in try{} above
-            //  mItemList = new ArrayList<HashMap<String, String>>();
-
-
-            //TODO add PHP checker, to check if DB has next line. If false, show report
-
-
-            try {
-                mList = json.getJSONArray(TAG_ITEMS_REPORT);
-                HashMap<String, String> map = new HashMap<String, String>();
-                map.put(TAG_ITEM_QUANTITY, "999");
-                mItemList.add(map);
-
-                //Retrieve all elements of 1st object. '0' points to the 1st element
-                JSONObject c = mList.getJSONObject(0);
-
-                Log.d("Before ", c.getString(TAG_ITEM_ID));
-                Globals.setItemId(c.getString(TAG_ITEM_ID));
-                Log.d("After ", Globals.getItemId());
-
-                Log.d("Before ", c.getString(TAG_ITEM_NAME));
-                Globals.setItemName(c.getString(TAG_ITEM_NAME));
-                Log.d("After ", Globals.getItemName());
-
-                Log.d("Before ", c.getString(TAG_ITEM_QUANTITY));
-                Globals.setItemQuantity(Integer.parseInt(c.getString(TAG_ITEM_QUANTITY)));
-                Log.d("After ", String.valueOf(Globals.getItemQuantity()));
-
-                Log.d("Before ", c.getString(TAG_ITEM_LOCATION));
-                Globals.setItemLocation(c.getString(TAG_ITEM_LOCATION));
-                Log.d("After ", Globals.getItemLocation());
-
-                Log.d("Before ", c.getString(TAG_ITEM_INFO));
-                Globals.setItemInfo(c.getString(TAG_ITEM_INFO));
-                Log.d("After ", Globals.getItemInfo());
-
-                Log.d("Before ", c.getString(TAG_ITEM_COMMENT));
-                Globals.setItemComment(c.getString(TAG_ITEM_COMMENT));
-                Log.d("After ", Globals.getItemComment());
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            // Intent replyIntent = new Intent(this, showItemLoc.class);
-
-            return "success33";
-        }
-
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            Log.d("After ", Globals.getItemId());
-            Log.d("After ", Globals.getItemName());
-            Log.d("After ", String.valueOf(Globals.getItemQuantity()));
-            Log.d("After ", Globals.getItemLocation());
-            Log.d("After ", Globals.getItemInfo());
-            Log.d("After ", Globals.getItemComment());
-            Log.d(LOC, " onPostExecute :value of row NUMBER " +
-                    String.valueOf(Globals.getItemRowNumber()));
-
-        }
-    }
+//    public class getItemNumber extends AsyncTask<String, String, String> {
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//            Log.d(LOC, " onPreExecute");
+//
+//        }
+//
+//        @Override
+//        protected String doInBackground(String... args) {
+//            Log.d(LOC, " doInBackground");
+//
+//            try {
+//                //post to server current row number to retreive a corresponding row
+//                //  mItemList = new ArrayList<HashMap<String, String>>();
+//                List<NameValuePair> params = new ArrayList<NameValuePair>();
+//                params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
+//                jsonParser.makeHttpRequest(
+//                        ITEM_NUMBER_URL, "POST", params);
+//                Log.d(LOC, "Succeeded to post");
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                Log.d(LOC, " doInBackgroun :cant Post");
+//            }
+//            // JSONParser jParser = new JSONParser();
+//            JSONObject json = jsonParser.getJSONFromUrl(ITEM_NUMBER_URL);
+//            // String rowNr = String.valueOf(Globals.getItemRowNumber());
+//
+//            //remove this line. it was in try{} above
+//            //  mItemList = new ArrayList<HashMap<String, String>>();
+//
+//
+//            //TODO add PHP checker, to check if DB has next line. If false, show report
+//
+//
+//            try {
+//                mList = json.getJSONArray(TAG_ITEMS_REPORT);
+//                HashMap<String, String> map = new HashMap<String, String>();
+//                map.put(TAG_ITEM_QUANTITY, "999");
+//                mItemList.add(map);
+//
+//                //Retrieve all elements of 1st object. '0' points to the 1st element
+//                JSONObject c = mList.getJSONObject(0);
+//
+//                Log.d("Before ", c.getString(TAG_ITEM_ID));
+//                Globals.setItemId(c.getString(TAG_ITEM_ID));
+//                Log.d("After ", Globals.getItemId());
+//
+//                Log.d("Before ", c.getString(TAG_ITEM_NAME));
+//                Globals.setItemName(c.getString(TAG_ITEM_NAME));
+//                Log.d("After ", Globals.getItemName());
+//
+//                Log.d("Before ", c.getString(TAG_ITEM_QUANTITY));
+//                Globals.setItemQuantity(Integer.parseInt(c.getString(TAG_ITEM_QUANTITY)));
+//                Log.d("After ", String.valueOf(Globals.getItemQuantity()));
+//
+//                Log.d("Before ", c.getString(TAG_ITEM_LOCATION));
+//                Globals.setItemLocation(c.getString(TAG_ITEM_LOCATION));
+//                Log.d("After ", Globals.getItemLocation());
+//
+//                Log.d("Before ", c.getString(TAG_ITEM_INFO));
+//                Globals.setItemInfo(c.getString(TAG_ITEM_INFO));
+//                Log.d("After ", Globals.getItemInfo());
+//
+//                Log.d("Before ", c.getString(TAG_ITEM_COMMENT));
+//                Globals.setItemComment(c.getString(TAG_ITEM_COMMENT));
+//                Log.d("After ", Globals.getItemComment());
+//
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//            // Intent replyIntent = new Intent(this, showItemLoc.class);
+//
+//            return "success33";
+//        }
+//
+//        protected void onPostExecute(String result) {
+//            super.onPostExecute(result);
+//            Log.d("After ", Globals.getItemId());
+//            Log.d("After ", Globals.getItemName());
+//            Log.d("After ", String.valueOf(Globals.getItemQuantity()));
+//            Log.d("After ", Globals.getItemLocation());
+//            Log.d("After ", Globals.getItemInfo());
+//            Log.d("After ", Globals.getItemComment());
+//            Log.d(LOC, " onPostExecute :value of row NUMBER " +
+//                    String.valueOf(Globals.getItemRowNumber()));
+//
+//        }
+//    }
 
 
 }

@@ -5,7 +5,7 @@
     android:background="#fff">
 
     <LinearLayout
-        android:id="@+id/top_layover"
+        android:id="@+id/top_layer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -26,14 +26,14 @@
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/bottom_layover"
-        android:layout_below="@+id/top_layover"
+        android:layout_above="@+id/bottom_layer"
+        android:layout_below="@+id/top_layer"
         android:background="#fff"
         android:divider="@android:color/transparent"
         android:scrollbars="none" />
 
     <LinearLayout
-        android:id="@+id/bottom_layover"
+        android:id="@+id/bottom_layer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -62,8 +62,7 @@
                 android:layout_gravity="right"
                 android:background="@drawable/black_button"
                 android:onClick="onResetReportBtn"
-                android:text="@string/viewReport_resetDatabase"
-                />
+                android:text="@string/viewReport_resetDatabase" />
         </LinearLayout>
     </LinearLayout>
 
