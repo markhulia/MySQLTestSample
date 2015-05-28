@@ -77,7 +77,7 @@ public class ActionFeedbackActivity extends Activity {
                 e.printStackTrace();
             }
 
-            JSONObject json = jParser.getJSONFromUrl(RANDOM_CRAP);
+            JSONObject json = jParser.getJSONFromUrl(NEXT_ITEM_URL);
 
             try {
                 mList = json.getJSONArray(Globals.TAG_ITEMS_REPORT);
@@ -127,7 +127,6 @@ public class ActionFeedbackActivity extends Activity {
             super.onPostExecute(result);
             Log.e(Loc, " onPostExecute");
             Log.d(Loc, "i onPostExecute NUMBER " + String.valueOf(Globals.getItemRowNumber()));
-            //update next row number
 
             //if json object is empty, start report atctivity, else, buid another notification
             if (mList == null) {

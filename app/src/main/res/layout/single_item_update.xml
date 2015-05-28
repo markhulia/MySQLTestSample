@@ -7,7 +7,7 @@
 
 
     <TextView
-        android:id="@+id/singleItemUpdate_itemName"
+        android:id="@+id/singleItemUpdate_tvItemName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Large Text"
@@ -15,7 +15,15 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/singleItemUpdate_itemInfo"
+        android:id="@+id/singleItemUpdate_tvItemLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Large Text"
+        android:layout_marginBottom="5dp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/singleItemUpdate_tvItemComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Large Text"
@@ -23,11 +31,19 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
-        android:id="@+id/singleItemUpdate_itemQty"
+        android:id="@+id/singleItemUpdate_etItemQty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:hint="quantity" />
+        android:hint="Quantity" />
+
+    <EditText
+        android:id="@+id/singleItemUpdate_etItemComment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        android:hint="Comment"
+        android:layout_weight="0.23" />
 
 
     <Button

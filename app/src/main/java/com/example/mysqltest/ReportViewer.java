@@ -2,6 +2,7 @@ package com.example.mysqltest;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,9 +12,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
@@ -28,27 +31,21 @@ import java.util.List;
 
 public class ReportViewer extends ListActivity {
 
-    // JSON IDS:
-    public static final String TAG_ITEM_ID = "item_id";
-    private static final String TAG_ITEM_NAME = "item_name";
-    private static final String TAG_ITEM_LOCATION = "item_location";
-    private static final String TAG_ITEM_QUANTITY = "item_quantity";
-    private static final String TAG_ITEM_INFO = "item_info";
-    private static final String TAG_ITEM_COMMENT = "comment";
-    private static final String TAG_ITEMS_REPORT = "items_report";
+    String SHOW_REPORT_URL = Globals.URL + "report.php";
+    String RESET_DATABASE_URL = Globals.URL + "resetReport.php";
+    JSONParser jsonParser = new JSONParser();
+    JSONArray mList = null;
+    TextView tvItemName, tvItemComment, tvItemLocation;
+    EditText etItemComment, etItemQuantity;
     private String LOC = " ReportViewer";
     private ProgressDialog pDialog;
-    private JSONArray mList = null;
     private ArrayList<HashMap<String, String>> mItemList;
-    private String SHOW_REPORT_URL = Globals.URL + "report.php";
-    private String RESET_DATABASE_URL = Globals.URL + "onResetReportBtn.php";
-    JSONParser jsonParser = new JSONParser();
     private boolean doubleBackToExitPressedOnce = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(LOC, " onCreate");
-        // note that use view_reportml instead of our single_eitem_view_view.xml
         setContentView(R.layout.view_report);
     }
 
@@ -71,54 +68,6 @@ public class ReportViewer extends ListActivity {
         }, 2000);
     }
 
-    @Override
-    protected void onResume() {
-        // TODO Auto-generated method stub
-        Log.d(LOC, " onResume");
-        super.onResume();
-        // loading the comments via AsyncTask
-        new LoadReportItems().execute();
-    }
-
-    /**
-     * Retrieves recent items data from the server.
-     */
-    public void updateJSONdata() {
-        Log.d(LOC, " updateJSONdata");
-        mItemList = new ArrayList<HashMap<String, String>>();
-        JSONParser jParser = new JSONParser();
-        JSONObject json = jParser.getJSONFromUrl(SHOW_REPORT_URL);
-
-        try {
-            mList = json.getJSONArray(TAG_ITEMS_REPORT);
-            for (int i = 0; i < mList.length(); i++) {
-                JSONObject c = mList.getJSONObject(i);
-
-                // gets the content of each tag
-                String iName = c.getString(TAG_ITEM_NAME);
-                String iInfo = c.getString(TAG_ITEM_INFO);
-                String iQuantity = c.getString(TAG_ITEM_QUANTITY);
-                String iLocation = c.getString(TAG_ITEM_LOCATION);
-                String iComment = c.getString(TAG_ITEM_COMMENT);
-
-                // creating new HashMap
-                HashMap<String, String> map = new HashMap<String, String>();
-
-                map.put(TAG_ITEM_QUANTITY, iQuantity);
-                map.put(TAG_ITEM_NAME, iName);
-                map.put(TAG_ITEM_INFO, iInfo);
-                map.put(TAG_ITEM_COMMENT, iComment);
-                map.put(TAG_ITEM_LOCATION, iLocation);
-
-                // adding HashList to ArrayList
-                mItemList.add(map);
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
     /**
      * Inserts the parsed data into the listview.
      */
@@ -126,8 +75,8 @@ public class ReportViewer extends ListActivity {
         Log.d(LOC, " updateList");
         final ListAdapter adapter = new SimpleAdapter(this, mItemList,
                 R.layout.single_item_view,
-                new String[]{TAG_ITEM_NAME, TAG_ITEM_INFO,
-                        TAG_ITEM_QUANTITY, TAG_ITEM_COMMENT, TAG_ITEM_LOCATION},
+                new String[]{Globals.TAG_ITEM_NAME, Globals.TAG_ITEM_INFO,
+                        Globals.TAG_ITEM_QUANTITY, Globals.TAG_ITEM_COMMENT, Globals.TAG_ITEM_LOCATION},
                 new int[]{R.id.singleItemView_itemName, R.id.singleItemView_ItemInfo,
                         R.id.login_username});
 
@@ -139,8 +88,17 @@ public class ReportViewer extends ListActivity {
             public void onItemClick(AdapterView<?> parent, View viewClicked,
                                     int position, long id) {
 
-                Toast.makeText(ReportViewer.this, "Position " + mItemList.get(position).get(TAG_ITEM_COMMENT), Toast.LENGTH_LONG).show();
-                Log.d(" ReportView onItemClick", mItemList.get(position).get(TAG_ITEM_COMMENT));
+                Toast.makeText(ReportViewer.this, "Position " + mItemList.get(position)
+                        .get(Globals.TAG_ITEM_COMMENT), Toast.LENGTH_LONG).show();
+                Log.d(" ReportView onItemClick", mItemList.get(position).get(Globals.TAG_ITEM_COMMENT));
+
+                tvItemName = (TextView) findViewById(R.id.singleItemUpdate_tvItemName);
+                tvItemComment = (TextView) findViewById(R.id.singleItemUpdate_tvItemComment);
+                tvItemLocation = (TextView) findViewById(R.id.singleItemUpdate_tvItemLocation);
+                etItemComment = (EditText) findViewById(R.id.singleItemUpdate_etItemComment);
+                etItemQuantity = (EditText) findViewById(R.id.singleItemUpdate_etItemQty);
+
+
             }
         });
     }
@@ -148,9 +106,21 @@ public class ReportViewer extends ListActivity {
 
     public void onResetReportBtn(View v) {
         Log.d(LOC, " onResetReportBtn");
-        new updateReport().execute();
+        new ResetReport().execute();
     }
 
+    @Override
+    protected void onResume() {
+        // TODO Auto-generated method stub
+        Log.d(LOC, " onResume");
+        super.onResume();
+        // loading the comments via AsyncTask
+        new LoadReportItems().execute();
+    }
+
+    /**
+     * Retrieves recent items data from the server .
+     */
     public class LoadReportItems extends AsyncTask<Void, Void, Boolean> {
 
         @Override
@@ -167,7 +137,40 @@ public class ReportViewer extends ListActivity {
         @Override
         protected Boolean doInBackground(Void... arg0) {
             Log.d(LOC, " doInBackground :LoadReportItems");
-            updateJSONdata();
+            Log.d(LOC, " updateJSONdata");
+            mItemList = new ArrayList<>();
+            JSONParser jParser = new JSONParser();
+            JSONObject json = jParser.getJSONFromUrl(SHOW_REPORT_URL);
+
+            try {
+                mList = json.getJSONArray(Globals.TAG_ITEMS_REPORT);
+                for (int i = 0; i < mList.length(); i++) {
+                    JSONObject c = mList.getJSONObject(i);
+
+                    // gets the content of each tag
+                    String iName = c.getString(Globals.TAG_ITEM_NAME);
+                    String iInfo = c.getString(Globals.TAG_ITEM_INFO);
+                    String iQuantity = c.getString(Globals.TAG_ITEM_QUANTITY);
+
+                    String iLocation = c.getString(Globals.TAG_ITEM_LOCATION);
+                    String iComment = c.getString(Globals.TAG_ITEM_COMMENT);
+
+                    // creating new HashMap
+                    HashMap<String, String> map = new HashMap<>();
+
+                    map.put(Globals.TAG_ITEM_QUANTITY, iQuantity);
+                    map.put(Globals.TAG_ITEM_NAME, iName);
+                    map.put(Globals.TAG_ITEM_INFO, iInfo);
+                    map.put(Globals.TAG_ITEM_COMMENT, iComment);
+                    map.put(Globals.TAG_ITEM_LOCATION, iLocation);
+
+                    // adding HashList to ArrayList
+                    mItemList.add(map);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return null;
         }
 
@@ -176,16 +179,16 @@ public class ReportViewer extends ListActivity {
             super.onPostExecute(result);
             Log.d(LOC, " onPostExecute :LoadREportItems");
             pDialog.dismiss();
-            //wtf???><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< this should not be here
+            //Load item list
             updateList();
         }
     }
 
-    class updateReport extends AsyncTask<String, String, String> {
+    //Resets 'picked' valueson the server to "0"
+    class ResetReport extends AsyncTask<String, String, String> {
         protected void onPreExecute() {
             super.onPreExecute();
             Log.d(LOC, " onPreExecute :updateReport");
-
         }
 
         @Override
@@ -196,22 +199,19 @@ public class ReportViewer extends ListActivity {
 
             try {
                 // Building Parameters
-                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                List<NameValuePair> params = new ArrayList<>();
                 params.add(new BasicNameValuePair("username", post_username));
-
-                jsonParser.makeHttpRequest(
-                        RESET_DATABASE_URL, "POST", params);
-                return "success";
+                jsonParser.makeHttpRequest(RESET_DATABASE_URL, "POST", params);
             } catch (Exception e) {
                 Log.e(LOC, " crashed here");
                 e.printStackTrace();
             }
-
             return null;
         }
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            Toast.makeText(ReportViewer.this, "Reset status: successfull", Toast.LENGTH_LONG).show();
             Log.d(LOC, " onPostExecute :updateReport");
         }
     }

@@ -58,7 +58,7 @@ public class NotificationBuilder extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.next_item_caller);
+        setContentView(R.layout.next_item);
 
         itemTitle = (TextView) findViewById(R.id.showItemName);
         itemLocationTV = (TextView) findViewById(R.id.showItemLoc);
@@ -82,9 +82,9 @@ public class NotificationBuilder extends Activity {
                 .build();
 
         PendingIntent confirmActionPendingIntent =
-                getActionFeedbackPendingIntent("confirmation dawg", 0);
+                getActionFeedbackPendingIntent("Action Feedback", 0);
 
-        PendingIntent replyPendingIntent = getConversationPendingIntent("reply dawg", 1);
+        PendingIntent replyPendingIntent = getOptionFeedbackPendingIntent("Option Feedback", 1);
 
         NotificationCompat.Action confirmAction = new NotificationCompat.Action(
                 R.drawable.ic_ok, "Confirm",
@@ -107,7 +107,7 @@ public class NotificationBuilder extends Activity {
                 .setContentTitle(Globals.getItemName())
                 .setContentText(String.valueOf(Globals.getItemQuantity()))
                 .setSmallIcon(R.drawable.ic_task)
-                .setContentIntent(getConversationPendingIntent("qty", 20))
+                .setContentIntent(getOptionFeedbackPendingIntent("qty", 20))
                 .setPriority(Notification.PRIORITY_HIGH)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setLargeIcon(prettyAvatar)
@@ -126,7 +126,7 @@ public class NotificationBuilder extends Activity {
     }
 
 
-    private PendingIntent getConversationPendingIntent(String string, int requestCode) {
+    private PendingIntent getOptionFeedbackPendingIntent(String string, int requestCode) {
         Log.d(LOC, " PendingIntent getConversationPI");
         Intent conversationIntent = new Intent(this, OptionFeedbackActivity.class);
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
