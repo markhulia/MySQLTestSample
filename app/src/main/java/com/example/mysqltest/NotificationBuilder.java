@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
@@ -20,10 +21,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by markhulia on 17/05/15.
@@ -31,20 +37,16 @@ import java.util.HashMap;
 public class NotificationBuilder extends Activity {
 
     public static final int NOTIFICATION_ID = 1;
-    public static final String TAG_ITEM_ID = "item_id";
-    private static final String TAG_ITEM_NAME = "item_name";
-    private static final String TAG_ITEM_LOCATION = "item_location";
-    private static final String TAG_ITEM_QUANTITY = "item_quantity";
-    private static final String TAG_ITEM_INFO = "item_info";
-    private static final String TAG_ITEM_COMMENT = "comment";
-    private static final String TAG_ITEMS_REPORT = "items_report";
     private static boolean FLAG = false;
     TextView itemTitle, itemLocationTV, itemQuantityTV;
     EditText updateQty;
     String LOC = " NotificationBuilder";
     JSONParser jsonParser = new JSONParser();
-    private String ITEM_NUMBER_URL = Globals.URL + "nextItem.php";
-    private int numberOfPackages;
+    List<NameValuePair> params = new ArrayList<NameValuePair>();
+    String numberOfItems;
+    String picked;
+    private String NEXT_ITEM_URL = Globals.URL + "nextItem.php";
+    private String ITEM_NUMBER_URL = Globals.URL + "notifier.php";
     private boolean doubleBackToExitPressedOnce = false;
     private JSONArray mList = null;
     private ArrayList<HashMap<String, String>> mItemList = new ArrayList<HashMap<String, String>>();
@@ -62,7 +64,7 @@ public class NotificationBuilder extends Activity {
         itemTitle.setText(Globals.getItemName());
         itemLocationTV.setText(Globals.getItemLocation());
         itemQuantityTV.setText(String.valueOf(Globals.getItemQuantity()));
-
+       // amount = updateQty.getText().toString();
         Log.d(LOC, " onCreate");
         Log.d(LOC, " value of global rowNumber: " + Globals.getItemRowNumber());
 
@@ -86,7 +88,7 @@ public class NotificationBuilder extends Activity {
 
         NotificationCompat.Action replyAction =
                 new NotificationCompat.Action.Builder(R.drawable.ic_add,
-                        TAG_ITEM_QUANTITY, replyPendingIntent)
+                        Globals.TAG_ITEM_QUANTITY, replyPendingIntent)
                         .addRemoteInput(remoteInput)
                         .build();
 
@@ -159,32 +161,36 @@ public class NotificationBuilder extends Activity {
 
     public void onUpdateButtonClick(View view) {
         Log.d(LOC, " onUpdateButtonClick");
-        String amount = updateQty.getText().toString();
 
-        if (amount.matches("")) {
-            Toast.makeText(this, "please update the amount", Toast.LENGTH_SHORT).show();
-        } else {
-            //trim().isEmpty() ignores whitespaces
-
-            //add flag. if user updated amount, it will change flag from 0 to 1. If user
-            //wants to update amount agian before pressing "next item" POP-up window should display info
-            //that this item_id has already been updated and if user wants to proceed
-            Toast.makeText(this, "onUpdateButtonClick", Toast.LENGTH_SHORT).show();
-
-            if (FLAG == false) {
-                if (amount != null && !amount.trim().isEmpty()) {
-                    numberOfPackages = Integer.parseInt(amount);
-                    Toast.makeText(this, "Items " + numberOfPackages, Toast.LENGTH_SHORT).show();
-                    updateQty.getText().clear();
-                    FLAG = true;
-                }
-            } else {
-                //TODO: create separate confirmation dialog class
-                //call confirmation dialog
-                //OPTION_YES -> update itemQTY, set FLAG = 1;
-                //OPTION NO -> return to parent activity
-            }
-        }
+        new updateAmount().execute();
+//        if (amount.matches("")) {
+//            Toast.makeText(this, "please update the amount", Toast.LENGTH_SHORT).show();
+//        } else {
+//            //trim().isEmpty() ignores whitespaces
+//
+//            //add flag. if user updated amount, it will change flag from 0 to 1. If user
+//            //wants to update amount agian before pressing "next item" POP-up window should display info
+//            //that this item_id has already been updated and if user wants to proceed
+//            Toast.makeText(this, amount + " items", Toast.LENGTH_SHORT).show();
+//
+//
+//
+//
+//
+//            if (FLAG == false) {
+//                if (amount != null && !amount.trim().isEmpty()) {
+//                    numberOfPackages = Integer.parseInt(amount);
+//                    Toast.makeText(this, "Items " + numberOfPackages, Toast.LENGTH_SHORT).show();
+//                    updateQty.getText().clear();
+//                    FLAG = true;
+//                }
+//            } else {
+//                //TODO: create separate confirmation dialog class
+//                //call confirmation dialog
+//                //OPTION_YES -> update itemQTY, set FLAG = 1;
+//                //OPTION NO -> return to parent activity
+//            }
+//        }
     }
 
     public void onBackPressed() {
@@ -204,7 +210,89 @@ public class NotificationBuilder extends Activity {
         }, 2000);
     }
 
-//    public class getItemNumber extends AsyncTask<String, String, String> {
+
+    public class updateAmount extends AsyncTask<String, String, String> {
+        protected void onPreExecute() {
+            super.onPreExecute();
+            numberOfItems = updateQty.getText().toString();
+            Log.d(LOC, " onPreExecute");
+
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            Log.d(LOC, " doInBackground");
+
+            try {
+                //If the number of items is 0, then picked is set to 0 ("not picked") by default
+                if (!numberOfItems.equals("0")) {
+                    picked = "1";
+                } else {
+                    picked = "0";
+                }
+
+                params.add(new BasicNameValuePair("picked", picked));
+                params.add(new BasicNameValuePair("item_quantity", numberOfItems));
+                params.add(new BasicNameValuePair("comment", Globals.getItemComment()));
+
+
+                //Posting parameters to php
+                jsonParser.makeHttpRequest(
+                        ITEM_NUMBER_URL, "POST", params);
+
+
+                //i think it has to be outside the try catch
+                int rn = Globals.getItemRowNumber();
+                rn++;
+                Globals.setItemRowNumber(rn);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
+                //Posting parameters to php
+                jsonParser.makeHttpRequest(
+                        NEXT_ITEM_URL, "POST", params);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            JSONObject json = jsonParser.getJSONFromUrl(NEXT_ITEM_URL);
+
+            try {
+                mList = json.getJSONArray(Globals.TAG_ITEMS_REPORT);
+
+                Log.e(LOC, "Inside JSON: " + mList);
+                JSONObject c = mList.getJSONObject(0);
+                Globals.setItemName(c.getString(Globals.TAG_ITEM_NAME));
+                Globals.setItemQuantity(Integer.parseInt(c.getString(Globals.TAG_ITEM_QUANTITY)));
+                Globals.setItemRowNumber(Integer.parseInt(c.getString(Globals.TAG_ROW_NUMBER)));
+                Globals.setItemLocation(c.getString(Globals.TAG_ITEM_LOCATION));
+                Globals.setItemInfo(c.getString(Globals.TAG_ITEM_INFO));
+                Globals.setItemComment(c.getString(Globals.TAG_ITEM_COMMENT));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (mList == null) {
+                Intent intent = new Intent(NotificationBuilder.this, ReportViewer.class);
+                finish();
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(NotificationBuilder.this, NotificationBuilder.class);
+                finish();
+                startActivity(intent);
+            }
+        }
+    }
+
+    //    public class getItemNumber extends AsyncTask<String, String, String> {
 //        protected void onPreExecute() {
 //            super.onPreExecute();
 //            Log.d(LOC, " onPreExecute");

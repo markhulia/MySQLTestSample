@@ -95,7 +95,8 @@ public class ReportViewer extends ListActivity {
                     Globals.setItemQuantity(Integer.parseInt(mItemList.get(position).get(Globals.TAG_ITEM_QUANTITY)));
                     Globals.setItemLocation(mItemList.get(position).get(Globals.TAG_ITEM_LOCATION));
                     Globals.setItemComment(mItemList.get(position).get(Globals.TAG_ITEM_COMMENT));
-
+                    Globals.setItemRowNumber(Integer.parseInt(mItemList.get(position).get(Globals.TAG_ROW_NUMBER)));
+                    Globals.setItemInfo(mItemList.get(position).get(Globals.TAG_ITEM_INFO));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -156,7 +157,6 @@ public class ReportViewer extends ListActivity {
                     String iName = c.getString(Globals.TAG_ITEM_NAME);
                     String iInfo = c.getString(Globals.TAG_ITEM_INFO);
                     String iQuantity = c.getString(Globals.TAG_ITEM_QUANTITY);
-
                     String iLocation = c.getString(Globals.TAG_ITEM_LOCATION);
                     String iComment = c.getString(Globals.TAG_ITEM_COMMENT);
 
