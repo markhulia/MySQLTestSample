@@ -54,7 +54,6 @@ public class ActionFeedbackActivity extends Activity {
                 params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
                 params.add(new BasicNameValuePair("picked", "1"));
                 params.add(new BasicNameValuePair("item_quantity", String.valueOf(Globals.getItemQuantity())));
-                params.add(new BasicNameValuePair("comment", Globals.getItemComment()));
 
                 //Posting parameters to php
                 jsonParser.makeHttpRequest(

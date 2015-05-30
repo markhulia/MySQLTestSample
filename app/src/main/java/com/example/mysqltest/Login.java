@@ -105,7 +105,7 @@ public class Login extends Activity {
 
 
                     //open second activity
-                    Intent i = new Intent(Login.this, NotificationBuilder.class);
+                    Intent i = new Intent(Login.this, ReportViewer.class);
                     finish();
                     startActivity(i);
                     return json.getString(TAG_MESSAGE);

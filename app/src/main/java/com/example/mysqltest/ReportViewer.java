@@ -12,9 +12,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
@@ -33,6 +35,8 @@ public class ReportViewer extends ListActivity {
     String RESET_DATABASE_URL = Globals.URL + "resetReport.php";
     JSONParser jsonParser = new JSONParser();
     JSONArray mList = null;
+    TextView tvItemName, tvItemComment, tvItemLocation;
+    EditText etItemComment, etItemQuantity;
     private String LOC = " ReportViewer";
     private ProgressDialog pDialog;
     private ArrayList<HashMap<String, String>> mItemList;
@@ -88,24 +92,15 @@ public class ReportViewer extends ListActivity {
                         .get(Globals.TAG_ITEM_COMMENT), Toast.LENGTH_LONG).show();
                 Log.d(" ReportView onItemClick", mItemList.get(position).get(Globals.TAG_ITEM_COMMENT));
 
-                try {
+                tvItemName = (TextView) findViewById(R.id.singleItemUpdate_tvItemName);
+                tvItemComment = (TextView) findViewById(R.id.singleItemUpdate_tvItemComment);
+                tvItemLocation = (TextView) findViewById(R.id.singleItemUpdate_tvItemLocation);
+                etItemComment = (EditText) findViewById(R.id.singleItemUpdate_etItemComment);
+                etItemQuantity = (EditText) findViewById(R.id.singleItemUpdate_etItemQty);
 
-
-                    Globals.setItemName(mItemList.get(position).get(Globals.TAG_ITEM_NAME));
-                    Globals.setItemQuantity(Integer.parseInt(mItemList.get(position).get(Globals.TAG_ITEM_QUANTITY)));
-                    Globals.setItemLocation(mItemList.get(position).get(Globals.TAG_ITEM_LOCATION));
-                    Globals.setItemComment(mItemList.get(position).get(Globals.TAG_ITEM_COMMENT));
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                Intent i = new Intent(ReportViewer.this, ItemUpdate.class);
-                finish();
-                startActivity(i);
 
             }
         });
-
     }
 
 
