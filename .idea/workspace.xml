@@ -10,60 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fbb14881-0711-4fc6-b9c8-ab493bc928d5" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/Items$nexItem.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/Items.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/ReportViewer$updateReport.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/BackendMagic.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/items.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/ActionFeedbackActivity$confirmPick.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/ActionFeedbackActivity$confirmPick.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/FirstRow$firstItem.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/FirstRow$firstItem.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/FirstRow.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/FirstRow.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/Globals.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/Globals.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/NotificationBuilder$getItemNumber.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/NotificationBuilder$getItemNumber.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/NotificationBuilder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/NotificationBuilder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/OptionFeedbackActivity$updateAmount.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/OptionFeedbackActivity$updateAmount.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/OptionFeedbackActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/OptionFeedbackActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/R$integer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/R$integer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/R$style.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/R$styleable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/R.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/R.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/ReportViewer$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/ReportViewer$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/ReportViewer$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/ReportViewer$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/ReportViewer$LoadReportItems.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/ReportViewer$LoadReportItems.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/ReportViewer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/mysqltest/ReportViewer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-93dc0342a549032f64c8d0ef51abd6980c297b9c.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-93dc0342a549032f64c8d0ef51abd6980c297b9c.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-c5601cea1077f0726f295365fe13c62578f15e87.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-c5601cea1077f0726f295365fe13c62578f15e87.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/gradle_project_sync_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/gradle_project_sync_data.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-920b078cfcfd4e4011b166270df48358f5c4c10d.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-920b078cfcfd4e4011b166270df48358f5c4c10d.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/outputFileStates.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug-androidTest.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug-androidTest.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-0b1f5c66b60afc85b75441bd808e4f5e49064745.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-0b1f5c66b60afc85b75441bd808e4f5e49064745.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/ActionFeedbackActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/ActionFeedbackActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/FirstRow.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/FirstRow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/Globals.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/Globals.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/NotificationBuilder.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/NotificationBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/OptionFeedbackActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/OptionFeedbackActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/example/mysqltest/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/example/mysqltest/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/ReportViewer.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/ReportViewer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/single_item_update.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/single_item_update.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/single_item_update.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/single_item_update.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/single_item_view.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/single_item_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/single_item_view.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/single_item_view.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MySQLTestSample.iws" />
@@ -95,21 +43,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ActionFeedbackActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ActionFeedbackActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/ActionFeedbackActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="143" column="1" selection-start-line="53" selection-start-column="16" selection-end-line="143" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.45974576">
+              <caret line="132" column="92" selection-start-line="132" selection-start-column="92" selection-end-line="132" selection-end-column="92" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OptionFeedbackActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="OptionFeedbackActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/OptionFeedbackActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.6377118">
-              <caret line="233" column="62" selection-start-line="233" selection-start-column="62" selection-end-line="233" selection-end-column="62" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="43" column="61" selection-start-line="43" selection-start-column="61" selection-end-line="43" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -1415,8 +1363,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
@@ -1456,7 +1403,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1727,6 +1675,38 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/OptionFeedbackActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="233" column="62" selection-start-line="233" selection-start-column="62" selection-end-line="233" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/NotificationBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="33" selection-start-line="52" selection-start-column="33" selection-end-line="52" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/ItemUpdate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="84" column="17" selection-start-line="84" selection-start-column="17" selection-end-line="84" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/ActionFeedbackActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="143" column="1" selection-start-line="53" selection-start-column="16" selection-end-line="143" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/OptionFeedbackActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -1756,18 +1736,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/ActionFeedbackActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/OptionFeedbackActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="143" column="1" selection-start-line="53" selection-start-column="16" selection-end-line="143" selection-end-column="1" />
+          <caret line="43" column="61" selection-start-line="43" selection-start-column="61" selection-end-line="43" selection-end-column="61" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/OptionFeedbackActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mysqltest/ActionFeedbackActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.6377118">
-          <caret line="233" column="62" selection-start-line="233" selection-start-column="62" selection-end-line="233" selection-end-column="62" />
+        <state vertical-scroll-proportion="0.45974576">
+          <caret line="132" column="92" selection-start-line="132" selection-start-column="92" selection-end-line="132" selection-end-column="92" />
           <folding />
         </state>
       </provider>
