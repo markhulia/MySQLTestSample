@@ -66,7 +66,6 @@ public class FirstRow extends Activity {
                 Globals.setItemComment(c.getString(TAG_ITEM_COMMENT));
 
 
-
 //                Log.e("Before ", String.valueOf(Globals.getItemRowNumber()));
 ////                Globals.setItemId(c.getString(TAG_ITEM_ID));
 ////                Log.d("After ", Globals.getItemId());

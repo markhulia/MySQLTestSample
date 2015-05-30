@@ -100,8 +100,6 @@ public class ItemUpdate extends Activity {
                 params.add(new BasicNameValuePair("picked", picked));
 
 
-
-
                 //Posting parameters to php
                 jsonParser.makeHttpRequest(
                         NOTIFIER, "POST", params);

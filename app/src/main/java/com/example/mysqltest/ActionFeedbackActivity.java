@@ -84,6 +84,7 @@ public class ActionFeedbackActivity extends Activity {
                 mList = json.getJSONArray(Globals.TAG_ITEMS_REPORT);
 
                 Log.e(Loc, "Inside JSON: " + mList);
+
                 JSONObject c = mList.getJSONObject(0);
                 Globals.setItemName(c.getString(Globals.TAG_ITEM_NAME));
                 Globals.setItemQuantity(Integer.parseInt(c.getString(Globals.TAG_ITEM_QUANTITY)));
