@@ -23,13 +23,8 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 
-<<<<<<< HEAD
 
     <LinearLayout
-=======
-    <TextView
-        android:id="@+id/singleItemUpdate_tvItemName"
->>>>>>> origin/master
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/top_layer"
@@ -37,20 +32,7 @@
         android:orientation="vertical">
 
 
-<<<<<<< HEAD
     <RelativeLayout
-=======
-    <TextView
-        android:id="@+id/singleItemUpdate_tvItemLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Large Text"
-        android:layout_marginBottom="5dp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/singleItemUpdate_tvItemComment"
->>>>>>> origin/master
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -149,27 +131,11 @@
     </RelativeLayout>
 
     <EditText
-<<<<<<< HEAD
         android:id="@+id/singleItemUpdate_etItemComment"
-=======
-        android:id="@+id/singleItemUpdate_etItemQty"
->>>>>>> origin/master
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="5dp"
-<<<<<<< HEAD
         android:hint="Comment" />
-=======
-        android:hint="Quantity" />
-
-    <EditText
-        android:id="@+id/singleItemUpdate_etItemComment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="5dp"
-        android:hint="Comment"
-        android:layout_weight="0.23" />
->>>>>>> origin/master
 
 
     </LinearLayout>
