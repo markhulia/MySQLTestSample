@@ -82,9 +82,9 @@ public class NotificationBuilder extends Activity {
                 .build();
 
         PendingIntent confirmActionPendingIntent =
-                getActionFeedbackPendingIntent("confirmation dawg", 0);
+                getActionFeedbackPendingIntent("Action Feedback", 0);
 
-        PendingIntent replyPendingIntent = getConversationPendingIntent("reply dawg", 1);
+        PendingIntent replyPendingIntent = getOptionFeedbackPendingIntent("Option Feedback", 1);
 
         NotificationCompat.Action confirmAction = new NotificationCompat.Action(
                 R.drawable.ic_ok, "Confirm",
@@ -107,7 +107,7 @@ public class NotificationBuilder extends Activity {
                 .setContentTitle(Globals.getItemName())
                 .setContentText(String.valueOf(Globals.getItemQuantity()))
                 .setSmallIcon(R.drawable.ic_task)
-                .setContentIntent(getConversationPendingIntent("qty", 20))
+                .setContentIntent(getOptionFeedbackPendingIntent("qty", 20))
                 .setPriority(Notification.PRIORITY_HIGH)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setLargeIcon(prettyAvatar)
@@ -126,7 +126,7 @@ public class NotificationBuilder extends Activity {
     }
 
 
-    private PendingIntent getConversationPendingIntent(String string, int requestCode) {
+    private PendingIntent getOptionFeedbackPendingIntent(String string, int requestCode) {
         Log.d(LOC, " PendingIntent getConversationPI");
         Intent conversationIntent = new Intent(this, OptionFeedbackActivity.class);
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
@@ -254,9 +254,6 @@ public class NotificationBuilder extends Activity {
                 //Retrieve all elements of 1st object. '0' points to the 1st element
                 JSONObject c = mList.getJSONObject(0);
 
-                Log.d("Before ", c.getString(TAG_ITEM_ID));
-                Globals.setItemId(c.getString(TAG_ITEM_ID));
-                Log.d("After ", Globals.getItemId());
 
                 Log.d("Before ", c.getString(TAG_ITEM_NAME));
                 Globals.setItemName(c.getString(TAG_ITEM_NAME));
@@ -289,7 +286,6 @@ public class NotificationBuilder extends Activity {
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Log.d("After ", Globals.getItemId());
             Log.d("After ", Globals.getItemName());
             Log.d("After ", String.valueOf(Globals.getItemQuantity()));
             Log.d("After ", Globals.getItemLocation());

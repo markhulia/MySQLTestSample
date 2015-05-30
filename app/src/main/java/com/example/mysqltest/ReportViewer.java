@@ -2,6 +2,7 @@ package com.example.mysqltest;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,27 +29,19 @@ import java.util.List;
 
 public class ReportViewer extends ListActivity {
 
-    // JSON IDS:
-    public static final String TAG_ITEM_ID = "item_id";
-    private static final String TAG_ITEM_NAME = "item_name";
-    private static final String TAG_ITEM_LOCATION = "item_location";
-    private static final String TAG_ITEM_QUANTITY = "item_quantity";
-    private static final String TAG_ITEM_INFO = "item_info";
-    private static final String TAG_ITEM_COMMENT = "comment";
-    private static final String TAG_ITEMS_REPORT = "items_report";
+    String SHOW_REPORT_URL = Globals.URL + "report.php";
+    String RESET_DATABASE_URL = Globals.URL + "resetReport.php";
+    JSONParser jsonParser = new JSONParser();
+    JSONArray mList = null;
     private String LOC = " ReportViewer";
     private ProgressDialog pDialog;
-    private JSONArray mList = null;
     private ArrayList<HashMap<String, String>> mItemList;
-    private String SHOW_REPORT_URL = Globals.URL + "report.php";
-    private String RESET_DATABASE_URL = Globals.URL + "onResetReportBtn.php";
-    JSONParser jsonParser = new JSONParser();
     private boolean doubleBackToExitPressedOnce = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(LOC, " onCreate");
-        // note that use view_reportml instead of our single_eitem_view_view.xml
         setContentView(R.layout.view_report);
     }
 
@@ -71,6 +64,60 @@ public class ReportViewer extends ListActivity {
         }, 2000);
     }
 
+    /**
+     * Inserts the parsed data into the listview.
+     */
+    private void updateList() {
+        Log.d(LOC, " updateList");
+        final ListAdapter adapter = new SimpleAdapter(this, mItemList,
+                R.layout.single_item_view,
+                new String[]{Globals.TAG_ITEM_NAME,
+                        Globals.TAG_ITEM_COMMENT, Globals.TAG_ITEM_QUANTITY, Globals.TAG_ITEM_LOCATION,
+                        Globals.TAG_ITEM_INFO},
+                new int[]{R.id.singleItemView_itemName,
+                        R.id.singleItemView_ItemInfo, R.id.singleItemView_ItemQty
+                });
+
+        setListAdapter(adapter);
+        final ListView lv = getListView();
+        lv.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View viewClicked,
+                                    int position, long id) {
+
+                Toast.makeText(ReportViewer.this, "Position " + mItemList.get(position)
+                        .get(Globals.TAG_ITEM_COMMENT), Toast.LENGTH_LONG).show();
+
+                Log.e(" ReportView onItemClick", mItemList.get(position).toString());
+                Log.e(LOC, "TAG_ROW_NUMBER: " + mItemList.get(position).get(Globals.TAG_ROW_NUMBER));
+                try {
+
+
+                    Globals.setItemName(mItemList.get(position).get(Globals.TAG_ITEM_NAME));
+                    Globals.setItemQuantity(Integer.parseInt(mItemList.get(position).get(Globals.TAG_ITEM_QUANTITY)));
+                    Globals.setItemLocation(mItemList.get(position).get(Globals.TAG_ITEM_LOCATION));
+                    Globals.setItemComment(mItemList.get(position).get(Globals.TAG_ITEM_COMMENT));
+                    Globals.setItemRowNumber(Integer.parseInt(mItemList.get(position).get(Globals.TAG_ROW_NUMBER)));
+                    Globals.setItemInfo(mItemList.get(position).get(Globals.TAG_ITEM_INFO));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Intent i = new Intent(ReportViewer.this, ItemUpdate.class);
+                finish();
+                startActivity(i);
+
+            }
+        });
+
+    }
+
+
+    public void onResetReportBtn(View v) {
+        Log.d(LOC, " onResetReportBtn");
+        new ResetReport().execute();
+    }
+
     @Override
     protected void onResume() {
         // TODO Auto-generated method stub
@@ -81,76 +128,8 @@ public class ReportViewer extends ListActivity {
     }
 
     /**
-     * Retrieves recent items data from the server.
+     * Retrieves recent items data from the server .
      */
-    public void updateJSONdata() {
-        Log.d(LOC, " updateJSONdata");
-        mItemList = new ArrayList<HashMap<String, String>>();
-        JSONParser jParser = new JSONParser();
-        JSONObject json = jParser.getJSONFromUrl(SHOW_REPORT_URL);
-
-        try {
-            mList = json.getJSONArray(TAG_ITEMS_REPORT);
-            for (int i = 0; i < mList.length(); i++) {
-                JSONObject c = mList.getJSONObject(i);
-
-                // gets the content of each tag
-                String iName = c.getString(TAG_ITEM_NAME);
-                String iInfo = c.getString(TAG_ITEM_INFO);
-                String iQuantity = c.getString(TAG_ITEM_QUANTITY);
-                String iLocation = c.getString(TAG_ITEM_LOCATION);
-                String iComment = c.getString(TAG_ITEM_COMMENT);
-
-                // creating new HashMap
-                HashMap<String, String> map = new HashMap<String, String>();
-
-                map.put(TAG_ITEM_QUANTITY, iQuantity);
-                map.put(TAG_ITEM_NAME, iName);
-                map.put(TAG_ITEM_INFO, iInfo);
-                map.put(TAG_ITEM_COMMENT, iComment);
-                map.put(TAG_ITEM_LOCATION, iLocation);
-
-                // adding HashList to ArrayList
-                mItemList.add(map);
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Inserts the parsed data into the listview.
-     */
-    private void updateList() {
-        Log.d(LOC, " updateList");
-        final ListAdapter adapter = new SimpleAdapter(this, mItemList,
-                R.layout.single_item_view,
-                new String[]{TAG_ITEM_NAME, TAG_ITEM_INFO,
-                        TAG_ITEM_QUANTITY, TAG_ITEM_COMMENT, TAG_ITEM_LOCATION},
-                new int[]{R.id.singleItemView_itemName, R.id.singleItemView_ItemInfo,
-                        R.id.login_username});
-
-        setListAdapter(adapter);
-        final ListView lv = getListView();
-        lv.setOnItemClickListener(new OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View viewClicked,
-                                    int position, long id) {
-
-                Toast.makeText(ReportViewer.this, "Position " + mItemList.get(position).get(TAG_ITEM_COMMENT), Toast.LENGTH_LONG).show();
-                Log.d(" ReportView onItemClick", mItemList.get(position).get(TAG_ITEM_COMMENT));
-            }
-        });
-    }
-
-
-    public void onResetReportBtn(View v) {
-        Log.d(LOC, " onResetReportBtn");
-        new updateReport().execute();
-    }
-
     public class LoadReportItems extends AsyncTask<Void, Void, Boolean> {
 
         @Override
@@ -167,7 +146,41 @@ public class ReportViewer extends ListActivity {
         @Override
         protected Boolean doInBackground(Void... arg0) {
             Log.d(LOC, " doInBackground :LoadReportItems");
-            updateJSONdata();
+            Log.d(LOC, " updateJSONdata");
+            mItemList = new ArrayList<>();
+            JSONParser jParser = new JSONParser();
+            JSONObject json = jParser.getJSONFromUrl(SHOW_REPORT_URL);
+
+            try {
+                mList = json.getJSONArray(Globals.TAG_ITEMS_REPORT);
+                for (int i = 0; i < mList.length(); i++) {
+                    JSONObject c = mList.getJSONObject(i);
+
+                    // gets the content of each tag
+                    String iName = c.getString(Globals.TAG_ITEM_NAME);
+                    String iInfo = c.getString(Globals.TAG_ITEM_INFO);
+                    String iQuantity = c.getString(Globals.TAG_ITEM_QUANTITY);
+                    String iLocation = c.getString(Globals.TAG_ITEM_LOCATION);
+                    String iComment = c.getString(Globals.TAG_ITEM_COMMENT);
+                    String iRowNr = c.getString(Globals.TAG_ROW_NUMBER);
+
+                    // creating new HashMap
+                    HashMap<String, String> map = new HashMap<>();
+
+                    map.put(Globals.TAG_ITEM_QUANTITY, iQuantity);
+                    map.put(Globals.TAG_ITEM_NAME, iName);
+                    map.put(Globals.TAG_ITEM_INFO, iInfo);
+                    map.put(Globals.TAG_ITEM_COMMENT, iComment);
+                    map.put(Globals.TAG_ITEM_LOCATION, iLocation);
+                    map.put(Globals.TAG_ROW_NUMBER, iRowNr);
+
+                    // adding HashList to ArrayList
+                    mItemList.add(map);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return null;
         }
 
@@ -176,16 +189,16 @@ public class ReportViewer extends ListActivity {
             super.onPostExecute(result);
             Log.d(LOC, " onPostExecute :LoadREportItems");
             pDialog.dismiss();
-            //wtf???><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< this should not be here
+            //Load item list
             updateList();
         }
     }
 
-    class updateReport extends AsyncTask<String, String, String> {
+    //Resets 'picked' valueson the server to "0"
+    class ResetReport extends AsyncTask<String, String, String> {
         protected void onPreExecute() {
             super.onPreExecute();
             Log.d(LOC, " onPreExecute :updateReport");
-
         }
 
         @Override
@@ -196,22 +209,19 @@ public class ReportViewer extends ListActivity {
 
             try {
                 // Building Parameters
-                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                List<NameValuePair> params = new ArrayList<>();
                 params.add(new BasicNameValuePair("username", post_username));
-
-                jsonParser.makeHttpRequest(
-                        RESET_DATABASE_URL, "POST", params);
-                return "success";
+                jsonParser.makeHttpRequest(RESET_DATABASE_URL, "POST", params);
             } catch (Exception e) {
                 Log.e(LOC, " crashed here");
                 e.printStackTrace();
             }
-
             return null;
         }
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            Toast.makeText(ReportViewer.this, "Reset status: successful", Toast.LENGTH_LONG).show();
             Log.d(LOC, " onPostExecute :updateReport");
         }
     }
