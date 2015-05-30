@@ -73,6 +73,7 @@ public class OptionFeedbackActivity extends Activity {
                 }
 
                 params.add(new BasicNameValuePair("picked", picked));
+                params.add(new BasicNameValuePair("rowNr", String.valueOf(globals.getItemRowNumber())));
                 params.add(new BasicNameValuePair("item_quantity", numberOfItems));
                 params.add(new BasicNameValuePair("comment", Globals.getItemComment()));
 
@@ -81,13 +82,12 @@ public class OptionFeedbackActivity extends Activity {
                 jsonParser.makeHttpRequest(
                         ITEM_NUMBER_URL, "POST", params);
 
-
-                //i think it has to be outside the try catch
                 int rn = Globals.getItemRowNumber();
                 rn++;
                 Globals.setItemRowNumber(rn);
 
             } catch (Exception e) {
+                Log.e(TAG, " crashed here");
                 e.printStackTrace();
             }
             try {

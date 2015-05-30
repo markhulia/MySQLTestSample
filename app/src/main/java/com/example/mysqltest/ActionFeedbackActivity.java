@@ -51,6 +51,7 @@ public class ActionFeedbackActivity extends Activity {
             Log.d(Loc, " doInBackground");
             try {
                 // Building Parameters
+                params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
                 params.add(new BasicNameValuePair("picked", "1"));
                 params.add(new BasicNameValuePair("item_quantity", String.valueOf(Globals.getItemQuantity())));
                 params.add(new BasicNameValuePair("comment", Globals.getItemComment()));
@@ -65,14 +66,14 @@ public class ActionFeedbackActivity extends Activity {
                 Globals.setItemRowNumber(rn);
 
             } catch (Exception e) {
+                Log.e(TAG, " crashed here");
                 e.printStackTrace();
             }
             try {
                 params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
                 //Posting parameters to php
                 jsonParser.makeHttpRequest(
-                        //it was NEXT ITEM URL---------------------------
-                        ITEM_NUMBER_URL, "POST", params);
+                        NEXT_ITEM_URL, "POST", params);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -82,6 +83,7 @@ public class ActionFeedbackActivity extends Activity {
             try {
                 mList = json.getJSONArray(Globals.TAG_ITEMS_REPORT);
 
+                Log.e(Loc, "Inside JSON: " + mList);
                 JSONObject c = mList.getJSONObject(0);
                 Globals.setItemName(c.getString(Globals.TAG_ITEM_NAME));
                 Globals.setItemQuantity(Integer.parseInt(c.getString(Globals.TAG_ITEM_QUANTITY)));
