@@ -54,7 +54,7 @@ public class ActionFeedbackActivity extends Activity {
                 params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
                 params.add(new BasicNameValuePair("picked", "1"));
                 params.add(new BasicNameValuePair("item_quantity", String.valueOf(Globals.getItemQuantity())));
-
+                params.add(new BasicNameValuePair("comment", Globals.getItemComment()));
                 //Posting parameters to php
                 jsonParser.makeHttpRequest(
                         ITEM_NUMBER_URL, "POST", params);
@@ -127,7 +127,6 @@ public class ActionFeedbackActivity extends Activity {
             super.onPostExecute(result);
             Log.e(Loc, " onPostExecute");
             Log.d(Loc, "i onPostExecute NUMBER " + String.valueOf(Globals.getItemRowNumber()));
-            //update next row number
 
             //if json object is empty, start report atctivity, else, buid another notification
             if (mList == null) {

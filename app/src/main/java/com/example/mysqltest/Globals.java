@@ -17,7 +17,6 @@ public class Globals {
     public static String itemLocation;
     public static String itemInfo;
     public static String itemComment;
-    public static String itemId;
     public static String user;
     public static int itemQuantity;
     public static int itemRowNumber;
@@ -52,14 +51,6 @@ public class Globals {
 
     public static void setItemComment(String itemComment) {
         Globals.itemComment = itemComment;
-    }
-
-    public static String getItemId() {
-        return itemId;
-    }
-
-    public static void setItemId(String itemId) {
-        Globals.itemId = itemId;
     }
 
     public static String getItemInfo() {
