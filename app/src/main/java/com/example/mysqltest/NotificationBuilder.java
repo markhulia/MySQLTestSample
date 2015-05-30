@@ -21,10 +21,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by markhulia on 17/05/15.
@@ -216,7 +221,6 @@ public class NotificationBuilder extends Activity {
         protected String doInBackground(String... args) {
             Log.d(LOC, " doInBackground");
 
-<<<<<<< HEAD
             try {
                 //post to server current row number to retreive a corresponding row
                 //  mItemList = new ArrayList<HashMap<String, String>>();
@@ -254,15 +258,34 @@ public class NotificationBuilder extends Activity {
                 Log.d("Before ", c.getString(TAG_ITEM_NAME));
                 Globals.setItemName(c.getString(TAG_ITEM_NAME));
                 Log.d("After ", Globals.getItemName());
-=======
->>>>>>> origin/master
 
-            return null;
+                Log.d("Before ", c.getString(TAG_ITEM_QUANTITY));
+                Globals.setItemQuantity(Integer.parseInt(c.getString(TAG_ITEM_QUANTITY)));
+                Log.d("After ", String.valueOf(Globals.getItemQuantity()));
+
+                Log.d("Before ", c.getString(TAG_ITEM_LOCATION));
+                Globals.setItemLocation(c.getString(TAG_ITEM_LOCATION));
+                Log.d("After ", Globals.getItemLocation());
+
+                Log.d("Before ", c.getString(TAG_ITEM_INFO));
+                Globals.setItemInfo(c.getString(TAG_ITEM_INFO));
+                Log.d("After ", Globals.getItemInfo());
+
+                Log.d("Before ", c.getString(TAG_ITEM_COMMENT));
+                Globals.setItemComment(c.getString(TAG_ITEM_COMMENT));
+                Log.d("After ", Globals.getItemComment());
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            // Intent replyIntent = new Intent(this, showItemLoc.class);
+
+            return "success33";
         }
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-<<<<<<< HEAD
             Log.d("After ", Globals.getItemName());
             Log.d("After ", String.valueOf(Globals.getItemQuantity()));
             Log.d("After ", Globals.getItemLocation());
@@ -270,9 +293,6 @@ public class NotificationBuilder extends Activity {
             Log.d("After ", Globals.getItemComment());
             Log.d(LOC, " onPostExecute :value of row NUMBER " +
                     String.valueOf(Globals.getItemRowNumber()));
-=======
-
->>>>>>> origin/master
 
         }
     }

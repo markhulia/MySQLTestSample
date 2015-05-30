@@ -55,10 +55,6 @@ public class ActionFeedbackActivity extends Activity {
                 params.add(new BasicNameValuePair("picked", "1"));
                 params.add(new BasicNameValuePair("item_quantity", String.valueOf(Globals.getItemQuantity())));
                 params.add(new BasicNameValuePair("comment", Globals.getItemComment()));
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
                 //Posting parameters to php
                 jsonParser.makeHttpRequest(
                         ITEM_NUMBER_URL, "POST", params);
@@ -81,13 +77,12 @@ public class ActionFeedbackActivity extends Activity {
                 e.printStackTrace();
             }
 
-            JSONObject json = jParser.getJSONFromUrl(NEXT_ITEM_URL);
+            JSONObject json = jParser.getJSONFromUrl(RANDOM_CRAP);
 
             try {
                 mList = json.getJSONArray(Globals.TAG_ITEMS_REPORT);
 
                 Log.e(Loc, "Inside JSON: " + mList);
-
                 JSONObject c = mList.getJSONObject(0);
                 Globals.setItemName(c.getString(Globals.TAG_ITEM_NAME));
                 Globals.setItemQuantity(Integer.parseInt(c.getString(Globals.TAG_ITEM_QUANTITY)));

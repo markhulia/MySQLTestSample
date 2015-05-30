@@ -64,10 +64,7 @@ public class FirstRow extends Activity {
                 Globals.setItemLocation(c.getString(TAG_ITEM_LOCATION));
                 Globals.setItemInfo(c.getString(TAG_ITEM_INFO));
                 Globals.setItemComment(c.getString(TAG_ITEM_COMMENT));
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
 
 
 //                Log.e("Before ", String.valueOf(Globals.getItemRowNumber()));
