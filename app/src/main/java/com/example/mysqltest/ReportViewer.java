@@ -12,11 +12,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
@@ -35,11 +33,6 @@ public class ReportViewer extends ListActivity {
     String RESET_DATABASE_URL = Globals.URL + "resetReport.php";
     JSONParser jsonParser = new JSONParser();
     JSONArray mList = null;
-<<<<<<< HEAD
-=======
-    TextView tvItemName, tvItemComment, tvItemLocation;
-    EditText etItemComment, etItemQuantity;
->>>>>>> origin/master
     private String LOC = " ReportViewer";
     private ProgressDialog pDialog;
     private ArrayList<HashMap<String, String>> mItemList;
@@ -78,19 +71,12 @@ public class ReportViewer extends ListActivity {
         Log.d(LOC, " updateList");
         final ListAdapter adapter = new SimpleAdapter(this, mItemList,
                 R.layout.single_item_view,
-<<<<<<< HEAD
                 new String[]{Globals.TAG_ITEM_NAME,
                         Globals.TAG_ITEM_COMMENT, Globals.TAG_ITEM_QUANTITY, Globals.TAG_ITEM_LOCATION,
                         Globals.TAG_ITEM_INFO},
                 new int[]{R.id.singleItemView_itemName,
                         R.id.singleItemView_ItemInfo, R.id.singleItemView_ItemQty
                 });
-=======
-                new String[]{Globals.TAG_ITEM_NAME, Globals.TAG_ITEM_INFO,
-                        Globals.TAG_ITEM_QUANTITY, Globals.TAG_ITEM_COMMENT, Globals.TAG_ITEM_LOCATION},
-                new int[]{R.id.singleItemView_itemName, R.id.singleItemView_ItemInfo,
-                        R.id.login_username});
->>>>>>> origin/master
 
         setListAdapter(adapter);
         final ListView lv = getListView();
@@ -102,7 +88,6 @@ public class ReportViewer extends ListActivity {
 
                 Toast.makeText(ReportViewer.this, "Position " + mItemList.get(position)
                         .get(Globals.TAG_ITEM_COMMENT), Toast.LENGTH_LONG).show();
-<<<<<<< HEAD
 
                 Log.e(" ReportView onItemClick", mItemList.get(position).toString());
                 Log.e(LOC, "TAG_ROW_NUMBER: " + mItemList.get(position).get(Globals.TAG_ROW_NUMBER));
@@ -122,17 +107,6 @@ public class ReportViewer extends ListActivity {
                 finish();
                 startActivity(i);
 
-=======
-                Log.d(" ReportView onItemClick", mItemList.get(position).get(Globals.TAG_ITEM_COMMENT));
-
-                tvItemName = (TextView) findViewById(R.id.singleItemUpdate_tvItemName);
-                tvItemComment = (TextView) findViewById(R.id.singleItemUpdate_tvItemComment);
-                tvItemLocation = (TextView) findViewById(R.id.singleItemUpdate_tvItemLocation);
-                etItemComment = (EditText) findViewById(R.id.singleItemUpdate_etItemComment);
-                etItemQuantity = (EditText) findViewById(R.id.singleItemUpdate_etItemQty);
-
-
->>>>>>> origin/master
             }
         });
 
@@ -142,7 +116,6 @@ public class ReportViewer extends ListActivity {
     public void onResetReportBtn(View v) {
         Log.d(LOC, " onResetReportBtn");
         new ResetReport().execute();
-<<<<<<< HEAD
     }
 
     @Override
@@ -154,19 +127,6 @@ public class ReportViewer extends ListActivity {
         new LoadReportItems().execute();
     }
 
-=======
-    }
-
-    @Override
-    protected void onResume() {
-        // TODO Auto-generated method stub
-        Log.d(LOC, " onResume");
-        super.onResume();
-        // loading the comments via AsyncTask
-        new LoadReportItems().execute();
-    }
-
->>>>>>> origin/master
     /**
      * Retrieves recent items data from the server .
      */
@@ -200,15 +160,9 @@ public class ReportViewer extends ListActivity {
                     String iName = c.getString(Globals.TAG_ITEM_NAME);
                     String iInfo = c.getString(Globals.TAG_ITEM_INFO);
                     String iQuantity = c.getString(Globals.TAG_ITEM_QUANTITY);
-<<<<<<< HEAD
                     String iLocation = c.getString(Globals.TAG_ITEM_LOCATION);
                     String iComment = c.getString(Globals.TAG_ITEM_COMMENT);
                     String iRowNr = c.getString(Globals.TAG_ROW_NUMBER);
-=======
-
-                    String iLocation = c.getString(Globals.TAG_ITEM_LOCATION);
-                    String iComment = c.getString(Globals.TAG_ITEM_COMMENT);
->>>>>>> origin/master
 
                     // creating new HashMap
                     HashMap<String, String> map = new HashMap<>();
@@ -218,10 +172,7 @@ public class ReportViewer extends ListActivity {
                     map.put(Globals.TAG_ITEM_INFO, iInfo);
                     map.put(Globals.TAG_ITEM_COMMENT, iComment);
                     map.put(Globals.TAG_ITEM_LOCATION, iLocation);
-<<<<<<< HEAD
                     map.put(Globals.TAG_ROW_NUMBER, iRowNr);
-=======
->>>>>>> origin/master
 
                     // adding HashList to ArrayList
                     mItemList.add(map);
@@ -270,11 +221,7 @@ public class ReportViewer extends ListActivity {
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-<<<<<<< HEAD
             Toast.makeText(ReportViewer.this, "Reset status: successful", Toast.LENGTH_LONG).show();
-=======
-            Toast.makeText(ReportViewer.this, "Reset status: successfull", Toast.LENGTH_LONG).show();
->>>>>>> origin/master
             Log.d(LOC, " onPostExecute :updateReport");
         }
     }
