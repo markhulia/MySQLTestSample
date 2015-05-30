@@ -56,7 +56,6 @@
 
 
                     <TextView
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="left"
@@ -66,7 +65,7 @@
                         android:textStyle="bold"></TextView>
 
                     <TextView
-                        android:id="@+id/singleItemView_ItemQty"
+                        android:id="@+id/login_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="left"

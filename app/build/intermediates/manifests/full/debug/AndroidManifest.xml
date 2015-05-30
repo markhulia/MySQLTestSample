@@ -29,10 +29,6 @@
         <!-- android:name="com.example.mysqltest.Register" -->
         <!-- android:label="@string/app_name"></activity> -->
         <activity
-            android:name="com.example.mysqltest.ItemUpdate"
-            android:label="Update"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.example.mysqltest.NotificationBuilder"
             android:label="Builder"
             android:screenOrientation="portrait" />

@@ -27,7 +27,7 @@ public class FirstRow extends Activity {
     private static final String TAG_ITEM_INFO = "item_info";
     private static final String TAG_ITEM_COMMENT = "comment";
     private static final String TAG_ITEMS_REPORT = "items_report";
-
+    String rowNumber;
     String Loc = " GetFirstRow";
     JSONParser jParser = new JSONParser();
     private JSONArray mList = null;
@@ -56,7 +56,6 @@ public class FirstRow extends Activity {
 
             try {
                 mList = json.getJSONArray(TAG_ITEMS_REPORT);
-
                 JSONObject c = mList.getJSONObject(0);
                 Globals.setItemName(c.getString(TAG_ITEM_NAME));
                 Globals.setItemQuantity(Integer.parseInt(c.getString(TAG_ITEM_QUANTITY)));
@@ -64,7 +63,7 @@ public class FirstRow extends Activity {
                 Globals.setItemLocation(c.getString(TAG_ITEM_LOCATION));
                 Globals.setItemInfo(c.getString(TAG_ITEM_INFO));
                 Globals.setItemComment(c.getString(TAG_ITEM_COMMENT));
-
+                rowNumber = c.getString(TAG_ROW_NUMBER);
 
 
 //                Log.e("Before ", String.valueOf(Globals.getItemRowNumber()));
@@ -100,15 +99,9 @@ public class FirstRow extends Activity {
             super.onPostExecute(result);
             Log.d(Loc, "NUMBER: " + String.valueOf(Globals.getItemRowNumber()));
             Log.e(Loc, "Name: " + Globals.getItemName());
-            if (mList == null) {
-                Intent intent = new Intent(FirstRow.this, ReportViewer.class);
-                finish();
-                startActivity(intent);
-            } else {
-                Intent intent = new Intent(FirstRow.this, NotificationBuilder.class);
-                finish();
-                startActivity(intent);
-            }
+            Intent intent = new Intent(FirstRow.this, NotificationBuilder.class);
+            finish();
+            startActivity(intent);
         }
 
     }
