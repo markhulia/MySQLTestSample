@@ -68,6 +68,7 @@ public class OptionFeedbackActivity extends Activity {
             params.add(new BasicNameValuePair("picked", "1"));
             params.add(new BasicNameValuePair("rowNr", String.valueOf(globals.getItemRowNumber())));
             params.add(new BasicNameValuePair("item_quantity", numberOfItems));
+            params.add(new BasicNameValuePair("comment", Globals.getItemComment()));
 
             //Posting parameters to php
             jsonParser.makeHttpRequest(
