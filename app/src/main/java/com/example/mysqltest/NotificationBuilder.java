@@ -58,7 +58,7 @@ public class NotificationBuilder extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.next_item_caller);
+        setContentView(R.layout.next_item);
 
         itemTitle = (TextView) findViewById(R.id.showItemName);
         itemLocationTV = (TextView) findViewById(R.id.showItemLoc);
