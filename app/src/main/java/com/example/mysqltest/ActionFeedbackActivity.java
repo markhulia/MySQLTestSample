@@ -27,11 +27,11 @@ public class ActionFeedbackActivity extends Activity {
     private static final String RANDOM_CRAP = Globals.URL + "randomCrap.php";
     JSONParser jsonParser = new JSONParser();
     List<NameValuePair> params = new ArrayList<NameValuePair>();
-    Globals globals = new Globals();
     String Loc = " ActionFeedbackActivity";
+    String numberOfItems;
     JSONParser jParser = new JSONParser();
     private String TAG = " Action Feedback ";
-    private String ITEM_NUMBER_URL = Globals.URL + "notifier.php";
+    private String NOTIFIER_URL = Globals.URL + "notifier.php";
     private String NEXT_ITEM_URL = Globals.URL + "nextItem.php";
     private JSONArray mList = null;
     private ArrayList<HashMap<String, String>> mItemList;
@@ -54,10 +54,10 @@ public class ActionFeedbackActivity extends Activity {
                 params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
                 params.add(new BasicNameValuePair("picked", "1"));
                 params.add(new BasicNameValuePair("item_quantity", String.valueOf(Globals.getItemQuantity())));
-
+                params.add(new BasicNameValuePair("comment", Globals.getItemComment()));
                 //Posting parameters to php
                 jsonParser.makeHttpRequest(
-                        ITEM_NUMBER_URL, "POST", params);
+                        NOTIFIER_URL, "POST", params);
                 //in case of successful post, increment the row number by one.
                 //In this case, the next "SELECT" query will pull most recent row
                 int rn = Globals.getItemRowNumber();
@@ -127,7 +127,6 @@ public class ActionFeedbackActivity extends Activity {
             super.onPostExecute(result);
             Log.e(Loc, " onPostExecute");
             Log.d(Loc, "i onPostExecute NUMBER " + String.valueOf(Globals.getItemRowNumber()));
-            //update next row number
 
             //if json object is empty, start report atctivity, else, buid another notification
             if (mList == null) {
