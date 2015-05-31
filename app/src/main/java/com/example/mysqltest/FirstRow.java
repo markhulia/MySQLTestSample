@@ -66,30 +66,6 @@ public class FirstRow extends Activity {
                 Globals.setItemComment(c.getString(TAG_ITEM_COMMENT));
 
 
-
-//                Log.e("Before ", String.valueOf(Globals.getItemRowNumber()));
-////                Globals.setItemId(c.getString(TAG_ITEM_ID));
-////                Log.d("After ", Globals.getItemId());
-//
-//                Log.e("Before ", Globals.getItemName());
-////                Globals.setItemName(c.getString(TAG_ITEM_NAME));
-////                Log.d("After ", Globals.getItemName());
-//
-//                Log.e("Before ", String.valueOf(Globals.getItemQuantity()));
-////                Globals.setItemQuantity(Integer.parseInt(c.getString(TAG_ITEM_QUANTITY)));
-////                Log.d("After ", String.valueOf(Globals.getItemQuantity()));
-//
-//                Log.e("Before ", Globals.getItemLocation());
-////                Globals.setItemLocation(c.getString(TAG_ITEM_LOCATION));
-////                Log.d("After ", Globals.getItemLocation());
-//
-//                Log.e("Before ", Globals.getItemInfo());
-////                Globals.setItemInfo(c.getString(TAG_ITEM_INFO));
-////                Log.d("After ", Globals.getItemInfo());
-//
-//                Log.e("Before ", Globals.getItemComment());
-////                Globals.setItemComment(c.getString(TAG_ITEM_COMMENT));
-////                Log.d("After ", Globals.getItemComment());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -100,6 +76,7 @@ public class FirstRow extends Activity {
             super.onPostExecute(result);
             Log.d(Loc, "NUMBER: " + String.valueOf(Globals.getItemRowNumber()));
             Log.e(Loc, "Name: " + Globals.getItemName());
+
             if (mList == null) {
                 Intent intent = new Intent(FirstRow.this, ReportViewer.class);
                 finish();

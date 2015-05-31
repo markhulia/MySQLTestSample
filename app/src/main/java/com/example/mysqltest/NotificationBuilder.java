@@ -109,25 +109,23 @@ public class NotificationBuilder extends Activity {
 
         Bitmap prettyAvatar = getScaledLargeIconFromResource(R.drawable.ic_light);
 
-        Notification notification = new NotificationCompat.Builder(NotificationBuilder.this)
+        String longText = "Location: " + Globals.getItemLocation() + " quantity: " + Globals.getItemQuantity();
+        Notification bigTextStyleNotification = new NotificationCompat.Builder(this)
                 .setContentTitle(Globals.getItemName())
-                .setContentText(String.valueOf(Globals.getItemQuantity()))
+                .setContentText(longText)
                 .setSmallIcon(R.drawable.ic_task)
-                .setContentIntent(getOptionFeedbackPendingIntent("qty", 20))
+                .setContentIntent(getOptionFeedbackPendingIntent("", 20))
                 .setPriority(Notification.PRIORITY_HIGH)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setLargeIcon(prettyAvatar)
                 .extend(wearableExtender)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(longText))
                 .build();
 
-        NotificationManagerCompat notificationManager =
-                NotificationManagerCompat.from(NotificationBuilder.this);
-        notificationManager.notify(NOTIFICATION_ID, notification);
 
-
-//        new getItemNumber().execute();
-//        getItemNumber getN = new getItemNumber();
-//        if(getN.getStatus()== AsyncTask.Status.FINISHED) {
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(NOTIFICATION_ID, bigTextStyleNotification);
 
     }
 
@@ -226,28 +224,28 @@ public class NotificationBuilder extends Activity {
                 params.add(new BasicNameValuePair("picked", picked));
                 params.add(new BasicNameValuePair("comment", Globals.getItemComment()));
 
-
                 //Posting parameters to php
                 jsonParser.makeHttpRequest(
                         NOTIFIER_URL, "POST", params);
 
 
+                int rn = Globals.getItemRowNumber();
+                rn++;
+                Globals.setItemRowNumber(rn);
+
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            int rn = Globals.getItemRowNumber();
-            rn++;
-            Globals.setItemRowNumber(rn);
-
-
-            try {
-                params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
-                //Posting parameters to php
-                jsonParser.makeHttpRequest(
-                        NEXT_ITEM_URL, "POST", params);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//
+//            try {
+//                params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
+//                //Posting parameters to php
+//                jsonParser.makeHttpRequest(
+//                        NEXT_ITEM_URL, "POST", params);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
 
             JSONObject json = jsonParser.getJSONFromUrl(RANDOM_CRAP);
 
@@ -268,9 +266,6 @@ public class NotificationBuilder extends Activity {
                 e.printStackTrace();
 
             }
-
-
-            // Intent replyIntent = new Intent(this, showItemLoc.class);
 
             return null;
         }
