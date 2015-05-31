@@ -98,7 +98,7 @@ public class NotificationBuilder extends Activity {
 
         NotificationCompat.Action replyAction =
                 new NotificationCompat.Action.Builder(R.drawable.ic_add,
-                        TAG_ITEM_QUANTITY, replyPendingIntent)
+                        "Quantity", replyPendingIntent)
                         .addRemoteInput(remoteInput)
                         .build();
 
@@ -109,23 +109,39 @@ public class NotificationBuilder extends Activity {
 
         Bitmap prettyAvatar = getScaledLargeIconFromResource(R.drawable.ic_light);
 
-        String longText = "Location: " + Globals.getItemLocation() + " quantity: " + Globals.getItemQuantity();
-        Notification bigTextStyleNotification = new NotificationCompat.Builder(this)
+        String longText = "Location: " + Globals.getItemLocation() + "\n" + " quantity: " + Globals.getItemQuantity();
+
+        Notification noti = new NotificationCompat.Builder(this)
                 .setContentTitle(Globals.getItemName())
-                .setContentText(longText)
+                .setContentText("Location: " + Globals.getItemLocation())
                 .setSmallIcon(R.drawable.ic_task)
-                .setContentIntent(getOptionFeedbackPendingIntent("", 20))
-                .setPriority(Notification.PRIORITY_HIGH)
-                .setDefaults(Notification.DEFAULT_ALL)
                 .setLargeIcon(prettyAvatar)
                 .extend(wearableExtender)
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(longText))
+                .setPriority(Notification.PRIORITY_HIGH)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setStyle(new NotificationCompat.InboxStyle()
+                        .addLine("Location: " + Globals.getItemLocation())
+                        .addLine("Quantity: " + Globals.getItemQuantity()))
+//                          .setContentTitle("")
+//                         .setSummaryText("+3 more"))
                 .build();
+
+//        Notification bigTextStyleNotification = new NotificationCompat.Builder(this)
+//                .setContentTitle(Globals.getItemName())
+//                .setContentText(longText)
+//                .setSmallIcon(R.drawable.ic_task)
+//                .setContentIntent(getOptionFeedbackPendingIntent("", 20))
+//                .setPriority(Notification.PRIORITY_HIGH)
+//                .setDefaults(Notification.DEFAULT_ALL)
+//                .setLargeIcon(prettyAvatar)
+//                .extend(wearableExtender)
+//                .setStyle(new NotificationCompat.BigTextStyle()
+//                        .bigText(longText))
+//                .build();
 
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(NOTIFICATION_ID, bigTextStyleNotification);
+        notificationManager.notify(NOTIFICATION_ID, noti);
 
     }
 
