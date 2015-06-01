@@ -3,9 +3,10 @@ package com.example.mysqltest;
 
 /**
  * Created by markhulia on 25/05/15.
+ * This class is a placeholder for global variables
  */
 public class Globals {
-    public static final String URL = "http://10.0.1.5:2604/webservice/";
+    public static final String URL = "http://192.168.1.153:2604/webservice/";
     public static final String TAG_ROW_NUMBER = "rowNr";
     public static final String TAG_ITEM_NAME = "item_name";
     public static final String TAG_ITEM_LOCATION = "item_location";

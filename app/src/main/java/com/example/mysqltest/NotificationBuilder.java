@@ -111,37 +111,41 @@ public class NotificationBuilder extends Activity {
 
         String longText = "Location: " + Globals.getItemLocation() + "\n" + " quantity: " + Globals.getItemQuantity();
 
-        Notification noti = new NotificationCompat.Builder(this)
-                .setContentTitle(Globals.getItemName())
-                .setContentText("Location: " + Globals.getItemLocation())
-                .setSmallIcon(R.drawable.ic_task)
-                .setLargeIcon(prettyAvatar)
-                .extend(wearableExtender)
-                .setPriority(Notification.PRIORITY_HIGH)
-                .setDefaults(Notification.DEFAULT_ALL)
-                .setStyle(new NotificationCompat.InboxStyle()
-                        .addLine("Location: " + Globals.getItemLocation())
-                        .addLine("Quantity: " + Globals.getItemQuantity()))
-//                          .setContentTitle("")
-//                         .setSummaryText("+3 more"))
-                .build();
-
-//        Notification bigTextStyleNotification = new NotificationCompat.Builder(this)
+//        Notification noti = new NotificationCompat.Builder(this)
 //                .setContentTitle(Globals.getItemName())
-//                .setContentText(longText)
+//                .setContentText("Location: " + Globals.getItemLocation())
 //                .setSmallIcon(R.drawable.ic_task)
-//                .setContentIntent(getOptionFeedbackPendingIntent("", 20))
-//                .setPriority(Notification.PRIORITY_HIGH)
-//                .setDefaults(Notification.DEFAULT_ALL)
 //                .setLargeIcon(prettyAvatar)
 //                .extend(wearableExtender)
-//                .setStyle(new NotificationCompat.BigTextStyle()
-//                        .bigText(longText))
+//                .setPriority(Notification.PRIORITY_HIGH)
+//                .setDefaults(Notification.DEFAULT_ALL)
+//                .setStyle(new NotificationCompat.InboxStyle()
+//                        .addLine("Location: " + Globals.getItemLocation())
+//                        .addLine("Quantity: " + Globals.getItemQuantity()))
+////                          .setContentTitle("")
+////                         .setSummaryText("+3 more"))
 //                .build();
+
+        Notification bigTextStyleNotification = new NotificationCompat.Builder(this)
+                .setContentTitle(Globals.getItemName())
+                .setContentText(longText)
+                .setSmallIcon(R.drawable.ic_task)
+                .setContentIntent(getOptionFeedbackPendingIntent("", 20))
+                .setPriority(Notification.PRIORITY_HIGH)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setLargeIcon(prettyAvatar)
+                //this should hide notification after it has been invoked
+                .setAutoCancel(true)
+                //or this
+                //.cancel(20) where 20 is the int ID of the notification
+                .extend(wearableExtender)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(longText))
+                .build();
 
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(NOTIFICATION_ID, noti);
+        notificationManager.notify(NOTIFICATION_ID, bigTextStyleNotification);
 
     }
 

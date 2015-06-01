@@ -13,11 +13,13 @@ import org.json.JSONObject;
 
 /**
  * Created by markhulia on 24/05/15.
+ * This class initializes the first row from the
+ * database where the item status is "not picked".
+ * It is called after Login
  */
 public class FirstRow extends Activity {
 
 
-    public static final String TAG_ITEM_ID = "item_id";
     private static final String GET_FIRST_ROW_URL = Globals.URL + "getFirstRow.php";
     private static final String RANDOM_CRAP = Globals.URL + "randomCrap.php";
     private static final String TAG_ROW_NUMBER = "rowNr";
@@ -52,11 +54,12 @@ public class FirstRow extends Activity {
         @Override
         protected String doInBackground(String... strings) {
             Log.d(Loc, " doInBackground");
+
+            //create a JSON object which will pull the first item where "picked" = 0
             JSONObject json = jParser.getJSONFromUrl(RANDOM_CRAP);
 
             try {
                 mList = json.getJSONArray(TAG_ITEMS_REPORT);
-
                 JSONObject c = mList.getJSONObject(0);
                 Globals.setItemName(c.getString(TAG_ITEM_NAME));
                 Globals.setItemQuantity(Integer.parseInt(c.getString(TAG_ITEM_QUANTITY)));
@@ -77,6 +80,7 @@ public class FirstRow extends Activity {
             Log.d(Loc, "NUMBER: " + String.valueOf(Globals.getItemRowNumber()));
             Log.e(Loc, "Name: " + Globals.getItemName());
 
+            // If there are no items to show, report will be displayed instead
             if (mList == null) {
                 Intent intent = new Intent(FirstRow.this, ReportViewer.class);
                 finish();

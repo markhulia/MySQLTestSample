@@ -18,6 +18,9 @@ import java.util.List;
 
 /**
  * Created by markhulia on 28/05/15.
+ * This class updates individual items after
+ * the report has been generated. It gives user a possibility
+ * to update quantity and/or comment
  */
 
 public class ItemUpdate extends Activity {
@@ -30,12 +33,14 @@ public class ItemUpdate extends Activity {
     String numberOfItems, comment;
     private String NOTIFIER = Globals.URL + "notifier.php";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_item_update);
         Log.e(LOC, "onCreate");
 
+        //Text fields and edit fields are initialized on
         tvItemName = (TextView) findViewById(R.id.singleItemUpdate_tvItemName);
         tvItemLocation = (TextView) findViewById(R.id.singleItemUpdate_tvItemLocation);
         tvItemComment = (TextView) findViewById(R.id.singleItemUpdate_tvItemComment);

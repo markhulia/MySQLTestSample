@@ -40,9 +40,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="17dp"
         android:layout_marginTop="17dp"
         android:gravity="center"
-        android:text="Welcome to Awesomeness"
+        android:text="Welcome"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textStyle="bold" />
 

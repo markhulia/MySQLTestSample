@@ -2,6 +2,7 @@ package com.example.mysqltest;
 
 /**
  * Created by markhulia on 17/05/15.
+ * This class represents a "Confirm" notification
  */
 
 
@@ -18,7 +19,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -28,13 +28,11 @@ public class ActionFeedbackActivity extends Activity {
     JSONParser jsonParser = new JSONParser();
     List<NameValuePair> params = new ArrayList<NameValuePair>();
     String Loc = " ActionFeedbackActivity";
-    String numberOfItems;
     JSONParser jParser = new JSONParser();
     private String TAG = " Action Feedback ";
     private String NOTIFIER_URL = Globals.URL + "notifier.php";
     private String NEXT_ITEM_URL = Globals.URL + "nextItem.php";
     private JSONArray mList = null;
-    private ArrayList<HashMap<String, String>> mItemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +47,10 @@ public class ActionFeedbackActivity extends Activity {
         @Override
         protected String doInBackground(String... strings) {
             Log.d(Loc, " doInBackground");
+
+            //Build and post parameters to HTTP request.
+            //This will update the entry of the databse where "rowNr" = current row number
             try {
-                // Building Parameters
                 params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
                 params.add(new BasicNameValuePair("picked", "1"));
                 params.add(new BasicNameValuePair("item_quantity", String.valueOf(Globals.getItemQuantity())));
@@ -59,7 +59,7 @@ public class ActionFeedbackActivity extends Activity {
                 jsonParser.makeHttpRequest(
                         NOTIFIER_URL, "POST", params);
                 //in case of successful post, increment the row number by one.
-                //In this case, the next "SELECT" query will pull most recent row
+                //and the next "SELECT" query will pull most recent row
                 int rn = Globals.getItemRowNumber();
                 rn++;
                 Globals.setItemRowNumber(rn);
@@ -68,20 +68,14 @@ public class ActionFeedbackActivity extends Activity {
                 Log.e(TAG, " crashed here");
                 e.printStackTrace();
             }
-//            try {
-//                params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
-//                //Posting parameters to php
-//                jsonParser.makeHttpRequest(
-//                        NEXT_ITEM_URL, "POST", params);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
 
+
+            //create a JSON object and pull information from the row with
+            //new row number
             JSONObject json = jParser.getJSONFromUrl(RANDOM_CRAP);
 
             try {
                 mList = json.getJSONArray(Globals.TAG_ITEMS_REPORT);
-
                 Log.e(Loc, "Inside JSON: " + mList);
                 JSONObject c = mList.getJSONObject(0);
                 Globals.setItemName(c.getString(Globals.TAG_ITEM_NAME));
@@ -90,7 +84,6 @@ public class ActionFeedbackActivity extends Activity {
                 Globals.setItemLocation(c.getString(Globals.TAG_ITEM_LOCATION));
                 Globals.setItemInfo(c.getString(Globals.TAG_ITEM_INFO));
                 Globals.setItemComment(c.getString(Globals.TAG_ITEM_COMMENT));
-
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -103,7 +96,7 @@ public class ActionFeedbackActivity extends Activity {
             Log.e(Loc, " onPostExecute");
             Log.d(Loc, "i onPostExecute NUMBER " + String.valueOf(Globals.getItemRowNumber()));
 
-            //if json object is empty, start report atctivity, else, buid another notification
+            //if json object is empty, start report atctivity, else, build another notification
             if (mList == null) {
                 Intent intent = new Intent(ActionFeedbackActivity.this, ReportViewer.class);
                 finish();
