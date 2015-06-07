@@ -15,11 +15,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This Activity is a placeholder for any additional options will be required on OptionsFeedbackActivity" />
+        android:text="This Activity is a placeholder for any view which might be required by OptionsFeedbackActivity" />
 
     <TextView
         android:id="@+id/reply"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dip" />
-</LinearLayout>
+</LinearLayout><!-- From: file:/Users/markhulia/Documents/gitProjects/MySQLTestSample/app/src/main/res/layout/option_feedback.xml -->

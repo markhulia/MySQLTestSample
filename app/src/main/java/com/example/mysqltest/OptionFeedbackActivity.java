@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.app.RemoteInput;
 import android.util.Log;
 import android.widget.Toast;
@@ -15,31 +16,27 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class OptionFeedbackActivity extends Activity {
     public static final String EXTRA_VOICE_REPLY = "extra_voice_reply";
-    private static final String RANDOM_CRAP = Globals.URL + "randomCrap.php";
-    String LOC = "OptionsFeedbackActivity";
-    Globals globals = new Globals();
+    private static final String FIRST_ROW_URL = Globals.URL + "firstRow.php";
+    String TAG = "OptionsFeedbackActivity";
     JSONParser jsonParser = new JSONParser();
     List<NameValuePair> params = new ArrayList<NameValuePair>();
     String picked;
     String Loc = " ActionFeedbackActivity";
     JSONParser jParser = new JSONParser();
     private String numberOfItems;
-    private String TAG = " Action Feedback ";
-    private String ITEM_NUMBER_URL = Globals.URL + "notifier.php";
+    private String UPDATE_ITEMS = Globals.URL + "updateItems.php";
     private String NEXT_ITEM_URL = Globals.URL + "nextItem.php";
     private JSONArray mList = null;
-    private ArrayList<HashMap<String, String>> mItemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(LOC, " onCreate");
-        setContentView(R.layout.confirmation_feedback);
+        Log.d(TAG, " onCreate");
+        setContentView(R.layout.option_feedback);
 
         CharSequence replyText = getMessageText(getIntent());
         //int foo is number of packages
@@ -53,7 +50,7 @@ public class OptionFeedbackActivity extends Activity {
     // The getMessageText method shows hot to extract voice reply from Intent
     @TargetApi(20) //Suppressing compatibility errors between SDK18 adn SDK20
     private CharSequence getMessageText(Intent intent) {
-        Log.d(LOC, " CharSequence getMessageText");
+        Log.d(TAG, " CharSequence getMessageText");
         Bundle remoteInput = RemoteInput.getResultsFromIntent(intent);
         if (remoteInput != null) {
             return remoteInput.getCharSequence(EXTRA_VOICE_REPLY);
@@ -71,15 +68,13 @@ public class OptionFeedbackActivity extends Activity {
                 } else {
                     picked = "0";
                 }
-
-
                 params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
                 params.add(new BasicNameValuePair("picked", picked));
                 params.add(new BasicNameValuePair("item_quantity", numberOfItems));
                 params.add(new BasicNameValuePair("comment", Globals.getItemComment()));
                 //Posting parameters to php
                 jsonParser.makeHttpRequest(
-                        ITEM_NUMBER_URL, "POST", params);
+                        UPDATE_ITEMS, "POST", params);
                 //in case of successful post, increment the row number by one.
                 //In this case, the next "SELECT" query will pull most recent row
 
@@ -93,16 +88,16 @@ public class OptionFeedbackActivity extends Activity {
                 Globals.setItemRowNumber(rn);
             }
 
-            try {
-                params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
-                //Posting parameters to php
-                jsonParser.makeHttpRequest(
-                        NEXT_ITEM_URL, "POST", params);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//            try {
+//                params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
+//                //Posting parameters to php
+//                jsonParser.makeHttpRequest(
+//                        NEXT_ITEM_URL, "POST", params);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
 
-            JSONObject json = jParser.getJSONFromUrl(RANDOM_CRAP);
+            JSONObject json = jParser.getJSONFromUrl(FIRST_ROW_URL);
 
             try {
                 mList = json.getJSONArray(Globals.TAG_ITEMS_REPORT);
@@ -127,7 +122,8 @@ public class OptionFeedbackActivity extends Activity {
             super.onPostExecute(result);
             Log.e(Loc, " onPostExecute");
             Log.d(Loc, "i onPostExecute NUMBER " + String.valueOf(Globals.getItemRowNumber()));
-
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(OptionFeedbackActivity.this);
+            notificationManager.cancel(NotificationBuilder.NOTIFICATION_ID);
             //if json object is empty, start report atctivity, else, buid another notification
             if (mList == null) {
                 Intent intent = new Intent(OptionFeedbackActivity.this, ReportViewer.class);

@@ -1449,15 +1449,14 @@ containing a value of this type.
         public static final int abc_search_view=0x7f030014;
         public static final int abc_simple_dropdown_hint=0x7f030015;
         public static final int action_feedback=0x7f030016;
-        public static final int confirmation_feedback=0x7f030017;
-        public static final int login=0x7f030018;
-        public static final int next_item_caller=0x7f030019;
-        public static final int register=0x7f03001a;
-        public static final int single_item_update=0x7f03001b;
-        public static final int single_item_view=0x7f03001c;
-        public static final int start_activity=0x7f03001d;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001e;
-        public static final int view_report=0x7f03001f;
+        public static final int login=0x7f030017;
+        public static final int next_item_caller=0x7f030018;
+        public static final int option_feedback=0x7f030019;
+        public static final int single_item_update=0x7f03001a;
+        public static final int single_item_view=0x7f03001b;
+        public static final int start_activity=0x7f03001c;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
+        public static final int view_report=0x7f03001e;
     }
     public static final class string {
         public static final int abc_action_bar_home_description=0x7f0a0000;
@@ -1487,10 +1486,11 @@ containing a value of this type.
         public static final int title=0x7f0a0018;
         public static final int title_activity_action_feedback=0x7f0a0019;
         public static final int title_activity_activity_action_feedback=0x7f0a001a;
-        public static final int update_button=0x7f0a001b;
-        public static final int username_textview=0x7f0a001c;
-        public static final int viewReport_resetDatabase=0x7f0a001d;
-        public static final int wearTitle=0x7f0a001e;
+        public static final int update=0x7f0a001b;
+        public static final int update_button=0x7f0a001c;
+        public static final int username_textview=0x7f0a001d;
+        public static final int viewReport_resetDatabase=0x7f0a001e;
+        public static final int wearTitle=0x7f0a001f;
     }
     public static final class style {
         public static final int Animation_AppCompat_DropDownUp=0x7f0b0000;

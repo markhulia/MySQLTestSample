@@ -19,54 +19,45 @@ import org.json.JSONObject;
  */
 public class FirstRow extends Activity {
 
-
-    private static final String GET_FIRST_ROW_URL = Globals.URL + "getFirstRow.php";
-    private static final String RANDOM_CRAP = Globals.URL + "randomCrap.php";
-    private static final String TAG_ROW_NUMBER = "rowNr";
-    private static final String TAG_ITEM_NAME = "item_name";
-    private static final String TAG_ITEM_LOCATION = "item_location";
-    private static final String TAG_ITEM_QUANTITY = "item_quantity";
-    private static final String TAG_ITEM_INFO = "item_info";
-    private static final String TAG_ITEM_COMMENT = "comment";
-    private static final String TAG_ITEMS_REPORT = "items_report";
-
-    String Loc = " GetFirstRow";
+    private static final String FIRST_ROW_URL = Globals.URL + "firstRow.php";
+    String TAG = " GetFirstRow";
     JSONParser jParser = new JSONParser();
     private JSONArray mList = null;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_activity);
-        Log.d(Loc, " onCreate");
+        Log.d(TAG, " onCreate");
     }
 
     public void onGetFirstRowClick(View view) {
-        Log.d(Loc, " onGetFirstRowClick");
+        Log.d(TAG, " onGetFirstRowClick");
         new firstItem().execute();
     }
 
     class firstItem extends AsyncTask<String, String, String> {
         protected void onPreExecute() {
             super.onPreExecute();
-            Log.d(Loc, " onPreExecute");
+            Log.d(TAG, " onPreExecute");
         }
 
         @Override
         protected String doInBackground(String... strings) {
-            Log.d(Loc, " doInBackground");
+            Log.d(TAG, " doInBackground");
 
             //create a JSON object which will pull the first item where "picked" = 0
-            JSONObject json = jParser.getJSONFromUrl(RANDOM_CRAP);
+            JSONObject json = jParser.getJSONFromUrl(FIRST_ROW_URL);
 
             try {
-                mList = json.getJSONArray(TAG_ITEMS_REPORT);
+                mList = json.getJSONArray(Globals.TAG_ITEMS_REPORT);
                 JSONObject c = mList.getJSONObject(0);
-                Globals.setItemName(c.getString(TAG_ITEM_NAME));
-                Globals.setItemQuantity(Integer.parseInt(c.getString(TAG_ITEM_QUANTITY)));
-                Globals.setItemRowNumber(Integer.parseInt(c.getString(TAG_ROW_NUMBER)));
-                Globals.setItemLocation(c.getString(TAG_ITEM_LOCATION));
-                Globals.setItemInfo(c.getString(TAG_ITEM_INFO));
-                Globals.setItemComment(c.getString(TAG_ITEM_COMMENT));
+
+                Globals.setItemName(c.getString(Globals.TAG_ITEM_NAME));
+                Globals.setItemQuantity(Integer.parseInt(c.getString(Globals.TAG_ITEM_QUANTITY)));
+                Globals.setItemRowNumber(Integer.parseInt(c.getString(Globals.TAG_ROW_NUMBER)));
+                Globals.setItemLocation(c.getString(Globals.TAG_ITEM_LOCATION));
+                Globals.setItemInfo(c.getString(Globals.TAG_ITEM_INFO));
+                Globals.setItemComment(c.getString(Globals.TAG_ITEM_COMMENT));
 
 
             } catch (JSONException e) {
@@ -77,8 +68,8 @@ public class FirstRow extends Activity {
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Log.d(Loc, "NUMBER: " + String.valueOf(Globals.getItemRowNumber()));
-            Log.e(Loc, "Name: " + Globals.getItemName());
+            Log.d(TAG, "NUMBER: " + String.valueOf(Globals.getItemRowNumber()));
+            Log.e(TAG, "Name: " + Globals.getItemName());
 
             // If there are no items to show, report will be displayed instead
             if (mList == null) {

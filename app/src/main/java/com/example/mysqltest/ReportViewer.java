@@ -29,14 +29,14 @@ import java.util.List;
 
 public class ReportViewer extends ListActivity {
 
-    String SHOW_REPORT_URL = Globals.URL + "report.php";
-    String RESET_DATABASE_URL = Globals.URL + "resetReport.php";
-    JSONParser jsonParser = new JSONParser();
-    JSONArray mList = null;
     private String LOC = " ReportViewer";
     private ProgressDialog pDialog;
     private ArrayList<HashMap<String, String>> mItemList;
     private boolean doubleBackToExitPressedOnce = false;
+    String SHOW_REPORT_URL = Globals.URL + "report.php";
+    String RESET_DATABASE_URL = Globals.URL + "resetReport.php";
+    JSONParser jsonParser = new JSONParser();
+    JSONArray mList = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

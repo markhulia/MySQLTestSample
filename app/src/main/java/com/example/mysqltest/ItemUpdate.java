@@ -24,21 +24,21 @@ import java.util.List;
  */
 
 public class ItemUpdate extends Activity {
-    TextView tvItemName, tvItemComment, tvItemLocation;
-    EditText etItemComment, etItemQuantity;
-    String LOC = "ItemUpdate";
+    private String UPDATE_ITEMS = Globals.URL + "updateItems.php";
+    private String picked;
+    private String numberOfItems, comment;
+    private String TAG = "ItemUpdate";
     List<NameValuePair> params = new ArrayList<NameValuePair>();
     JSONParser jsonParser = new JSONParser();
-    String picked;
-    String numberOfItems, comment;
-    private String NOTIFIER = Globals.URL + "notifier.php";
+    TextView tvItemName, tvItemComment, tvItemLocation;
+    EditText etItemComment, etItemQuantity;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_item_update);
-        Log.e(LOC, "onCreate");
+        Log.e(TAG, "onCreate");
 
         //Text fields and edit fields are initialized on
         tvItemName = (TextView) findViewById(R.id.singleItemUpdate_tvItemName);
@@ -65,11 +65,11 @@ public class ItemUpdate extends Activity {
     public class getItemNumber extends AsyncTask<String, String, String> {
         protected void onPreExecute() {
             super.onPreExecute();
-            Log.e(LOC, " onPreExecute");
+            Log.e(TAG, " onPreExecute");
             numberOfItems = etItemQuantity.getText().toString();
-            Log.e(LOC, "numberOfItems: " + numberOfItems);
+            Log.e(TAG, "numberOfItems: " + numberOfItems);
             comment = etItemComment.getText().toString();
-            Log.e(LOC, "comment: " + comment);
+            Log.e(TAG, "comment: " + comment);
 
 //            if (comment.equals("")) {
 //                comment = Globals.getItemComment();
@@ -84,7 +84,7 @@ public class ItemUpdate extends Activity {
                 //If the number of items is 0, then picked is set to 0 ("not picked") by default
                 if (numberOfItems.matches("")) {
                     params.add(new BasicNameValuePair("item_quantity", String.valueOf(Globals.getItemQuantity())));
-                    Log.e(LOC, "if");
+                    Log.e(TAG, "if");
                 } else {
                     params.add(new BasicNameValuePair("item_quantity", numberOfItems));
                     Globals.setItemQuantity(Integer.parseInt(numberOfItems));
@@ -107,7 +107,7 @@ public class ItemUpdate extends Activity {
 
                 //Posting parameters to php
                 jsonParser.makeHttpRequest(
-                        NOTIFIER, "POST", params);
+                        UPDATE_ITEMS, "POST", params);
 
 
             } catch (Exception e) {

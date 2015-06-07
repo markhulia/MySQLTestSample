@@ -8,6 +8,7 @@
     <string name="viewReport_resetDatabase">Reset Database</string>
     <string name="current_item">Current Item</string>
     <string name="report">Report</string>
+    <string name="update">Update</string>
     <string name="passwords_not_same">Passwords don\'t match</string>
     <string name="title">Title</string>
     <string name="wearTitle">Title on Wearable</string>

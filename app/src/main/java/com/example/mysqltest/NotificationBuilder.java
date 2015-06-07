@@ -28,7 +28,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,29 +36,18 @@ import java.util.List;
 public class NotificationBuilder extends Activity {
 
     public static final int NOTIFICATION_ID = 1;
-    public static final String TAG_ITEM_ID = "item_id";
-    private static final String TAG_ITEM_NAME = "item_name";
-    private static final String TAG_ITEM_LOCATION = "item_location";
-    private static final String TAG_ITEM_QUANTITY = "item_quantity";
-    private static final String TAG_ITEM_INFO = "item_info";
-    private static final String TAG_ITEM_COMMENT = "comment";
-    private static final String TAG_ITEMS_REPORT = "items_report";
-    private static final String RANDOM_CRAP = Globals.URL + "randomCrap.php";
-    private static boolean FLAG = false;
-    TextView itemTitle, itemLocationTV, itemQuantityTV;
+    private static final String FIRST_ROW_URL = Globals.URL + "firstRow.php";
+    private String UPDATE_ITEMS = Globals.URL + "updateItems.php";
+    private String ITEM_NUMBER_URL = Globals.URL + "nextItem.php";
+    private boolean doubleBackToExitPressedOnce = false;
+    private JSONArray mList = null;
+    private String TAG = " NotificationBuilder";
     List<NameValuePair> params = new ArrayList<NameValuePair>();
+    JSONParser jsonParser = new JSONParser();
+    TextView itemTitle, itemLocationTV, itemQuantityTV;
     EditText updateQty;
     String numberOfItems;
     String picked;
-    String LOC = " NotificationBuilder";
-    JSONParser jsonParser = new JSONParser();
-    private String NEXT_ITEM_URL = Globals.URL + "nextItem.php";
-    private String NOTIFIER_URL = Globals.URL + "notifier.php";
-    private String ITEM_NUMBER_URL = Globals.URL + "nextItem.php";
-    private int numberOfPackages;
-    private boolean doubleBackToExitPressedOnce = false;
-    private JSONArray mList = null;
-    private ArrayList<HashMap<String, String>> mItemList = new ArrayList<HashMap<String, String>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +63,8 @@ public class NotificationBuilder extends Activity {
         itemLocationTV.setText(Globals.getItemLocation());
         itemQuantityTV.setText(String.valueOf(Globals.getItemQuantity()));
 
-        Log.d(LOC, " onCreate");
-        Log.d(LOC, " value of global rowNumber: " + Globals.getItemRowNumber());
+        Log.d(TAG, " onCreate");
+        Log.d(TAG, " value of global rowNumber: " + Globals.getItemRowNumber());
 
 
         String[] choices = NumberGenerator.getNumbers();
@@ -134,13 +122,14 @@ public class NotificationBuilder extends Activity {
                 .setPriority(Notification.PRIORITY_HIGH)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setLargeIcon(prettyAvatar)
-                //this should hide notification after it has been invoked
+                        //this should hide notification after it has been invoked
                 .setAutoCancel(true)
-                //or this
-                //.cancel(20) where 20 is the int ID of the notification
+                        //or this
+                        //.cancel(20) where 20 is the int ID of the notification
                 .extend(wearableExtender)
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(longText))
+                .setAutoCancel(true)
                 .build();
 
 
@@ -151,7 +140,7 @@ public class NotificationBuilder extends Activity {
 
 
     private PendingIntent getOptionFeedbackPendingIntent(String string, int requestCode) {
-        Log.d(LOC, " PendingIntent getConversationPI");
+        Log.d(TAG, " PendingIntent getConversationPI");
         Intent conversationIntent = new Intent(this, OptionFeedbackActivity.class);
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
         taskStackBuilder.addParentStack(OptionFeedbackActivity.class);
@@ -160,7 +149,7 @@ public class NotificationBuilder extends Activity {
     }
 
     private PendingIntent getActionFeedbackPendingIntent(String actionFeedback, int requestCode) {
-        Log.d(LOC, " PendingIntent getACtionFeedbackPI");
+        Log.d(TAG, " PendingIntent getACtionFeedbackPI");
         Intent actionFeedbackIntent = new Intent(this, ActionFeedbackActivity.class);
         actionFeedbackIntent.putExtra(ActionFeedbackActivity.EXTRA_ACTION_FEEDBACK, actionFeedback);
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this)
@@ -188,7 +177,7 @@ public class NotificationBuilder extends Activity {
     }
 
     public void onUpdateButtonClick(View view) {
-        Log.d(LOC, " onUpdateButtonClick");
+        Log.d(TAG, " onUpdateButtonClick");
         new updateItem().execute();
 
     }
@@ -213,7 +202,7 @@ public class NotificationBuilder extends Activity {
     public class updateItem extends AsyncTask<String, String, String> {
         protected void onPreExecute() {
             super.onPreExecute();
-            Log.d(LOC, " onPreExecute");
+            Log.d(TAG, " onPreExecute");
             numberOfItems = updateQty.getText().toString();
 
 
@@ -221,7 +210,7 @@ public class NotificationBuilder extends Activity {
 
         @Override
         protected String doInBackground(String... args) {
-            Log.d(LOC, " doInBackground");
+            Log.d(TAG, " doInBackground");
 
 
             try {
@@ -229,7 +218,7 @@ public class NotificationBuilder extends Activity {
                 if (numberOfItems.matches("")) {
                     Toast.makeText(NotificationBuilder.this, "Enter the number of packages ", Toast.LENGTH_SHORT).show();
                     params.add(new BasicNameValuePair("item_quantity", String.valueOf(Globals.getItemQuantity())));
-                    Log.e(LOC, "if");
+                    Log.e(TAG, "if");
                 } else {
                     params.add(new BasicNameValuePair("item_quantity", numberOfItems));
                     Globals.setItemQuantity(Integer.parseInt(numberOfItems));
@@ -246,7 +235,7 @@ public class NotificationBuilder extends Activity {
 
                 //Posting parameters to php
                 jsonParser.makeHttpRequest(
-                        NOTIFIER_URL, "POST", params);
+                        UPDATE_ITEMS, "POST", params);
 
 
                 int rn = Globals.getItemRowNumber();
@@ -267,14 +256,14 @@ public class NotificationBuilder extends Activity {
 //                e.printStackTrace();
 //            }
 
-            JSONObject json = jsonParser.getJSONFromUrl(RANDOM_CRAP);
+            JSONObject json = jsonParser.getJSONFromUrl(FIRST_ROW_URL);
 
             try
 
             {
                 mList = json.getJSONArray(Globals.TAG_ITEMS_REPORT);
 
-                Log.e(LOC, "Inside JSON: " + mList);
+                Log.e(TAG, "Inside JSON: " + mList);
                 JSONObject c = mList.getJSONObject(0);
                 Globals.setItemName(c.getString(Globals.TAG_ITEM_NAME));
                 Globals.setItemQuantity(Integer.parseInt(c.getString(Globals.TAG_ITEM_QUANTITY)));
@@ -293,7 +282,7 @@ public class NotificationBuilder extends Activity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            Log.d(LOC, " onPostExecute :value of row NUMBER " +
+            Log.d(TAG, " onPostExecute :value of row NUMBER " +
                     String.valueOf(Globals.getItemRowNumber()));
 
             if (mList == null) {

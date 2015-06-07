@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -23,21 +24,21 @@ import java.util.List;
 
 
 public class ActionFeedbackActivity extends Activity {
+    //delete this
     public static final String EXTRA_ACTION_FEEDBACK = "jorik";
-    private static final String RANDOM_CRAP = Globals.URL + "randomCrap.php";
-    JSONParser jsonParser = new JSONParser();
-    List<NameValuePair> params = new ArrayList<NameValuePair>();
-    String Loc = " ActionFeedbackActivity";
-    JSONParser jParser = new JSONParser();
-    private String TAG = " Action Feedback ";
-    private String NOTIFIER_URL = Globals.URL + "notifier.php";
+    private static final String FIRST_ROW_URL = Globals.URL + "firstRow.php";
+    private String TAG = " ActionFeedbackActivity";
+    private String UPDATE_ITEMS = Globals.URL + "updateItems.php";
     private String NEXT_ITEM_URL = Globals.URL + "nextItem.php";
     private JSONArray mList = null;
+    JSONParser jsonParser = new JSONParser();
+    List<NameValuePair> params = new ArrayList<NameValuePair>();
+    JSONParser jParser = new JSONParser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(Loc, " onCreate");
+        Log.d(TAG, " onCreate");
         setContentView(R.layout.action_feedback);
         Toast.makeText(this, "ActionFeedbackActivity", Toast.LENGTH_LONG).show();
         new confirmPick().execute();
@@ -46,7 +47,7 @@ public class ActionFeedbackActivity extends Activity {
     public class confirmPick extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
-            Log.d(Loc, " doInBackground");
+            Log.d(TAG, " doInBackground");
 
             //Build and post parameters to HTTP request.
             //This will update the entry of the databse where "rowNr" = current row number
@@ -57,7 +58,7 @@ public class ActionFeedbackActivity extends Activity {
                 params.add(new BasicNameValuePair("comment", Globals.getItemComment()));
                 //Posting parameters to php
                 jsonParser.makeHttpRequest(
-                        NOTIFIER_URL, "POST", params);
+                        UPDATE_ITEMS, "POST", params);
                 //in case of successful post, increment the row number by one.
                 //and the next "SELECT" query will pull most recent row
                 int rn = Globals.getItemRowNumber();
@@ -72,11 +73,11 @@ public class ActionFeedbackActivity extends Activity {
 
             //create a JSON object and pull information from the row with
             //new row number
-            JSONObject json = jParser.getJSONFromUrl(RANDOM_CRAP);
+            JSONObject json = jParser.getJSONFromUrl(FIRST_ROW_URL);
 
             try {
                 mList = json.getJSONArray(Globals.TAG_ITEMS_REPORT);
-                Log.e(Loc, "Inside JSON: " + mList);
+                Log.e(TAG, "Inside JSON: " + mList);
                 JSONObject c = mList.getJSONObject(0);
                 Globals.setItemName(c.getString(Globals.TAG_ITEM_NAME));
                 Globals.setItemQuantity(Integer.parseInt(c.getString(Globals.TAG_ITEM_QUANTITY)));
@@ -88,14 +89,16 @@ public class ActionFeedbackActivity extends Activity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
             return null;
         }
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Log.e(Loc, " onPostExecute");
-            Log.d(Loc, "i onPostExecute NUMBER " + String.valueOf(Globals.getItemRowNumber()));
-
+            Log.e(TAG, " onPostExecute");
+            Log.d(TAG, "i onPostExecute NUMBER " + String.valueOf(Globals.getItemRowNumber()));
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(ActionFeedbackActivity.this);
+            notificationManager.cancel(NotificationBuilder.NOTIFICATION_ID);
             //if json object is empty, start report atctivity, else, build another notification
             if (mList == null) {
                 Intent intent = new Intent(ActionFeedbackActivity.this, ReportViewer.class);

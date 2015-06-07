@@ -30,11 +30,12 @@ public class Login extends Activity {
     // JSON element ids from response of php script:
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
-    // JSON parser class and  URL class
-    JSONParser jsonParser = new JSONParser();
-    String LOGIN_URL = Globals.URL + "login.php";
     private EditText user, pass;
     private ProgressDialog pDialog;
+    // JSON parser class and  URL class
+    JSONParser jsonParser = new JSONParser();
+    List<NameValuePair> params = new ArrayList<NameValuePair>();
+    String LOGIN_URL = Globals.URL + "login.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +79,7 @@ public class Login extends Activity {
 
             try {
                 // Building Parameters
-                List<NameValuePair> params = new ArrayList<NameValuePair>();
+
                 params.add(new BasicNameValuePair("username", username));
                 params.add(new BasicNameValuePair("password", password));
 
