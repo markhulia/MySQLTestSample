@@ -37,17 +37,17 @@ public class NotificationBuilder extends Activity {
 
     public static final int NOTIFICATION_ID = 1;
     private static final String FIRST_ROW_URL = Globals.URL + "firstRow.php";
-    private String UPDATE_ITEMS = Globals.URL + "updateItems.php";
-    private String ITEM_NUMBER_URL = Globals.URL + "nextItem.php";
-    private boolean doubleBackToExitPressedOnce = false;
-    private JSONArray mList = null;
-    private String TAG = " NotificationBuilder";
     List<NameValuePair> params = new ArrayList<NameValuePair>();
     JSONParser jsonParser = new JSONParser();
     TextView itemTitle, itemLocationTV, itemQuantityTV;
     EditText updateQty;
     String numberOfItems;
     String picked;
+    private String UPDATE_ITEMS = Globals.URL + "updateItems.php";
+    private String ITEM_NUMBER_URL = Globals.URL + "nextItem.php";
+    private boolean doubleBackToExitPressedOnce = false;
+    private JSONArray mList = null;
+    private String TAG = " NotificationBuilder";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,6 +199,12 @@ public class NotificationBuilder extends Activity {
         }, 2000);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString("WORKAROUND_FOR_BUG_19917_KEY", "WORKAROUND_FOR_BUG_19917_VALUE");
+        super.onSaveInstanceState(outState);
+    }
+
     public class updateItem extends AsyncTask<String, String, String> {
         protected void onPreExecute() {
             super.onPreExecute();
@@ -227,7 +233,7 @@ public class NotificationBuilder extends Activity {
                 if (!numberOfItems.equals("0")) {
                     picked = "1";
                 } else {
-                    picked = "0";
+                    picked = "2";
                 }
                 params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
                 params.add(new BasicNameValuePair("picked", picked));
@@ -297,6 +303,5 @@ public class NotificationBuilder extends Activity {
 
         }
     }
-
 
 }

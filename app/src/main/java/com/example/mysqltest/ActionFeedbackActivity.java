@@ -27,13 +27,13 @@ public class ActionFeedbackActivity extends Activity {
     //delete this
     public static final String EXTRA_ACTION_FEEDBACK = "jorik";
     private static final String FIRST_ROW_URL = Globals.URL + "firstRow.php";
+    JSONParser jsonParser = new JSONParser();
+    List<NameValuePair> params = new ArrayList<NameValuePair>();
+    JSONParser jParser = new JSONParser();
     private String TAG = " ActionFeedbackActivity";
     private String UPDATE_ITEMS = Globals.URL + "updateItems.php";
     private String NEXT_ITEM_URL = Globals.URL + "nextItem.php";
     private JSONArray mList = null;
-    JSONParser jsonParser = new JSONParser();
-    List<NameValuePair> params = new ArrayList<NameValuePair>();
-    JSONParser jParser = new JSONParser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,12 @@ public class ActionFeedbackActivity extends Activity {
         setContentView(R.layout.action_feedback);
         Toast.makeText(this, "ActionFeedbackActivity", Toast.LENGTH_LONG).show();
         new confirmPick().execute();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString("WORKAROUND_FOR_BUG_19917_KEY", "WORKAROUND_FOR_BUG_19917_VALUE");
+        super.onSaveInstanceState(outState);
     }
 
     public class confirmPick extends AsyncTask<String, String, String> {
@@ -111,5 +117,4 @@ public class ActionFeedbackActivity extends Activity {
             }
         }
     }
-
 }

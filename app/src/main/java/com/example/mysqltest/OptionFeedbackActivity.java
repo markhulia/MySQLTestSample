@@ -58,6 +58,12 @@ public class OptionFeedbackActivity extends Activity {
         return null;
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString("WORKAROUND_FOR_BUG_19917_KEY", "WORKAROUND_FOR_BUG_19917_VALUE");
+        super.onSaveInstanceState(outState);
+    }
+
     public class updateAmount extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
@@ -66,7 +72,7 @@ public class OptionFeedbackActivity extends Activity {
                 if (!numberOfItems.equals("0")) {
                     picked = "1";
                 } else {
-                    picked = "0";
+                    picked = "2";
                 }
                 params.add(new BasicNameValuePair("rowNr", String.valueOf(Globals.getItemRowNumber())));
                 params.add(new BasicNameValuePair("picked", picked));
