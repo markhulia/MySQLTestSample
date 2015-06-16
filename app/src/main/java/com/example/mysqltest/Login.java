@@ -71,10 +71,8 @@ public class Login extends Activity {
             // TODO Auto-generated method stub
             // Check for success tag
             int success;
-            //  String username = user.getText().toString();
-            String username = "gio";
-            //  String password = pass.getText().toString();
-            String password = "333";
+              String username = user.getText().toString();
+              String password = pass.getText().toString();
 
 
             try {
